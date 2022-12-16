@@ -1,5 +1,6 @@
 package com.fincatto.documentofiscal.mdfe3.classes.nota;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,10 +15,9 @@ import com.fincatto.documentofiscal.DFBase;
 import com.fincatto.documentofiscal.DFModelo;
 import com.fincatto.documentofiscal.DFUnidadeFederativa;
 import com.fincatto.documentofiscal.mdfe3.classes.def.*;
-import com.fincatto.documentofiscal.validadores.DFIntegerValidador;
-import com.fincatto.documentofiscal.validadores.DFListValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
-import java.time.ZonedDateTime;
+import com.fincatto.documentofiscal.validadores.IntegerValidador;
+import com.fincatto.documentofiscal.validadores.ListValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * Created by Eldevan Nery Junior on 03/11/17.
@@ -26,7 +26,6 @@ import java.time.ZonedDateTime;
 @Root(name = "ide")
 @Namespace(reference = "http://www.portalfiscal.inf.br/mdfe")
 public class MDFInfoIdentificacao extends DFBase {
-
     private static final long serialVersionUID = -106178398166932545L;
 
     @Element(name = "cUF")
@@ -63,7 +62,7 @@ public class MDFInfoIdentificacao extends DFBase {
     private MDFModalidadeTransporte modalidadeFrete;
 
     @Element(name = "dhEmi")
-    private ZonedDateTime dataEmissao;
+    private LocalDateTime dataEmissao;
 
     @Element(name = "tpEmis")
     private MDFTipoEmissao tipoEmissao;
@@ -93,8 +92,7 @@ public class MDFInfoIdentificacao extends DFBase {
     private List<MDFInfoIdentificacaoMunicipioCarregamento> municipioCarregamentos;
 
     /**
-     * Sigla das Unidades da Federação do percurso do veículo. Não é necessário
-     * repetir as UF de Início e Fim
+     * Sigla das Unidades da Federação do percurso do veículo. Não é necessário repetir as UF de Início e Fim
      */
     @ElementList(entry = "infPercurso", inline = true, required = false)
     private List<MDFInfoIdentificacaoUfPercurso> identificacaoUfPercursos;
@@ -103,20 +101,13 @@ public class MDFInfoIdentificacao extends DFBase {
      * Data e hora previstos de inicio da viagem.
      */
     @Element(name = "dhIniViagem", required = false)
-    private ZonedDateTime dataHoraDoInicioViagem;
+    private LocalDateTime dataHoraDoInicioViagem;
 
     /**
      * Indicador de participação do Canal Verde.
      */
     @Element(name = "indCanalVerde", required = false)
     private String indicadorCanalVerde;
-
-    /**
-     * Indicador de MDF-e com inclusão da Carga posterior a emissão por evento
-     * de inclusão de DF-e
-     */
-    @Element(name = "indCarregaPosterior", required = false)
-    private String indicadorCarregaPosterior;
 
     public DFUnidadeFederativa getCodigoUF() {
         return this.codigoUF;
@@ -135,11 +126,10 @@ public class MDFInfoIdentificacao extends DFBase {
 
     /**
      * Código numérico que compõe a Chave de Acesso.<br>
-     * Número aleatório gerado pelo emitente para cada MDF-e, com o objetivo de
-     * evitar acessos indevidos ao documento.
+     * Número aleatório gerado pelo emitente para cada MDF-e, com o objetivo de evitar acessos indevidos ao documento.
      */
     public void setCodigoNumerico(final String codigoNumerico) {
-        DFStringValidador.exatamente8N(codigoNumerico, "Código Numérico");
+        StringValidador.exatamente8N(codigoNumerico, "Código Numérico");
         this.codigoNumerico = codigoNumerico;
     }
 
@@ -148,11 +138,10 @@ public class MDFInfoIdentificacao extends DFBase {
     }
 
     /**
-     * Série do Manifesto. Informar a série do documento fiscal (informar zero
-     * se inexistente).
+     * Série do Manifesto. Informar a série do documento fiscal (informar zero se inexistente).
      */
     public void setSerie(final Integer serie) {
-        DFIntegerValidador.tamanho3(serie, "Série");
+        IntegerValidador.tamanho3(serie, "Série");
         this.serie = serie;
     }
 
@@ -164,11 +153,11 @@ public class MDFInfoIdentificacao extends DFBase {
      * Número do MDF-e
      */
     public void setNumero(final Integer numero) {
-        DFIntegerValidador.tamanho9(numero, "Número");
+        IntegerValidador.tamanho9(numero, "Número");
         this.numero = numero;
     }
 
-    public ZonedDateTime getDataEmissao() {
+    public LocalDateTime getDataEmissao() {
         return this.dataEmissao;
     }
 
@@ -176,7 +165,7 @@ public class MDFInfoIdentificacao extends DFBase {
      * Data e hora de emissão do MDF-e<br>
      * Formato AAAA-MM-DDTHH:MM:DD TZD
      */
-    public void setDataEmissao(final ZonedDateTime dataEmissao) {
+    public void setDataEmissao(final LocalDateTime dataEmissao) {
         this.dataEmissao = dataEmissao;
     }
 
@@ -197,12 +186,10 @@ public class MDFInfoIdentificacao extends DFBase {
 
     /**
      * Digito Verificador da chave de acesso do MDF-e<br>
-     * Informar o dígito de controle da chave de acesso do MDF-e, que deve ser
-     * calculado com a aplicação do algoritmo módulo 11 (base 2,9) da chave de
-     * acesso.
+     * Informar o dígito de controle da chave de acesso do MDF-e, que deve ser calculado com a aplicação do algoritmo módulo 11 (base 2,9) da chave de acesso.
      */
     public void setDigitoVerificador(final Integer digitoVerificador) {
-        DFIntegerValidador.exatamente1(digitoVerificador, "Digito verificador MDF-e");
+        IntegerValidador.exatamente1(digitoVerificador, "Digito verificador MDF-e");
         this.digitoVerificador = digitoVerificador;
     }
 
@@ -240,7 +227,7 @@ public class MDFInfoIdentificacao extends DFBase {
      * Iinformar a versão do aplicativo emissor de MDF-e.
      */
     public void setVersaoProcessoEmissao(final String versaoProcessoEmissao) {
-        DFStringValidador.tamanho20(versaoProcessoEmissao, "Versão Aplicativo Emissor");
+        StringValidador.tamanho20(versaoProcessoEmissao, "Versão Aplicativo Emissor");
         this.versaoProcessoEmissao = versaoProcessoEmissao;
     }
 
@@ -289,7 +276,7 @@ public class MDFInfoIdentificacao extends DFBase {
     }
 
     public void setMunicipioCarregamentos(final List<MDFInfoIdentificacaoMunicipioCarregamento> municipioCarregamentos) {
-        this.municipioCarregamentos = DFListValidador.validaListaObrigatoria(municipioCarregamentos, 50, "Municípios carregamento MDF-e");
+        this.municipioCarregamentos = ListValidador.validaListaObrigatoria(municipioCarregamentos, 50, "Municípios carregamento MDF-e");
     }
 
     public List<MDFInfoIdentificacaoUfPercurso> getIdentificacaoUfPercursos() {
@@ -297,14 +284,14 @@ public class MDFInfoIdentificacao extends DFBase {
     }
 
     public void setIdentificacaoUfPercursos(final List<MDFInfoIdentificacaoUfPercurso> identificacaoUfPercursos) {
-        this.identificacaoUfPercursos = DFListValidador.validaListaNaoObrigatoria(identificacaoUfPercursos, 25, "UF percurso MDF-e");
+        this.identificacaoUfPercursos = ListValidador.validaListaNaoObrigatoria(identificacaoUfPercursos, 25, "UF percurso MDF-e");
     }
 
-    public ZonedDateTime getDataHoraDoInicioViagem() {
+    public LocalDateTime getDataHoraDoInicioViagem() {
         return this.dataHoraDoInicioViagem;
     }
 
-    public void setDataHoraDoInicioViagem(final ZonedDateTime dataHoraDoInicioViagem) {
+    public void setDataHoraDoInicioViagem(final LocalDateTime dataHoraDoInicioViagem) {
         this.dataHoraDoInicioViagem = dataHoraDoInicioViagem;
     }
 
@@ -313,19 +300,10 @@ public class MDFInfoIdentificacao extends DFBase {
     }
 
     public void setIndicadorCanalVerde(final String indicadorCanalVerde) {
-        final String[] enumeration = new String[]{"1"};
+        final String[] enumeration = new String[] { "1" };
         if (StringUtils.isNotBlank(indicadorCanalVerde) && !StringUtils.equalsAny(indicadorCanalVerde, enumeration)) {
             throw new IllegalStateException(String.format("Indicador canal verde \"%s\" deve possuir um dos seguintes:'%s' caracteres", indicadorCanalVerde, Arrays.toString(enumeration)));
         }
         this.indicadorCanalVerde = indicadorCanalVerde;
     }
-
-    public String getIndicadorCarregaPosterior() {
-        return indicadorCarregaPosterior;
-    }
-
-    public void setIndicadorCarregaPosterior(String indicadorCarregaPosterior) {
-        this.indicadorCarregaPosterior = indicadorCarregaPosterior;
-    }
-
 }

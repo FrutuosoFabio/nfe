@@ -1,18 +1,20 @@
 package com.fincatto.documentofiscal.cte300.transformes;
 
+import com.fincatto.documentofiscal.cte300.classes.CTModeloNF;
 import org.simpleframework.xml.transform.Transform;
 
-import com.fincatto.documentofiscal.cte300.classes.CTModeloNF;
-
 public class CTModeloNFTransformer implements Transform<CTModeloNF> {
-    
-    @Override
+
+	@Override
     public CTModeloNF read(String arg0) {
-        return CTModeloNF.valueOfCodigo(arg0);
-    }
-    
-    @Override
+		// TODO Auto-generated method stub
+		return CTModeloNF.valueOfCodigo(arg0);
+	}
+
+	@Override
     public String write(CTModeloNF arg0) {
-        return arg0.getCodigo();
-    }
+		// TODO Auto-generated method stub
+		return arg0.getCodigo();
+	}
+
 }

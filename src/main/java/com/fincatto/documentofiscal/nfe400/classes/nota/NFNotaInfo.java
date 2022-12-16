@@ -1,11 +1,14 @@
 package com.fincatto.documentofiscal.nfe400.classes.nota;
 
 import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.nfe400.classes.NFTipo;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFListValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
-import org.simpleframework.xml.*;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.ListValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Namespace;
+import org.simpleframework.xml.Root;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,17 +19,17 @@ public class NFNotaInfo extends DFBase {
     private static final long serialVersionUID = 4569152242139670228L;
 
     public static final String IDENT = "NFe";
-    
-    @Attribute(name = "Id")
+
+    @Attribute(name = "Id", required = true)
     private String identificador;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
-    
-    @Element(name = "ide")
+
+    @Element(name = "ide", required = true)
     private NFNotaInfoIdentificacao identificacao;
-    
-    @Element(name = "emit")
+
+    @Element(name = "emit", required = true)
     private NFNotaInfoEmitente emitente;
 
     @Element(name = "avulsa", required = false)
@@ -43,24 +46,21 @@ public class NFNotaInfo extends DFBase {
 
     @ElementList(entry = "autXML", inline = true, required = false)
     private List<NFPessoaAutorizadaDownloadNFe> pessoasAutorizadasDownloadNFe;
-    
-    @ElementList(entry = "det", inline = true)
+
+    @ElementList(entry = "det", inline = true, required = true)
     private List<NFNotaInfoItem> itens;
-    
-    @Element(name = "total")
+
+    @Element(name = "total", required = true)
     private NFNotaInfoTotal total;
-    
-    @Element(name = "transp")
+
+    @Element(name = "transp", required = true)
     private NFNotaInfoTransporte transporte;
 
     @Element(name = "cobr", required = false)
     private NFNotaInfoCobranca cobranca;
 
-    @Element(name = "pag")
-    private NFNotaInfoPagamento pagamento;
-    
-    @Element(name="infIntermed", required = false)
-    private NFInformacaoIntermediador infIntermed;
+    @ElementList(entry = "pag", inline = true)
+    private List<NFNotaInfoPagamento> pagamentos;
 
     @Element(name = "infAdic", required = false)
     private NFNotaInfoInformacoesAdicionais informacoesAdicionais;
@@ -74,12 +74,6 @@ public class NFNotaInfo extends DFBase {
     @Element(name = "cana", required = false)
     private NFNotaInfoCana cana;
 
-    @Element(name="infRespTec", required = false)
-    private NFNotaInfoResponsavelTecnico informacaoResposavelTecnico;
-
-    @Element(name="infSolicNFF", required = false)
-    private NFInfoSolicitacaoNFF informacaoSolicitacaoNFF;
-
     /**
      * Pega a chave de acesso a partir do identificador.
      * @return Chave de acesso.
@@ -89,7 +83,7 @@ public class NFNotaInfo extends DFBase {
     }
 
     public void setIdentificador(final String identificador) {
-        DFStringValidador.exatamente44N(identificador, "Identificador");
+        StringValidador.exatamente44N(identificador, "Identificador");
         this.identificador = NFNotaInfo.IDENT + identificador;
     }
 
@@ -98,7 +92,7 @@ public class NFNotaInfo extends DFBase {
     }
 
     public void setVersao(final BigDecimal versao) {
-        this.versao = DFBigDecimalValidador.tamanho4Com2CasasDecimais(versao, "Versao");
+        this.versao = BigDecimalParser.tamanho4Com2CasasDecimais(versao, "Versao");
     }
 
     public NFNotaInfoIdentificacao getIdentificacao() {
@@ -126,7 +120,7 @@ public class NFNotaInfo extends DFBase {
     }
 
     public void setItens(final List<NFNotaInfoItem> itens) {
-        DFListValidador.tamanho990(itens, "Itens da Nota");
+        ListValidador.tamanho990(itens, "Itens da Nota");
         this.itens = itens;
     }
 
@@ -167,25 +161,13 @@ public class NFNotaInfo extends DFBase {
     }
 
     public void setPessoasAutorizadasDownloadNFe(final List<NFPessoaAutorizadaDownloadNFe> pessoasAutorizadasDownloadNFe) {
-        DFListValidador.tamanho10(pessoasAutorizadasDownloadNFe, "Pessoas Autorizadas Download NFe");
+        ListValidador.tamanho10(pessoasAutorizadasDownloadNFe, "Pessoas Autorizadas Download NFe");
         this.pessoasAutorizadasDownloadNFe = pessoasAutorizadasDownloadNFe;
     }
 
-    public void setPagamento(final NFNotaInfoPagamento pagamento) {
-        this.pagamento = pagamento;
-    }
-    
-    public void setInfIntermed(final NFInformacaoIntermediador infIntermed) {
-		this.infIntermed = infIntermed;
-	}
-
-    public NFNotaInfo setInformacaoResposavelTecnico(NFNotaInfoResponsavelTecnico informacaoResposavelTecnico) {
-        this.informacaoResposavelTecnico = informacaoResposavelTecnico;
-        return this;
-    }
-
-    public void setInformacaoSolicitacaoNFF(NFInfoSolicitacaoNFF informacaoSolicitacaoNFF) {
-        this.informacaoSolicitacaoNFF = informacaoSolicitacaoNFF;
+    public void setPagamentos(final List<NFNotaInfoPagamento> pagamentos) {
+        ListValidador.tamanho100(pagamentos, "Pagamentos");
+        this.pagamentos = pagamentos;
     }
 
     public String getVersao() {
@@ -228,13 +210,9 @@ public class NFNotaInfo extends DFBase {
         return this.cobranca;
     }
 
-    public NFNotaInfoPagamento getPagamento() {
-        return this.pagamento;
+    public List<NFNotaInfoPagamento> getPagamentos() {
+        return this.pagamentos;
     }
-    
-    public NFInformacaoIntermediador getInfIntermed() {
-		return infIntermed;
-	}
 
     public NFNotaInfoInformacoesAdicionais getInformacoesAdicionais() {
         return this.informacoesAdicionais;
@@ -251,21 +229,4 @@ public class NFNotaInfo extends DFBase {
     public NFNotaInfoCana getCana() {
         return this.cana;
     }
-
-    public NFNotaInfoResponsavelTecnico getInformacaoResposavelTecnico() {
-        return this.informacaoResposavelTecnico;
-    }
-
-    public NFInfoSolicitacaoNFF getInformacaoSolicitacaoNFF() {
-        return informacaoSolicitacaoNFF;
-    }
-
-    @Override
-    public String toString() {
-        if (this.getDestinatario() != null && this.getIdentificacao() != null && this.getDestinatario().getIndicadorIEDestinatario().equals(NFIndicadorIEDestinatario.NAO_CONTRIBUINTE) && this.getIdentificacao().getOperacaoConsumidorFinal().equals(NFOperacaoConsumidorFinal.NAO) && this.getIdentificacao().getTipo().equals(NFTipo.SAIDA) && !this.getIdentificacao().getIdentificadorLocalDestinoOperacao().equals(NFIdentificadorLocalDestinoOperacao.OPERACAO_COM_EXTERIOR)) {
-            throw new IllegalStateException("Opera\u00E7\u00E3o com n\u00E3o contribuinte deve indicar opera\u00E7\u00E3o com consumidor final");
-        }
-        return super.toString();
-    }
-	
 }

@@ -1,14 +1,15 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.util.List;
+
+import java.time.LocalDate;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.time.LocalDate;
-import java.util.List;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -19,8 +20,8 @@ import java.util.List;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalInfoDocumentosInfoNFe extends DFBase {
     private static final long serialVersionUID = 6424661920899043977L;
-    
-    @Element(name = "chave")
+
+    @Element(name = "chave", required = true)
     private String chave;
 
     @Element(name = "PIN", required = false)
@@ -50,7 +51,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNFe extends DFBase {
      * Chave de acesso da NF-e
      */
     public void setChave(final String chave) {
-        DFStringValidador.exatamente44N(chave, "Chave de acesso da NF-e");
+        StringValidador.exatamente44N(chave, "Chave de acesso da NF-e");
         this.chave = chave;
     }
 
@@ -63,7 +64,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNFe extends DFBase {
      * PIN atribuído pela SUFRAMA para a operação.
      */
     public void setPinSUFRAMA(final String pinSUFRAMA) {
-        DFStringValidador.tamanho2a9N(pinSUFRAMA, "PIN SUFRAMA");
+        StringValidador.tamanho2a9N(pinSUFRAMA, "PIN SUFRAMA");
         this.pinSUFRAMA = pinSUFRAMA;
     }
 

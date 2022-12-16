@@ -12,11 +12,7 @@ public enum NFMeioPagamento {
     VALE_PRESENTE("12", "Vale presente"),
     VALE_COMBUSTIVEL("13", "Vale combust\u00edvel"),
     DUPLICATA_MERCANTIL("14", "Duplicata mercantil"),
-    BOLETO_BANCARIO("15", "Boleto bancario"),
-    DEPOSITO_BANCARIO("16", "Deposito bancario"),
-    PIX("17", "Pagamento Instantaneo (PIX)"),
-    TRANSFERENCIA_BANCARIA("18", "Transferencia bancaria"),
-    FIDELIDADE_CASHBACK("19", "Programa de fidelidade (Cashback)"),	
+    BOLETO_BANCARIO("15", "Boleto Bancario"),
     SEM_PAGAMENTO("90", "Sem pagamento"),
     OUTRO("99", "Outro");
 

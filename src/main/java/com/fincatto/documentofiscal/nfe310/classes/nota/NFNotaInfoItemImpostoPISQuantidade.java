@@ -2,24 +2,24 @@ package com.fincatto.documentofiscal.nfe310.classes.nota;
 
 import com.fincatto.documentofiscal.DFBase;
 import com.fincatto.documentofiscal.nfe310.classes.NFNotaInfoSituacaoTributariaPIS;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
 import org.simpleframework.xml.Element;
 
 import java.math.BigDecimal;
 
 public class NFNotaInfoItemImpostoPISQuantidade extends DFBase {
     private static final long serialVersionUID = 8768801743177271906L;
-    
-    @Element(name = "CST")
+
+    @Element(name = "CST", required = true)
     private NFNotaInfoSituacaoTributariaPIS situacaoTributaria;
-    
-    @Element(name = "qBCProd")
+
+    @Element(name = "qBCProd", required = true)
     private String quantidadeVendida;
-    
-    @Element(name = "vAliqProd")
+
+    @Element(name = "vAliqProd", required = true)
     private String valorAliquota;
-    
-    @Element(name = "vPIS")
+
+    @Element(name = "vPIS", required = true)
     private String valorTributo;
 
     public NFNotaInfoItemImpostoPISQuantidade() {
@@ -38,15 +38,15 @@ public class NFNotaInfoItemImpostoPISQuantidade extends DFBase {
     }
 
     public void setQuantidadeVendida(final BigDecimal quantidadeVendida) {
-        this.quantidadeVendida = DFBigDecimalValidador.tamanho16ComAte4CasasDecimais(quantidadeVendida, "Quantidade Vendida PIS Qtde Item");
+        this.quantidadeVendida = BigDecimalParser.tamanho16ComAte4CasasDecimais(quantidadeVendida, "Quantidade Vendida PIS Qtde Item");
     }
 
     public void setValorAliquota(final BigDecimal valorAliquota) {
-        this.valorAliquota = DFBigDecimalValidador.tamanho15Com4CasasDecimais(valorAliquota, "Valor Aliquota PIS Qtde Item");
+        this.valorAliquota = BigDecimalParser.tamanho15Com4CasasDecimais(valorAliquota, "Valor Aliquota PIS Qtde Item");
     }
 
     public void setValorTributo(final BigDecimal valorTributo) {
-        this.valorTributo = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorTributo, "Valor Tributo PIS Qtde Item");
+        this.valorTributo = BigDecimalParser.tamanho15Com2CasasDecimais(valorTributo, "Valor Tributo PIS Qtde Item");
     }
 
     public NFNotaInfoSituacaoTributariaPIS getSituacaoTributaria() {

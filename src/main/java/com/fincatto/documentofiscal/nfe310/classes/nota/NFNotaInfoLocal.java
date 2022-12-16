@@ -1,9 +1,10 @@
 package com.fincatto.documentofiscal.nfe310.classes.nota;
 
+import org.simpleframework.xml.Element;
+
 import com.fincatto.documentofiscal.DFBase;
 import com.fincatto.documentofiscal.DFUnidadeFederativa;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
-import org.simpleframework.xml.Element;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFNotaInfoLocal extends DFBase {
     private static final long serialVersionUID = -6618642990785758823L;
@@ -13,33 +14,33 @@ public class NFNotaInfoLocal extends DFBase {
 
     @Element(name = "CPF", required = false)
     private String cpf;
-    
-    @Element(name = "xLgr")
+
+    @Element(name = "xLgr", required = true)
     private String logradouro;
-    
-    @Element(name = "nro")
+
+    @Element(name = "nro", required = true)
     private String numero;
 
     @Element(name = "xCpl", required = false)
     private String complemento;
-    
-    @Element(name = "xBairro")
+
+    @Element(name = "xBairro", required = true)
     private String bairro;
-    
-    @Element(name = "cMun")
+
+    @Element(name = "cMun", required = true)
     private String codigoMunicipio;
-    
-    @Element(name = "xMun")
+
+    @Element(name = "xMun", required = true)
     private String nomeMunicipio;
-    
-    @Element(name = "UF")
+
+    @Element(name = "UF", required = true)
     private String uf;
 
     public void setCnpj(final String cnpj) {
         if (this.cpf != null) {
             throw new IllegalStateException("Nao pode setar CNPJ por que o CPF foi setado");
         }
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
@@ -47,37 +48,37 @@ public class NFNotaInfoLocal extends DFBase {
         if (this.cnpj != null) {
             throw new IllegalStateException("Nao pode setar CPF por que o CNPJ foi setado");
         }
-        DFStringValidador.cpf(cpf);
+        StringValidador.cpf(cpf);
         this.cpf = cpf;
     }
 
     public void setLogradouro(final String logradouro) {
-        DFStringValidador.tamanho60(logradouro, "Logradouro Local");
+        StringValidador.tamanho60(logradouro, "Logradouro Local");
         this.logradouro = logradouro;
     }
 
     public void setNumero(final String numero) {
-        DFStringValidador.tamanho60(numero, "Numero Local");
+        StringValidador.tamanho60(numero, "Numero Local");
         this.numero = numero;
     }
 
     public void setComplemento(final String complemento) {
-        DFStringValidador.tamanho60(complemento, "Complemento Local");
+        StringValidador.tamanho60(complemento, "Complemento Local");
         this.complemento = complemento;
     }
 
     public void setBairro(final String bairro) {
-        DFStringValidador.tamanho2ate60(bairro, "Bairro Local");
+        StringValidador.tamanho2ate60(bairro, "Bairro Local");
         this.bairro = bairro;
     }
 
     public void setCodigoMunicipio(final String codigoMunicipio) {
-        DFStringValidador.exatamente7(codigoMunicipio, "Codigo Municipio Local");
+        StringValidador.exatamente7(codigoMunicipio, "Codigo Municipio Local");
         this.codigoMunicipio = codigoMunicipio;
     }
 
     public void setNomeMunicipio(final String nomeMunicipio) {
-        DFStringValidador.tamanho60(nomeMunicipio, "Nome Municipio Local");
+        StringValidador.tamanho60(nomeMunicipio, "Nome Municipio Local");
         this.nomeMunicipio = nomeMunicipio;
     }
 

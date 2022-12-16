@@ -1,13 +1,14 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
+import java.math.BigDecimal;
+
+import java.time.LocalDate;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
 
 /**
  * @author Caio
@@ -21,11 +22,11 @@ public class CTeNotaInfoCTeNormalInfoModalDutoviario extends DFBase {
 
     @Element(name = "vTar", required = false)
     private String valorTarifa;
-    
-    @Element(name = "dIni")
+
+    @Element(name = "dIni", required = true)
     private LocalDate dataInicioServico;
-    
-    @Element(name = "dFim")
+
+    @Element(name = "dFim", required = true)
     private LocalDate dataFimServico;
 
     public CTeNotaInfoCTeNormalInfoModalDutoviario() {
@@ -42,7 +43,7 @@ public class CTeNotaInfoCTeNormalInfoModalDutoviario extends DFBase {
      * Valor da tarifa
      */
     public void setValorTarifa(final BigDecimal valorTarifa) {
-        this.valorTarifa = DFBigDecimalValidador.tamanho15comAte6CasasDecimais(valorTarifa, "Valor da tarifa");
+        this.valorTarifa = BigDecimalParser.tamanho15comAte6CasasDecimais(valorTarifa, "Valor da tarifa");
     }
 
     public LocalDate getDataInicioServico() {

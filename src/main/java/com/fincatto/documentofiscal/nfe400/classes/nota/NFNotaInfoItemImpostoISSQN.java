@@ -1,29 +1,30 @@
 package com.fincatto.documentofiscal.nfe400.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFIntegerValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Element;
 
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.IntegerValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFNotaInfoItemImpostoISSQN extends DFBase {
     private static final long serialVersionUID = 5303195667632685433L;
-    
-    @Element(name = "vBC")
+
+    @Element(name = "vBC", required = true)
     private String valorBaseCalculo;
-    
-    @Element(name = "vAliq")
+
+    @Element(name = "vAliq", required = true)
     private String valorAliquota;
-    
-    @Element(name = "vISSQN")
+
+    @Element(name = "vISSQN", required = true)
     private String valor;
-    
-    @Element(name = "cMunFG")
+
+    @Element(name = "cMunFG", required = true)
     private Integer codigoMunicipio;
-    
-    @Element(name = "cListServ")
+
+    @Element(name = "cListServ", required = true)
     private String itemListaServicos;
 
     @Element(name = "vDeducao", required = false)
@@ -40,8 +41,8 @@ public class NFNotaInfoItemImpostoISSQN extends DFBase {
 
     @Element(name = "vISSRet", required = false)
     private String valorRetencaoISS;
-    
-    @Element(name = "indISS")
+
+    @Element(name = "indISS", required = true)
     private NFNotaInfoItemIndicadorExigibilidadeISS indicadorExigibilidadeISS;
 
     @Element(name = "cServico", required = false)
@@ -55,44 +56,44 @@ public class NFNotaInfoItemImpostoISSQN extends DFBase {
 
     @Element(name = "nProcesso", required = false)
     private String numeroProcesso;
-    
-    @Element(name = "indIncentivo")
+
+    @Element(name = "indIncentivo", required = true)
     private NFNotaInfoItemIndicadorIncentivoFiscal indicadorIncentivoFiscal;
 
     public void setValorBaseCalculo(final BigDecimal valorBaseCalculo) {
-        this.valorBaseCalculo = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorBaseCalculo, "Valor BC ISSQN Item");
+        this.valorBaseCalculo = BigDecimalParser.tamanho15Com2CasasDecimais(valorBaseCalculo, "Valor BC ISSQN Item");
     }
 
     public void setValorAliquota(final BigDecimal valorAliquota) {
-        this.valorAliquota = DFBigDecimalValidador.tamanho7ComAte4CasasDecimais(valorAliquota, "Valor Aliquota ISSQN Item");
+        this.valorAliquota = BigDecimalParser.tamanho7ComAte4CasasDecimais(valorAliquota, "Valor Aliquota ISSQN Item");
     }
 
     public void setValor(final BigDecimal valor) {
-        this.valor = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valor, "Valor ISSQN Item");
+        this.valor = BigDecimalParser.tamanho15Com2CasasDecimais(valor, "Valor ISSQN Item");
     }
 
     public void setCodigoMunicipio(final Integer codigoMunicipio) {
-        DFIntegerValidador.exatamente7(codigoMunicipio, "Codigo Municipio ISSQN Item");
+        IntegerValidador.exatamente7(codigoMunicipio, "Codigo Municipio ISSQN Item");
         this.codigoMunicipio = codigoMunicipio;
     }
 
     public void setItemListaServicos(final String itemListaServicos) {
-        DFStringValidador.itemListaServico(itemListaServicos);
+        StringValidador.itemListaServico(itemListaServicos);
         this.itemListaServicos = itemListaServicos;
     }
 
     public void setCodigoMunicipioIncidenciaImposto(final String codigoMunicipioIncidenciaImposto) {
-        DFStringValidador.exatamente7N(codigoMunicipioIncidenciaImposto, "Codigo Municipio Incidencia Imposto ISSQN Item");
+        StringValidador.exatamente7N(codigoMunicipioIncidenciaImposto, "Codigo Municipio Incidencia Imposto ISSQN Item");
         this.codigoMunicipioIncidenciaImposto = codigoMunicipioIncidenciaImposto;
     }
 
     public void setCodigoPais(final String codigoPais) {
-        DFStringValidador.exatamente4N(codigoPais, "Codigo Pais ISSQN Item");
+        StringValidador.exatamente4N(codigoPais, "Codigo Pais ISSQN Item");
         this.codigoPais = codigoPais;
     }
 
     public void setCodigoServico(final String codigoServico) {
-        DFStringValidador.tamanho20(codigoServico, "Codigo Servico ISSQN Item");
+        StringValidador.tamanho20(codigoServico, "Codigo Servico ISSQN Item");
         this.codigoServico = codigoServico;
     }
 
@@ -105,28 +106,28 @@ public class NFNotaInfoItemImpostoISSQN extends DFBase {
     }
 
     public void setNumeroProcesso(final String numeroProcesso) {
-        DFStringValidador.tamanho30(numeroProcesso, "Numero Processo ISSQN Item");
+        StringValidador.tamanho30(numeroProcesso, "Numero Processo ISSQN Item");
         this.numeroProcesso = numeroProcesso;
     }
 
     public void setValorDeducao(final BigDecimal valorDeducao) {
-        this.valorDeducao = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorDeducao, "Valor Deducao ISSQN Item");
+        this.valorDeducao = BigDecimalParser.tamanho15Com2CasasDecimais(valorDeducao, "Valor Deducao ISSQN Item");
     }
 
     public void setValorDescontoCondicionado(final BigDecimal valorDescontoCondicionado) {
-        this.valorDescontoCondicionado = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorDescontoCondicionado, "Valor Desconto Condicionado ISSQN Item");
+        this.valorDescontoCondicionado = BigDecimalParser.tamanho15Com2CasasDecimais(valorDescontoCondicionado, "Valor Desconto Condicionado ISSQN Item");
     }
 
     public void setValorDescontoIncondicionado(final BigDecimal valorDescontoIncondicionado) {
-        this.valorDescontoIncondicionado = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorDescontoIncondicionado, "Valor Desconto Incondicionado ISSQN Item");
+        this.valorDescontoIncondicionado = BigDecimalParser.tamanho15Com2CasasDecimais(valorDescontoIncondicionado, "Valor Desconto Incondicionado ISSQN Item");
     }
 
     public void setValorOutro(final BigDecimal valorOutro) {
-        this.valorOutro = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorOutro, "Valor Outro ISSQN Item");
+        this.valorOutro = BigDecimalParser.tamanho15Com2CasasDecimais(valorOutro, "Valor Outro ISSQN Item");
     }
 
     public void setValorRetencaoISS(final BigDecimal valorRetencaoISS) {
-        this.valorRetencaoISS = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorRetencaoISS, "Valor Retencao ISS ISSQN Item");
+        this.valorRetencaoISS = BigDecimalParser.tamanho15Com2CasasDecimais(valorRetencaoISS, "Valor Retencao ISS ISSQN Item");
     }
 
     public String getValorBaseCalculo() {

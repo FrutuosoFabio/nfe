@@ -1,17 +1,18 @@
 package com.fincatto.documentofiscal.nfe400.classes.nota;
 
+import org.simpleframework.xml.Element;
+
 import com.fincatto.documentofiscal.DFBase;
 import com.fincatto.documentofiscal.DFUnidadeFederativa;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
-import org.simpleframework.xml.Element;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFNotaInfoExportacao extends DFBase {
     private static final long serialVersionUID = 3726297203738653822L;
-    
-    @Element(name = "UFSaidaPais")
+
+    @Element(name = "UFSaidaPais", required = true)
     private String ufEmbarqueProduto;
-    
-    @Element(name = "xLocExporta")
+
+    @Element(name = "xLocExporta", required = true)
     private String localEmbarqueProdutos;
 
     @Element(name = "xLocDespacho", required = false)
@@ -22,12 +23,12 @@ public class NFNotaInfoExportacao extends DFBase {
     }
 
     public void setLocalEmbarqueProdutos(final String localEmbarqueProdutos) {
-        DFStringValidador.tamanho60(localEmbarqueProdutos, "Local Embarque Produtos");
+        StringValidador.tamanho60(localEmbarqueProdutos, "Local Embarque Produtos");
         this.localEmbarqueProdutos = localEmbarqueProdutos;
     }
 
     public void setLocalDespachoProdutos(final String localDespachoProdutos) {
-        DFStringValidador.tamanho60(localDespachoProdutos, "Local Despacho Produtos");
+        StringValidador.tamanho60(localDespachoProdutos, "Local Despacho Produtos");
         this.localDespachoProdutos = localDespachoProdutos;
     }
 

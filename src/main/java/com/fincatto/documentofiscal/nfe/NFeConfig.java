@@ -38,6 +38,6 @@ public abstract class NFeConfig extends DFConfig {
      * @return versão nota fiscal
      */
     public String getVersao() {
-        return "4.00";
+        return "3.10";
     }
 }

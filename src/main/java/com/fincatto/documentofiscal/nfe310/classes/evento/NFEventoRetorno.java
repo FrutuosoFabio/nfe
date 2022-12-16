@@ -1,17 +1,18 @@
 package com.fincatto.documentofiscal.nfe310.classes.evento;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.nfe310.classes.nota.assinatura.NFSignature;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.nfe310.classes.nota.assinatura.NFSignature;
+
 public class NFEventoRetorno extends DFBase {
     private static final long serialVersionUID = -3477722335101130748L;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
-    
-    @Element(name = "infEvento")
+
+    @Element(name = "infEvento", required = true)
     private NFInfoEventoRetorno infoEventoRetorno;
 
     @Element(name = "Signature", required = false)

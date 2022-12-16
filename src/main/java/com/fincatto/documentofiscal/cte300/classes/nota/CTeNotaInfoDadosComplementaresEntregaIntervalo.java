@@ -2,7 +2,6 @@ package com.fincatto.documentofiscal.cte300.classes.nota;
 
 import com.fincatto.documentofiscal.DFBase;
 import com.fincatto.documentofiscal.cte300.classes.CTTipoPrazoHoraEntrega;
-
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
@@ -16,14 +15,14 @@ import java.time.LocalTime;
 @Root(name = "noInter")
 public class CTeNotaInfoDadosComplementaresEntregaIntervalo extends DFBase {
     private static final long serialVersionUID = 733372678080043594L;
-    
-    @Element(name = "tpHor")
+
+    @Element(name = "tpHor", required = true)
     private CTTipoPrazoHoraEntrega tipoPrazoHoraEntrega;
-    
-    @Element(name = "hIni")
+
+    @Element(name = "hIni", required = true)
     private LocalTime horaInicio;
-    
-    @Element(name = "hFim")
+
+    @Element(name = "hFim", required = true)
     private LocalTime horaFim;
 
     public CTeNotaInfoDadosComplementaresEntregaIntervalo() {

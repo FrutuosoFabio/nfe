@@ -1,14 +1,15 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.cte300.classes.CTInformacoesManuseio;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.util.List;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.util.List;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.cte300.classes.CTInformacoesManuseio;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -22,8 +23,8 @@ public class CTeNotaInfoCTeNormalInfoModalAereoNaturezaCarga extends DFBase {
 
     @Element(name = "xDime", required = false)
     private String dimensao;
-    
-    @ElementList(name = "cInfManu", required = false)
+
+    @ElementList(name = "cInfManu", inline = false, required = false)
     private List<CTInformacoesManuseio> informacoesManuseio;
 
     public CTeNotaInfoCTeNormalInfoModalAereoNaturezaCarga() {
@@ -40,7 +41,7 @@ public class CTeNotaInfoCTeNormalInfoModalAereoNaturezaCarga extends DFBase {
      * Formato:1234X1234X1234 (cm). Esse campo deve sempre que possível ser preenchido. Entretanto, quando for impossível o preenchimento das dimensões, fica obrigatório o preenchimento da cubagem em metro cúbico do leiaute do CT-e da estrutura genérica (infQ).
      */
     public void setDimensao(final String dimensao) {
-        DFStringValidador.tamanho5a14(dimensao, "Dimensão");
+        StringValidador.tamanho5a14(dimensao, "Dimensão");
         this.dimensao = dimensao;
     }
 

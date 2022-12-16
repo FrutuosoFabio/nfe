@@ -1,16 +1,17 @@
 package com.fincatto.documentofiscal.nfe400.classes.cadastro;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Element;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFInfoConsultaCadastro extends DFBase {
     private static final long serialVersionUID = 2846137738770858117L;
-    
-    @Element(name = "xServ")
+
+    @Element(name = "xServ", required = true)
     private String servico;
-    
-    @Element(name = "UF")
+
+    @Element(name = "UF", required = true)
     private String uf;
 
     @Element(name = "IE", required = false)
@@ -55,7 +56,7 @@ public class NFInfoConsultaCadastro extends DFBase {
             throw new IllegalStateException("Nao pode setar CPF pois CNPJ ja esta setado");
         }
 
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
@@ -68,7 +69,7 @@ public class NFInfoConsultaCadastro extends DFBase {
             throw new IllegalStateException("Nao pode setar CPF pois CNPJ ja esta setado");
         }
 
-        DFStringValidador.cpf(cpf);
+        StringValidador.cpf(cpf);
         this.cpf = cpf;
     }
 }

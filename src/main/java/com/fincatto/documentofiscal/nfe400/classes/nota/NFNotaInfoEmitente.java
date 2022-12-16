@@ -1,11 +1,12 @@
 package com.fincatto.documentofiscal.nfe400.classes.nota;
 
+import org.apache.commons.lang3.StringUtils;
+import org.simpleframework.xml.Element;
+
 import com.fincatto.documentofiscal.DFBase;
 import com.fincatto.documentofiscal.nfe400.classes.NFEndereco;
 import com.fincatto.documentofiscal.nfe400.classes.NFRegimeTributario;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
-import org.apache.commons.lang3.StringUtils;
-import org.simpleframework.xml.Element;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFNotaInfoEmitente extends DFBase {
     private static final long serialVersionUID = -2236869565066526162L;
@@ -15,17 +16,17 @@ public class NFNotaInfoEmitente extends DFBase {
 
     @Element(name = "CPF", required = false)
     private String cpf;
-    
-    @Element(name = "xNome")
+
+    @Element(name = "xNome", required = true)
     private String razaoSocial;
 
     @Element(name = "xFant", required = false)
     private String nomeFantasia;
-    
-    @Element(name = "enderEmit")
+
+    @Element(name = "enderEmit", required = true)
     private NFEndereco endereco;
-    
-    @Element(name = "IE")
+
+    @Element(name = "IE", required = true)
     private String inscricaoEstadual;
 
     @Element(name = "IEST", required = false)
@@ -36,15 +37,15 @@ public class NFNotaInfoEmitente extends DFBase {
 
     @Element(name = "CNAE", required = false)
     private String classificacaoNacionalAtividadesEconomicas;
-    
-    @Element(name = "CRT")
+
+    @Element(name = "CRT", required = true)
     private NFRegimeTributario regimeTributario;
 
     public void setCnpj(final String cnpj) {
         if (this.cpf != null && cnpj != null) {
             throw new IllegalStateException("Nao pode setar CNPJ caso CPF esteja setado");
         }
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
@@ -52,17 +53,17 @@ public class NFNotaInfoEmitente extends DFBase {
         if (this.cnpj != null && cpf != null) {
             throw new IllegalStateException("Nao pode setar CPF caso CNPJ esteja setado");
         }
-        DFStringValidador.cpf(cpf);
+        StringValidador.cpf(cpf);
         this.cpf = cpf;
     }
 
     public void setRazaoSocial(final String razaoSocial) {
-        DFStringValidador.tamanho60(razaoSocial, "Razao Social Emitente");
+        StringValidador.tamanho60(razaoSocial, "Razao Social Emitente");
         this.razaoSocial = razaoSocial;
     }
 
     public void setNomeFantasia(final String nomeFantasia) {
-        DFStringValidador.tamanho60(nomeFantasia, "Nome Fantasia Emitente");
+        StringValidador.tamanho60(nomeFantasia, "Nome Fantasia Emitente");
         this.nomeFantasia = nomeFantasia;
     }
 
@@ -71,22 +72,22 @@ public class NFNotaInfoEmitente extends DFBase {
     }
 
     public void setInscricaoEstadual(final String inscricaoEstadual) {
-        DFStringValidador.inscricaoEstadual(inscricaoEstadual);
+        StringValidador.inscricaoEstadual(inscricaoEstadual);
         this.inscricaoEstadual = inscricaoEstadual;
     }
 
     public void setInscricaoEstadualSubstituicaoTributaria(final String inscricaoEstadualSubstituicaoTributaria) {
-        DFStringValidador.inscricaoEstadualSemIsencao(inscricaoEstadualSubstituicaoTributaria);
+        StringValidador.inscricaoEstadualSemIsencao(inscricaoEstadualSubstituicaoTributaria);
         this.inscricaoEstadualSubstituicaoTributaria = inscricaoEstadualSubstituicaoTributaria;
     }
 
     public void setInscricaoMunicipal(final String inscricaoMunicipal) {
-        DFStringValidador.tamanho15(inscricaoMunicipal, "IM Emitente");
+        StringValidador.tamanho15(inscricaoMunicipal, "IM Emitente");
         this.inscricaoMunicipal = inscricaoMunicipal;
     }
 
     public void setClassificacaoNacionalAtividadesEconomicas(final String classificacaoNacionalAtividadesEconomicas) {
-        DFStringValidador.exatamente7N(classificacaoNacionalAtividadesEconomicas, "CNAE Emitente");
+        StringValidador.exatamente7N(classificacaoNacionalAtividadesEconomicas, "CNAE Emitente");
         this.classificacaoNacionalAtividadesEconomicas = classificacaoNacionalAtividadesEconomicas;
     }
 

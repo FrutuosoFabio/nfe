@@ -7,8 +7,7 @@ public enum NFNotaInfoItemModalidadeBCICMSST {
     LISTA_POSITIVA("2", "Lista Positiva"),
     LISTA_NEUTRA("3", "Lista Neutra"),
     MARGEM_VALOR_AGREGADO("4", "Margem Valor Agregado"),
-    PAUTA("5", "Pauta"),
-    VALOR_OPERACAO("6", "Valor Opera\u00e7\u00e3o");
+    PAUTA("5", "Pauta");
 
     private final String codigo;
     private final String descricao;

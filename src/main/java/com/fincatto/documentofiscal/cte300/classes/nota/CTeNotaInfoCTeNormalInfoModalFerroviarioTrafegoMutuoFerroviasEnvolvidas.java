@@ -1,10 +1,11 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -15,8 +16,8 @@ import org.simpleframework.xml.Root;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalInfoModalFerroviarioTrafegoMutuoFerroviasEnvolvidas extends DFBase {
     private static final long serialVersionUID = -7408236804856205178L;
-    
-    @Element(name = "CNPJ")
+
+    @Element(name = "CNPJ", required = true)
     private String cnpj;
 
     @Element(name = "cInt", required = false)
@@ -24,11 +25,11 @@ public class CTeNotaInfoCTeNormalInfoModalFerroviarioTrafegoMutuoFerroviasEnvolv
 
     @Element(name = "IE", required = false)
     private String inscricaoEstadual;
-    
-    @Element(name = "xNome")
+
+    @Element(name = "xNome", required = true)
     private String razaoSocial;
-    
-    @Element(name = "enderFerro")
+
+    @Element(name = "enderFerro", required = true)
     private CTeNotaEnderecoFerrovia endereco;
 
     public CTeNotaInfoCTeNormalInfoModalFerroviarioTrafegoMutuoFerroviasEnvolvidas() {
@@ -48,7 +49,7 @@ public class CTeNotaInfoCTeNormalInfoModalFerroviarioTrafegoMutuoFerroviasEnvolv
      * Informar o CNPJ da Ferrovia Envolvida. Caso a Ferrovia envolvida não seja inscrita no CNPJ o campo deverá preenchido com zeros. Informar os zeros não significativos.
      */
     public void setCnpj(final String cnpj) {
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
@@ -61,7 +62,7 @@ public class CTeNotaInfoCTeNormalInfoModalFerroviarioTrafegoMutuoFerroviasEnvolv
      * Uso da transportadora
      */
     public void setCodigoInterno(final String codigoInterno) {
-        DFStringValidador.tamanho10(codigoInterno, "Código interno da Ferrovia envolvida");
+        StringValidador.tamanho10(codigoInterno, "Código interno da Ferrovia envolvida");
         this.codigoInterno = codigoInterno;
     }
 
@@ -73,7 +74,7 @@ public class CTeNotaInfoCTeNormalInfoModalFerroviarioTrafegoMutuoFerroviasEnvolv
      * Inscrição Estadual
      */
     public void setInscricaoEstadual(final String inscricaoEstadual) {
-        DFStringValidador.inscricaoEstadual(inscricaoEstadual);
+        StringValidador.inscricaoEstadual(inscricaoEstadual);
         this.inscricaoEstadual = inscricaoEstadual;
     }
 
@@ -85,7 +86,7 @@ public class CTeNotaInfoCTeNormalInfoModalFerroviarioTrafegoMutuoFerroviasEnvolv
      * Razão Social ou Nome
      */
     public void setRazaoSocial(final String razaoSocial) {
-        DFStringValidador.tamanho2ate60(razaoSocial, "Razão Social ou Nome");
+        StringValidador.tamanho2ate60(razaoSocial, "Razão Social ou Nome");
         this.razaoSocial = razaoSocial;
     }
 

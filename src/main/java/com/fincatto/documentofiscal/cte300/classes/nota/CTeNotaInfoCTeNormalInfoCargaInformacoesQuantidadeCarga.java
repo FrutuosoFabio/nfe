@@ -2,8 +2,8 @@ package com.fincatto.documentofiscal.cte300.classes.nota;
 
 import com.fincatto.documentofiscal.DFBase;
 import com.fincatto.documentofiscal.cte300.classes.CTUnidadeMedida;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
@@ -24,14 +24,14 @@ import java.math.BigDecimal;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalInfoCargaInformacoesQuantidadeCarga extends DFBase {
     private static final long serialVersionUID = 4270955186707660004L;
-    
-    @Element(name = "cUnid")
+
+    @Element(name = "cUnid", required = true)
     private CTUnidadeMedida unidadeMedida;
-    
-    @Element(name = "tpMed")
+
+    @Element(name = "tpMed", required = true)
     private String tipoMedia;
-    
-    @Element(name = "qCarga")
+
+    @Element(name = "qCarga", required = true)
     private String quantidade;
 
     public CTeNotaInfoCTeNormalInfoCargaInformacoesQuantidadeCarga() {
@@ -67,7 +67,7 @@ public class CTeNotaInfoCTeNormalInfoCargaInformacoesQuantidadeCarga extends DFB
      * Exemplos:PESO BRUTO, PESO DECLARADO, PESO CUBADO, PESO AFORADO, PESO AFERIDO, PESO BASE DE CÁLCULO, LITRAGEM, CAIXAS e etc
      */
     public void setTipoMedia(final String tipoMedia) {
-        DFStringValidador.tamanho20(tipoMedia, "Tipo da Medida");
+        StringValidador.tamanho20(tipoMedia, "Tipo da Medida");
         this.tipoMedia = tipoMedia;
     }
 
@@ -79,6 +79,6 @@ public class CTeNotaInfoCTeNormalInfoCargaInformacoesQuantidadeCarga extends DFB
      * Quantidade
      */
     public void setQuantidade(final BigDecimal quantidade) {
-        this.quantidade = DFBigDecimalValidador.validaTamanho(quantidade, "Quantidade Carga CT-e", 11, 4, true);
+        this.quantidade = BigDecimalParser.validaTamanho(quantidade, "Quantidade Carga CT-e", 11, 4, true);
     }
 }

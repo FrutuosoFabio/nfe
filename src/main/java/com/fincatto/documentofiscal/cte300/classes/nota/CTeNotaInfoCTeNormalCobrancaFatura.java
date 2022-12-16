@@ -1,13 +1,14 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -46,7 +47,7 @@ public class CTeNotaInfoCTeNormalCobrancaFatura extends DFBase {
      * Número da fatura
      */
     public void setNumero(final String numero) {
-        DFStringValidador.tamanho60(numero, "Número da fatura");
+        StringValidador.tamanho60(numero, "Número da fatura");
         this.numero = numero;
     }
 
@@ -58,7 +59,7 @@ public class CTeNotaInfoCTeNormalCobrancaFatura extends DFBase {
      * Valor original da fatura
      */
     public void setValorOriginal(final BigDecimal valorOriginal) {
-        this.valorOriginal = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorOriginal, "Valor original da fatura");
+        this.valorOriginal = BigDecimalParser.tamanho15Com2CasasDecimais(valorOriginal, "Valor original da fatura");
     }
 
     public String getValorDesconto() {
@@ -69,7 +70,7 @@ public class CTeNotaInfoCTeNormalCobrancaFatura extends DFBase {
      * Valor do desconto da fatura
      */
     public void setValorDesconto(final BigDecimal valorDesconto) {
-        this.valorDesconto = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorDesconto, "Valor do desconto da fatura");
+        this.valorDesconto = BigDecimalParser.tamanho15Com2CasasDecimais(valorDesconto, "Valor do desconto da fatura");
     }
 
     public String getValorLiquido() {
@@ -80,6 +81,6 @@ public class CTeNotaInfoCTeNormalCobrancaFatura extends DFBase {
      * Valor líquido da fatura
      */
     public void setValorLiquido(final BigDecimal valorLiquido) {
-        this.valorLiquido = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorLiquido, "Valor líquido da fatura");
+        this.valorLiquido = BigDecimalParser.tamanho15Com2CasasDecimais(valorLiquido, "Valor líquido da fatura");
     }
 }

@@ -1,10 +1,11 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -15,8 +16,8 @@ import org.simpleframework.xml.Root;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalInfoModalAquaviarioConteinerLacre extends DFBase {
     private static final long serialVersionUID = 7913872502882601577L;
-    
-    @Element(name = "nLacre")
+
+    @Element(name = "nLacre", required = true)
     private String numeroLacre;
 
     public CTeNotaInfoCTeNormalInfoModalAquaviarioConteinerLacre() {
@@ -31,7 +32,7 @@ public class CTeNotaInfoCTeNormalInfoModalAquaviarioConteinerLacre extends DFBas
      * Lacre
      */
     public void setNumeroLacre(final String numeroLacre) {
-        DFStringValidador.tamanho20(numeroLacre, "Lacre");
+        StringValidador.tamanho20(numeroLacre, "Lacre");
         this.numeroLacre = numeroLacre;
     }
 }

@@ -1,12 +1,12 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.time.LocalDate;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.time.LocalDate;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -17,11 +17,11 @@ import java.time.LocalDate;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeAnulacao extends DFBase {
     private static final long serialVersionUID = -8393627804759742007L;
-    
-    @Element(name = "chCte")
+
+    @Element(name = "chCte", required = true)
     private String chave;
-    
-    @Element(name = "dEmi")
+
+    @Element(name = "dEmi", required = true)
     private LocalDate dataEmissao;
 
     public CTeNotaInfoCTeAnulacao() {
@@ -37,7 +37,7 @@ public class CTeNotaInfoCTeAnulacao extends DFBase {
      * Chave de acesso do CT-e original a ser anulado e substituído
      */
     public void setChave(final String chave) {
-        DFStringValidador.exatamente44N(chave, "Chave de acesso do CT-e original a ser anulado e substituído");
+        StringValidador.exatamente44N(chave, "Chave de acesso do CT-e original a ser anulado e substituído");
         this.chave = chave;
     }
 

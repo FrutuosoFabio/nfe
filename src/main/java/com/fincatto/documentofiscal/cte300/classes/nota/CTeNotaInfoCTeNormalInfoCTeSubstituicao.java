@@ -1,10 +1,11 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -15,14 +16,14 @@ import org.simpleframework.xml.Root;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalInfoCTeSubstituicao extends DFBase {
     private static final long serialVersionUID = 8643576155858141154L;
-    
-    @Element(name = "chCte")
+
+    @Element(name = "chCte", required = true)
     private String chaveCTe;
-    
-    @Element(name = "refCteAnu")
+
+    @Element(name = "refCteAnu", required = true)
     private String chaveCTeAnulacao;
-    
-    @Element(name = "tomaICMS")
+
+    @Element(name = "tomaICMS", required = true)
     private CTeNotaInfoCTeNormalInfoCTeSubstituicaoTomadorICMS tomadorICMS;
 
     @Element(name = "indAlteraToma", required = false)
@@ -43,7 +44,7 @@ public class CTeNotaInfoCTeNormalInfoCTeSubstituicao extends DFBase {
      * Chave de acesso do CT-e a ser substituído (original)
      */
     public void setChaveCTe(final String chaveCTe) {
-        DFStringValidador.exatamente44N(chaveCTe, "Chave de acesso do CT-e a ser substituído (original)");
+        StringValidador.exatamente44N(chaveCTe, "Chave de acesso do CT-e a ser substituído (original)");
         this.chaveCTe = chaveCTe;
     }
 
@@ -55,7 +56,7 @@ public class CTeNotaInfoCTeNormalInfoCTeSubstituicao extends DFBase {
      * Chave de acesso do CT-e de Anulação
      */
     public void setChaveCTeAnulacao(final String chaveCTeAnulacao) {
-        DFStringValidador.exatamente44N(chaveCTeAnulacao, "Chave de acesso do CT-e de Anulação");
+        StringValidador.exatamente44N(chaveCTeAnulacao, "Chave de acesso do CT-e de Anulação");
         this.chaveCTeAnulacao = chaveCTeAnulacao;
     }
 
@@ -79,7 +80,7 @@ public class CTeNotaInfoCTeNormalInfoCTeSubstituicao extends DFBase {
      * Tag com efeito e utilização aguardando legislação, não utilizar antes de NT específica tratar desse procedimento
      */
     public void setIndicadorAlteracaoTomador(final String indicadorAlteracaoTomador) {
-        DFStringValidador.exatamente1(indicadorAlteracaoTomador, "Indicador de CT-e Alteração de Tomador");
+        StringValidador.exatamente1(indicadorAlteracaoTomador, "Indicador de CT-e Alteração de Tomador");
         this.indicadorAlteracaoTomador = indicadorAlteracaoTomador;
     }
 }

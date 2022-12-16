@@ -1,10 +1,11 @@
 package com.fincatto.documentofiscal.nfe310.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.nfe310.classes.NFEndereco;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.apache.commons.lang3.StringUtils;
 import org.simpleframework.xml.Element;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.nfe310.classes.NFEndereco;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFNotaInfoDestinatario extends DFBase {
     private static final long serialVersionUID = 5245421887189198219L;
@@ -23,8 +24,8 @@ public class NFNotaInfoDestinatario extends DFBase {
 
     @Element(name = "enderDest", required = false)
     private NFEndereco endereco;
-    
-    @Element(name = "indIEDest")
+
+    @Element(name = "indIEDest", required = true)
     private NFIndicadorIEDestinatario indicadorIEDestinatario;
 
     @Element(name = "IE", required = false)
@@ -47,7 +48,7 @@ public class NFNotaInfoDestinatario extends DFBase {
         if (this.cpf != null) {
             throw new IllegalStateException("Nao deve setar CNPJ se CPF esteja setado");
         }
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
@@ -55,7 +56,7 @@ public class NFNotaInfoDestinatario extends DFBase {
         if (this.cnpj != null) {
             throw new IllegalStateException("Nao deve setar CPF se CNPJ esteja setado");
         }
-        DFStringValidador.cpf(cpf);
+        StringValidador.cpf(cpf);
         this.cpf = cpf;
     }
 
@@ -73,7 +74,7 @@ public class NFNotaInfoDestinatario extends DFBase {
     }
 
     public void setRazaoSocial(final String razaoSocial) {
-        DFStringValidador.tamanho60(razaoSocial, "Razao Social Destinatario");
+        StringValidador.tamanho60(razaoSocial, "Razao Social Destinatario");
         this.razaoSocial = razaoSocial;
     }
 
@@ -82,23 +83,23 @@ public class NFNotaInfoDestinatario extends DFBase {
     }
 
     public void setInscricaoEstadual(final String inscricaoEstadual) {
-        DFStringValidador.inscricaoEstadual(inscricaoEstadual);
+        StringValidador.inscricaoEstadual(inscricaoEstadual);
         this.inscricaoEstadual = inscricaoEstadual;
     }
 
     public void setInscricaoSuframa(final String inscricaoSuframa) {
-        DFStringValidador.tamanho8a9N(inscricaoSuframa, "Inscricao Suframa Destinatario");
+        StringValidador.tamanho8a9N(inscricaoSuframa, "Inscricao Suframa Destinatario");
         this.inscricaoSuframa = inscricaoSuframa;
     }
 
     public void setEmail(final String email) {
-        DFStringValidador.tamanho60(email, "Email Destinatario");
+        StringValidador.tamanho60(email, "Email Destinatario");
         this.email = email;
     }
 
     public void setIdEstrangeiro(final String idEstrangeiro) {
         if (!idEstrangeiro.isEmpty()) {
-            DFStringValidador.tamanho5a20(idEstrangeiro, "ID Estrangeiro Destinatario");
+            StringValidador.tamanho5a20(idEstrangeiro, "ID Estrangeiro Destinatario");
         }
         this.idEstrangeiro = idEstrangeiro;
     }
@@ -108,7 +109,7 @@ public class NFNotaInfoDestinatario extends DFBase {
     }
 
     public void setInscricaoMunicipal(final String inscricaoMunicipal) {
-        DFStringValidador.tamanho15(inscricaoMunicipal, "IM Destinatario");
+        StringValidador.tamanho15(inscricaoMunicipal, "IM Destinatario");
         this.inscricaoMunicipal = inscricaoMunicipal;
     }
 

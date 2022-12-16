@@ -1,15 +1,16 @@
 package com.fincatto.documentofiscal.nfe310.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFListValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
+
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.ListValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFNotaInfoVolume extends DFBase {
     private static final long serialVersionUID = -7649649556872297786L;
@@ -40,30 +41,30 @@ public class NFNotaInfoVolume extends DFBase {
     }
 
     public void setNumeracaoVolumesTransportados(final String numeracaoVolumesTransportados) {
-        DFStringValidador.tamanho60(numeracaoVolumesTransportados, "Numeracao Volumes Transportados");
+        StringValidador.tamanho60(numeracaoVolumesTransportados, "Numeracao Volumes Transportados");
         this.numeracaoVolumesTransportados = numeracaoVolumesTransportados;
     }
 
     public void setEspecieVolumesTransportados(final String especieVolumesTransportados) {
-        DFStringValidador.tamanho60(especieVolumesTransportados, "Especie Volumes Transportados");
+        StringValidador.tamanho60(especieVolumesTransportados, "Especie Volumes Transportados");
         this.especieVolumesTransportados = especieVolumesTransportados;
     }
 
     public void setMarca(final String marca) {
-        DFStringValidador.tamanho60(marca, "Marca Volume");
+        StringValidador.tamanho60(marca, "Marca Volume");
         this.marca = marca;
     }
 
     public void setPesoLiquido(final BigDecimal pesoLiquido) {
-        this.pesoLiquido = DFBigDecimalValidador.tamanho15Com3CasasDecimais(pesoLiquido, "Peso Liquido Volume");
+        this.pesoLiquido = BigDecimalParser.tamanho15Com3CasasDecimais(pesoLiquido, "Peso Liquido Volume");
     }
 
     public void setPesoBruto(final BigDecimal pesoBruto) {
-        this.pesoBruto = DFBigDecimalValidador.tamanho15Com3CasasDecimais(pesoBruto, "Peso Bruto Volume");
+        this.pesoBruto = BigDecimalParser.tamanho15Com3CasasDecimais(pesoBruto, "Peso Bruto Volume");
     }
 
     public void setLacres(final List<NFNotaInfoLacre> lacres) {
-        DFListValidador.tamanho5000(lacres, "Lacres");
+        ListValidador.tamanho5000(lacres, "Lacres");
         this.lacres = lacres;
     }
 

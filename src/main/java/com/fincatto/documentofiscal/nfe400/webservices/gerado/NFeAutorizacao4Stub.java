@@ -1,13 +1,9 @@
 package com.fincatto.documentofiscal.nfe400.webservices.gerado;
 
 import org.apache.axis2.client.Stub;
-import org.apache.axis2.transport.http.HTTPConstants;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamReader;
-
-import com.fincatto.documentofiscal.DFConfig;
-import com.fincatto.documentofiscal.utils.MessageContextFactory;
 
 public class NFeAutorizacao4Stub extends org.apache.axis2.client.Stub {
     private static int counter = 0;
@@ -21,37 +17,33 @@ public class NFeAutorizacao4Stub extends org.apache.axis2.client.Stub {
     @SuppressWarnings("rawtypes")
     private final java.util.HashMap faultMessageMap = new java.util.HashMap();
     private final javax.xml.namespace.QName[] opNameArray = null;
-    private final DFConfig config;
 
     /**
      * Constructor that takes in a configContext
      */
-    public NFeAutorizacao4Stub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, DFConfig config) throws org.apache.axis2.AxisFault {
-        this(configurationContext, targetEndpoint, false, config);
+    public NFeAutorizacao4Stub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
+        this(configurationContext, targetEndpoint, false);
     }
 
     /**
      * Constructor that takes in a configContext and useseperate listner
      */
-    public NFeAutorizacao4Stub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, final boolean useSeparateListener, DFConfig config) throws org.apache.axis2.AxisFault {
+    public NFeAutorizacao4Stub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, final boolean useSeparateListener) throws org.apache.axis2.AxisFault {
         // To populate AxisService
         this.populateAxisService();
         this.populateFaults();
         this._serviceClient = new org.apache.axis2.client.ServiceClient(configurationContext, this._service);
         this._serviceClient.getOptions().setTo(new org.apache.axis2.addressing.EndpointReference(targetEndpoint));
         this._serviceClient.getOptions().setUseSeparateListener(useSeparateListener);
-        this._serviceClient.getOptions().setProperty(HTTPConstants.CHUNKED, false);
-
         // Set the soap version
         this._serviceClient.getOptions().setSoapVersionURI(org.apache.axiom.soap.SOAP12Constants.SOAP_ENVELOPE_NAMESPACE_URI);
-        this.config = config;
     }
 
     /**
      * Constructor taking the target endpoint
      */
-    public NFeAutorizacao4Stub(final java.lang.String targetEndpoint, DFConfig config) throws org.apache.axis2.AxisFault {
-        this(null, targetEndpoint, config);
+    public NFeAutorizacao4Stub(final java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
+        this(null, targetEndpoint);
     }
 
     private static synchronized java.lang.String getUniqueSuffix() {
@@ -60,7 +52,7 @@ public class NFeAutorizacao4Stub extends org.apache.axis2.client.Stub {
             NFeAutorizacao4Stub.counter = 0;
         }
         NFeAutorizacao4Stub.counter = NFeAutorizacao4Stub.counter + 1;
-        return System.currentTimeMillis() + "_" + NFeAutorizacao4Stub.counter;
+        return java.lang.Long.toString(java.lang.System.currentTimeMillis()) + "_" + NFeAutorizacao4Stub.counter;
     }
 
     private void populateAxisService() {
@@ -96,10 +88,9 @@ public class NFeAutorizacao4Stub extends org.apache.axis2.client.Stub {
             final org.apache.axis2.client.OperationClient _operationClient = this._serviceClient.createClient(this._operations[0].getName());
             _operationClient.getOptions().setAction("http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4/nfeAutorizacaoLote");
             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
-            _operationClient.getOptions().setProperty(HTTPConstants.CHUNKED, false);//INSERIDO PARA RESOLVER FALHA COM NFCe em MG
             this.addPropertyToOperationClient(_operationClient, org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR, "&");
             // create a message context
-            _messageContext = MessageContextFactory.INSTANCE.create(config);
+            _messageContext = new org.apache.axis2.context.MessageContext();
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env;
             env = this.toEnvelope(Stub.getFactory(_operationClient.getOptions().getSoapVersionURI()), nfeDadosMsg1, this.optimizeContent(new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4", "nfeAutorizacaoLote")), new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4", "nfeDadosMsg"));
@@ -163,7 +154,7 @@ public class NFeAutorizacao4Stub extends org.apache.axis2.client.Stub {
             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
             this.addPropertyToOperationClient(_operationClient, org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR, "&");
             // create a message context
-            _messageContext = MessageContextFactory.INSTANCE.create(config);
+            _messageContext = new org.apache.axis2.context.MessageContext();
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env;
             env = this.toEnvelope(Stub.getFactory(_operationClient.getOptions().getSoapVersionURI()), nfeDadosMsgZip3, this.optimizeContent(new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4", "nfeAutorizacaoLoteZip")), new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4", "nfeDadosMsgZip"));

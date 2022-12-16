@@ -1,11 +1,12 @@
 package com.fincatto.documentofiscal.mdfe3.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Element;
 
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * Created by Eldevan Nery Junior on 01/11/17.
@@ -54,7 +55,7 @@ public class MDFInfoModalRodoviarioPedagioDisp extends DFBase {
     }
 
     public void setCnpjFornecedora(final String cnpjFornecedora) {
-        DFStringValidador.cnpj(cnpjFornecedora);
+        StringValidador.cnpj(cnpjFornecedora);
         this.cnpjFornecedora = cnpjFornecedora;
     }
 
@@ -63,7 +64,7 @@ public class MDFInfoModalRodoviarioPedagioDisp extends DFBase {
     }
 
     public void setNumeroComprovante(final String numeroComprovante) {
-        DFStringValidador.tamanho20N(numeroComprovante, "Numero do comprovante de compra");
+        StringValidador.tamanho20N(numeroComprovante, "Numero do comprovante de compra");
         this.numeroComprovante = numeroComprovante;
     }
 
@@ -75,7 +76,7 @@ public class MDFInfoModalRodoviarioPedagioDisp extends DFBase {
         if (this.cpfPagadora != null) {
             throw new IllegalStateException("Nao deve setar CNPJ se CPF esteja setado em PedagioDisp ");
         }
-        DFStringValidador.cnpj(cnpjPagadora);
+        StringValidador.cnpj(cnpjPagadora);
         this.cnpjPagadora = cnpjPagadora;
     }
 
@@ -84,7 +85,7 @@ public class MDFInfoModalRodoviarioPedagioDisp extends DFBase {
     }
 
     public void setValor(final BigDecimal valor) {
-        this.valor = DFBigDecimalValidador.tamanho13Com2CasasDecimais(valor, "Valor do pedagio");
+        this.valor = BigDecimalParser.tamanho13Com2CasasDecimais(valor, "Valor do pedagio");
     }
 
     public String getCpfPagadora() {
@@ -95,7 +96,7 @@ public class MDFInfoModalRodoviarioPedagioDisp extends DFBase {
         if (this.cnpjPagadora != null) {
             throw new IllegalStateException("Nao deve setar CPF se CNPJ esteja setado em PedagioDisp ");
         }
-        DFStringValidador.cpf(cpfPagadora);
+        StringValidador.cpf(cpfPagadora);
         this.cpfPagadora = cpfPagadora;
     }
 }

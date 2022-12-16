@@ -2,7 +2,7 @@ package com.fincatto.documentofiscal.mdfe3.classes.nota;
 
 import org.simpleframework.xml.Element;
 
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class MDFInfoModalRodoviarioVeiculoReboque extends MDFInfoModalRodoviarioVeiculo {
     private static final long serialVersionUID = -2787982058485353668L;
@@ -11,23 +11,23 @@ public class MDFInfoModalRodoviarioVeiculoReboque extends MDFInfoModalRodoviario
 
     @Override
     public void setCodigoInterno(final String codigoInterno) {
-        super.codigoInterno = DFStringValidador.validador(codigoInterno, "Codigo interno Veiculo Reboque", 10, false, false);
+        super.codigoInterno = StringValidador.validador(codigoInterno, "Codigo interno Veiculo Reboque", 10, false, false);
     }
 
     @Override
     public void setPlaca(final String placa) {
-        DFStringValidador.placaDeVeiculo(placa, "Placa do reboque");
+        StringValidador.placaDeVeiculo(placa, "Placa do reboque");
         this.placa = placa;
     }
 
     @Override
     public void setRenavam(final String renavam) {
-        this.renavam = DFStringValidador.validaIntervalo(renavam, 9, 11, "Renavam do reboque");
+        this.renavam = StringValidador.validaIntervalo(renavam, 9, 11, "Renavam do reboque");
     }
 
     @Override
     public void setTara(final String tara) {
-        this.tara = DFStringValidador.capacidadeNDigitos(tara, "Tara em reboque", 5);
+        this.tara = StringValidador.capacidadeNDigitos(tara, "Tara em reboque", 5);
     }
 
     public String getCapacidadeKG() {
@@ -35,7 +35,7 @@ public class MDFInfoModalRodoviarioVeiculoReboque extends MDFInfoModalRodoviario
     }
 
     public void setCapacidadeKG(final String capacidadeKG) {
-        this.capacidadeKG = DFStringValidador.capacidadeNDigitos(capacidadeKG, "Capacidade em KG reboque", 5);
+        this.capacidadeKG = StringValidador.capacidadeNDigitos(capacidadeKG, "Capacidade em KG reboque", 5);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class MDFInfoModalRodoviarioVeiculoReboque extends MDFInfoModalRodoviario
 
     @Override
     public void setCapacidadeM3(final String capacidadeM3) {
-        this.capacidadeM3 = DFStringValidador.capacidadeNDigitos(capacidadeM3, "Capacidade em M3 reboque", 2);
+        this.capacidadeM3 = StringValidador.capacidadeNDigitos(capacidadeM3, "Capacidade em M3 reboque", 2);
     }
 
 }

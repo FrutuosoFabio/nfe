@@ -1,13 +1,14 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -18,11 +19,11 @@ import java.math.BigDecimal;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalInfoModalAquaviarioConteinerInfoDocumentosNF extends DFBase {
     private static final long serialVersionUID = 2044424620532788296L;
-    
-    @Element(name = "serie")
+
+    @Element(name = "serie", required = true)
     private String serie;
-    
-    @Element(name = "nDoc")
+
+    @Element(name = "nDoc", required = true)
     private String numero;
 
     @Element(name = "unidRat", required = false)
@@ -42,7 +43,7 @@ public class CTeNotaInfoCTeNormalInfoModalAquaviarioConteinerInfoDocumentosNF ex
      * Série
      */
     public void setSerie(final String serie) {
-        DFStringValidador.tamanho3(serie, "Série");
+        StringValidador.tamanho3(serie, "Série");
         this.serie = serie;
     }
 
@@ -54,7 +55,7 @@ public class CTeNotaInfoCTeNormalInfoModalAquaviarioConteinerInfoDocumentosNF ex
      * Número
      */
     public void setNumero(final String numero) {
-        DFStringValidador.tamanho20(numero, "Número");
+        StringValidador.tamanho20(numero, "Número");
         this.numero = numero;
     }
 
@@ -66,6 +67,6 @@ public class CTeNotaInfoCTeNormalInfoModalAquaviarioConteinerInfoDocumentosNF ex
      * Unidade de medida rateada (Peso,Volume)
      */
     public void setUnidadeRateada(final BigDecimal unidadeRateada) {
-        this.unidadeRateada = DFBigDecimalValidador.tamanho5Com2CasasDecimais(unidadeRateada, "Unidade de medida rateada (Peso,Volume)");
+        this.unidadeRateada = BigDecimalParser.tamanho5Com2CasasDecimais(unidadeRateada, "Unidade de medida rateada (Peso,Volume)");
     }
 }

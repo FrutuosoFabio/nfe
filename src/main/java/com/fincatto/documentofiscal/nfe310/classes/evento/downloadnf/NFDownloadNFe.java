@@ -1,31 +1,32 @@
 package com.fincatto.documentofiscal.nfe310.classes.evento.downloadnf;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
+import com.fincatto.documentofiscal.DFAmbiente;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
+
 @Root(name = "downloadNFe")
 @Namespace(reference = "http://www.portalfiscal.inf.br/nfe")
 public class NFDownloadNFe extends DFBase {
     private static final long serialVersionUID = 5595066759407095694L;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
-    
-    @Element(name = "xServ")
+
+    @Element(name = "xServ", required = true)
     private String servico;
-    
-    @Element(name = "CNPJ")
+
+    @Element(name = "CNPJ", required = true)
     private String cnpj;
-    
-    @Element(name = "chNFe")
+
+    @Element(name = "chNFe", required = true)
     private String chave;
 
     public NFDownloadNFe() {
@@ -65,7 +66,7 @@ public class NFDownloadNFe extends DFBase {
     }
 
     public void setCnpj(final String cnpj) {
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
@@ -74,7 +75,7 @@ public class NFDownloadNFe extends DFBase {
     }
 
     public void setChave(final String chave) {
-        DFStringValidador.exatamente44N(chave, "chave de acesso");
+        StringValidador.exatamente44N(chave, "chave de acesso");
         this.chave = chave;
     }
 }

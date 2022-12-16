@@ -1,16 +1,16 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.cte300.classes.CTTipoUnidadeTransporte;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.math.BigDecimal;
-import java.util.List;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.cte300.classes.CTTipoUnidadeTransporte;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -22,17 +22,17 @@ import java.util.List;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalInfoDocumentosInfoUnidadeTransporte extends DFBase {
     private static final long serialVersionUID = -5873044131536025528L;
-    
-    @Element(name = "tpUnidTransp")
+
+    @Element(name = "tpUnidTransp", required = true)
     private CTTipoUnidadeTransporte tpUnidTransp;
-    
-    @Element(name = "idUnidTransp")
+
+    @Element(name = "idUnidTransp", required = true)
     private String identificacaoTransporte;
 
-    @ElementList(name = "lacUnidTransp", inline = true, required = false)
+    @Element(name = "lacUnidTransp", required = false)
     private List<CTeNotaInfoCTeNormalInfoDocumentosLacre> lacre;
 
-    @ElementList(name = "infUnidCarga", inline = true, required = false)
+    @Element(name = "infUnidCarga", required = false)
     private List<CTeNotaInfoCTeNormalInfoDocumentosInfoUnidadeCarga> infoUnidadeCarga;
 
     @Element(name = "qtdRat", required = false)
@@ -73,7 +73,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoUnidadeTransporte extends DFB
      * Informar a identificação conforme o tipo de unidade de transporte. Por exemplo: para rodoviário tração ou reboque deverá preencher com a placa do veículo.
      */
     public void setIdentificacaoTransporte(final String identificacaoTransporte) {
-        DFStringValidador.tamanho20(identificacaoTransporte, "Identificação da Unidade de Transporte");
+        StringValidador.tamanho20(identificacaoTransporte, "Identificação da Unidade de Transporte");
         this.identificacaoTransporte = identificacaoTransporte;
     }
 
@@ -108,6 +108,6 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoUnidadeTransporte extends DFB
      * Quantidade rateada (Peso,Volume)
      */
     public void setQuantidadeRateada(final BigDecimal quantidadeRateada) {
-        this.quantidadeRateada = DFBigDecimalValidador.tamanho5Com2CasasDecimais(quantidadeRateada, "Quantidade rateada (Peso,Volume)");
+        this.quantidadeRateada = BigDecimalParser.tamanho5Com2CasasDecimais(quantidadeRateada, "Quantidade rateada (Peso,Volume)");
     }
 }

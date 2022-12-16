@@ -1,32 +1,32 @@
 package com.fincatto.documentofiscal.cte300.classes.evento;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.DFUnidadeFederativa;
+import java.time.LocalDateTime;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 
-import java.time.LocalDateTime;
+import com.fincatto.documentofiscal.DFAmbiente;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.DFUnidadeFederativa;
 
 public class CTeInfoEventoRetorno extends DFBase {
     private static final long serialVersionUID = -3599530698491518711L;
 
     @Attribute(name = "Id", required = false)
     private String id;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
-    
-    @Element(name = "verAplic")
+
+    @Element(name = "verAplic", required = true)
     private String versaoAplicativo;
-    
-    @Element(name = "cOrgao")
+
+    @Element(name = "cOrgao", required = true)
     private DFUnidadeFederativa orgao;
-    
-    @Element(name = "cStat")
+
+    @Element(name = "cStat", required = true)
     private Integer codigoStatus;
-    
-    @Element(name = "xMotivo")
+
+    @Element(name = "xMotivo", required = true)
     private String motivo;
 
     @Element(name = "chCTe", required = false)
@@ -49,8 +49,8 @@ public class CTeInfoEventoRetorno extends DFBase {
 
     @Element(name = "emailDest", required = false)
     private String email;
-    
-    @Element(name = "dhRegEvento")
+
+    @Element(name = "dhRegEvento", required = true)
     private LocalDateTime dataHoraRegistro;
 
     @Element(name = "nProt", required = false)

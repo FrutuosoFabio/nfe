@@ -1,10 +1,11 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -25,8 +26,8 @@ public class CTeNotaInfoRemetente extends DFBase {
 
     @Element(name = "IE", required = false)
     private String inscricaoEstadual;
-    
-    @Element(name = "xNome")
+
+    @Element(name = "xNome", required = true)
     private String razaoSocial;
 
     @Element(name = "xFant", required = false)
@@ -34,8 +35,8 @@ public class CTeNotaInfoRemetente extends DFBase {
 
     @Element(name = "fone", required = false)
     private String telefone;
-    
-    @Element(name = "enderReme")
+
+    @Element(name = "enderReme", required = true)
     private CTeNotaEndereco endereco;
 
     @Element(name = "email", required = false)
@@ -61,7 +62,7 @@ public class CTeNotaInfoRemetente extends DFBase {
      * Em caso de empresa não estabelecida no Brasil, será informado o CNPJ com zeros. Informar os zeros não significativos.
      */
     public void setCnpj(final String cnpj) {
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
@@ -74,7 +75,7 @@ public class CTeNotaInfoRemetente extends DFBase {
      * Informar os zeros não significativos.
      */
     public void setCpf(final String cpf) {
-        DFStringValidador.cpf(cpf);
+        StringValidador.cpf(cpf);
         this.cpf = cpf;
     }
 
@@ -87,7 +88,7 @@ public class CTeNotaInfoRemetente extends DFBase {
      * Informar a IE do remetente ou ISENTO se remetente é contribuinte do ICMS isento de inscrição no cadastro de contribuintes do ICMS. Caso o remetente não seja contribuinte do ICMS não informar a tag.
      */
     public void setInscricaoEstadual(final String inscricaoEstadual) {
-        DFStringValidador.inscricaoEstadual(inscricaoEstadual);
+        StringValidador.inscricaoEstadual(inscricaoEstadual);
         this.inscricaoEstadual = inscricaoEstadual;
     }
 
@@ -99,7 +100,7 @@ public class CTeNotaInfoRemetente extends DFBase {
      * Razão social ou nome do remetente
      */
     public void setRazaoSocial(final String razaoSocial) {
-        DFStringValidador.tamanho2ate60(razaoSocial, "Razão social ou nome do remetente");
+        StringValidador.tamanho2ate60(razaoSocial, "Razão social ou nome do remetente");
         this.razaoSocial = razaoSocial;
     }
 
@@ -111,7 +112,7 @@ public class CTeNotaInfoRemetente extends DFBase {
      * Nome fantasia
      */
     public void setNomeFantasia(final String nomeFantasia) {
-        DFStringValidador.tamanho2ate60(nomeFantasia, "Nome fantasia");
+        StringValidador.tamanho2ate60(nomeFantasia, "Nome fantasia");
         this.nomeFantasia = nomeFantasia;
     }
 
@@ -123,7 +124,7 @@ public class CTeNotaInfoRemetente extends DFBase {
      * Telefone
      */
     public void setTelefone(final String telefone) {
-        DFStringValidador.telefone(telefone);
+        StringValidador.telefone(telefone);
         this.telefone = telefone;
     }
 
@@ -146,8 +147,8 @@ public class CTeNotaInfoRemetente extends DFBase {
      * Endereço de email
      */
     public void setEmail(final String email) {
-        DFStringValidador.tamanho60(email, "Endereço de email");
-        DFStringValidador.email(email);
+        StringValidador.tamanho60(email, "Endereço de email");
+        StringValidador.email(email);
         this.email = email;
     }
 }

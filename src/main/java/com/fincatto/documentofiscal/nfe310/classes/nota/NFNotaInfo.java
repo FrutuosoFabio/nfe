@@ -1,13 +1,14 @@
 package com.fincatto.documentofiscal.nfe310.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFListValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
-import org.simpleframework.xml.*;
-
 import java.math.BigDecimal;
 import java.util.List;
+
+import org.simpleframework.xml.*;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.ListValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 @Root(name = "infNFe")
 @Namespace(reference = "http://www.portalfiscal.inf.br/nfe")
@@ -15,17 +16,17 @@ public class NFNotaInfo extends DFBase {
     private static final long serialVersionUID = 4569152242139670228L;
 
     public static final String IDENT = "NFe";
-    
-    @Attribute(name = "Id")
+
+    @Attribute(name = "Id", required = true)
     private String identificador;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
-    
-    @Element(name = "ide")
+
+    @Element(name = "ide", required = true)
     private NFNotaInfoIdentificacao identificacao;
-    
-    @Element(name = "emit")
+
+    @Element(name = "emit", required = true)
     private NFNotaInfoEmitente emitente;
 
     @Element(name = "avulsa", required = false)
@@ -42,14 +43,14 @@ public class NFNotaInfo extends DFBase {
 
     @ElementList(entry = "autXML", inline = true, required = false)
     private List<NFPessoaAutorizadaDownloadNFe> pessoasAutorizadasDownloadNFe;
-    
-    @ElementList(entry = "det", inline = true)
+
+    @ElementList(entry = "det", inline = true, required = true)
     private List<NFNotaInfoItem> itens;
-    
-    @Element(name = "total")
+
+    @Element(name = "total", required = true)
     private NFNotaInfoTotal total;
-    
-    @Element(name = "transp")
+
+    @Element(name = "transp", required = true)
     private NFNotaInfoTransporte transporte;
 
     @Element(name = "cobr", required = false)
@@ -79,7 +80,7 @@ public class NFNotaInfo extends DFBase {
     }
 
     public void setIdentificador(final String identificador) {
-        DFStringValidador.exatamente44N(identificador, "Identificador");
+        StringValidador.exatamente44N(identificador, "Identificador");
         this.identificador = NFNotaInfo.IDENT + identificador;
     }
 
@@ -88,7 +89,7 @@ public class NFNotaInfo extends DFBase {
     }
 
     public void setVersao(final BigDecimal versao) {
-        this.versao = DFBigDecimalValidador.tamanho4Com2CasasDecimais(versao, "Versao");
+        this.versao = BigDecimalParser.tamanho4Com2CasasDecimais(versao, "Versao");
     }
 
     public NFNotaInfoIdentificacao getIdentificacao() {
@@ -116,7 +117,7 @@ public class NFNotaInfo extends DFBase {
     }
 
     public void setItens(final List<NFNotaInfoItem> itens) {
-        DFListValidador.tamanho990(itens, "Itens da Nota");
+        ListValidador.tamanho990(itens, "Itens da Nota");
         this.itens = itens;
     }
 
@@ -157,12 +158,12 @@ public class NFNotaInfo extends DFBase {
     }
 
     public void setPessoasAutorizadasDownloadNFe(final List<NFPessoaAutorizadaDownloadNFe> pessoasAutorizadasDownloadNFe) {
-        DFListValidador.tamanho10(pessoasAutorizadasDownloadNFe, "Pessoas Autorizadas Download NFe");
+        ListValidador.tamanho10(pessoasAutorizadasDownloadNFe, "Pessoas Autorizadas Download NFe");
         this.pessoasAutorizadasDownloadNFe = pessoasAutorizadasDownloadNFe;
     }
 
     public void setPagamentos(final List<NFNotaInfoPagamento> pagamentos) {
-        DFListValidador.tamanho100(pagamentos, "Pagamentos");
+        ListValidador.tamanho100(pagamentos, "Pagamentos");
         this.pagamentos = pagamentos;
     }
 

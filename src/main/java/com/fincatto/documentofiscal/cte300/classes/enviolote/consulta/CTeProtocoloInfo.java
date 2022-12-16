@@ -1,11 +1,12 @@
 package com.fincatto.documentofiscal.cte300.classes.enviolote.consulta;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFBase;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
+
+import com.fincatto.documentofiscal.DFAmbiente;
+import com.fincatto.documentofiscal.DFBase;
 
 /**
  * @author Caio
@@ -17,17 +18,17 @@ import org.simpleframework.xml.Root;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeProtocoloInfo extends DFBase {
     private static final long serialVersionUID = -6767121633444305271L;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
-    
-    @Element(name = "verAplic")
+
+    @Element(name = "verAplic", required = true)
     private String versaoAplicacao;
-    
-    @Element(name = "chCTe")
+
+    @Element(name = "chCTe", required = true)
     private String chave;
-    
-    @Element(name = "dhRecbto")
+
+    @Element(name = "dhRecbto", required = true)
     private String dataRecebimento;
 
     @Element(name = "nProt", required = false)
@@ -35,11 +36,11 @@ public class CTeProtocoloInfo extends DFBase {
 
     @Element(name = "digVal", required = false)
     private String validador;
-    
-    @Element(name = "cStat")
+
+    @Element(name = "cStat", required = true)
     private String status;
-    
-    @Element(name = "xMotivo")
+
+    @Element(name = "xMotivo", required = true)
     private String motivo;
 
     @Attribute(name = "Id", required = false)

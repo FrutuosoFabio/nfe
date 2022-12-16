@@ -1,6 +1,6 @@
 package com.fincatto.documentofiscal.mdfe3.classes.nota;
 
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
@@ -46,7 +46,7 @@ public class MDFInfoInformacoesNFe {
     }
 
     public void setChaveNFe(String chaveNFe) {
-        DFStringValidador.exatamente44N(chaveNFe, "Chave NF-e informações");
+        StringValidador.exatamente44N(chaveNFe, "Chave NF-e informações");
         this.chaveNFe = chaveNFe;
     }
 
@@ -55,7 +55,7 @@ public class MDFInfoInformacoesNFe {
     }
 
     public void setSegCodBarra(String segCodBarra) {
-        this.segCodBarra = DFStringValidador.validador(segCodBarra, "Segundo codigo barras", 36, true, true);
+        this.segCodBarra = StringValidador.validador(segCodBarra, "Segundo codigo barras", 36, true, true);
     }
 
     public String getIndicadorReentrega() {
@@ -63,7 +63,7 @@ public class MDFInfoInformacoesNFe {
     }
 
     public void setIndicadorReentrega(String indicadorReentrega) {
-        DFStringValidador.equals( "1", indicadorReentrega);
+        StringValidador.equals( "1", indicadorReentrega);
         this.indicadorReentrega = indicadorReentrega;
     }
 

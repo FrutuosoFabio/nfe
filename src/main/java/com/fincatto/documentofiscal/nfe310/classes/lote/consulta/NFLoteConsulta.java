@@ -1,27 +1,28 @@
 package com.fincatto.documentofiscal.nfe310.classes.lote.consulta;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFAmbiente;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
 
 @Root(name = "consReciNFe")
 @Namespace(reference = "http://www.portalfiscal.inf.br/nfe")
 public class NFLoteConsulta extends DFBase {
     private static final long serialVersionUID = 205828108320121890L;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
-    
-    @Element(name = "nRec")
+
+    @Element(name = "nRec", required = true)
     private String recibo;
 
     public String getVersao() {
@@ -29,7 +30,7 @@ public class NFLoteConsulta extends DFBase {
     }
 
     public void setVersao(final BigDecimal versao) {
-        this.versao = DFBigDecimalValidador.tamanho4Com2CasasDecimais(versao, "Versao");
+        this.versao = BigDecimalParser.tamanho4Com2CasasDecimais(versao, "Versao");
     }
 
     public DFAmbiente getAmbiente() {

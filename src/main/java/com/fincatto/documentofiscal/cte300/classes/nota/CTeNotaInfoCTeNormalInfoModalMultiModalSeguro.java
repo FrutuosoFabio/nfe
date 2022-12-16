@@ -1,10 +1,11 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -15,14 +16,14 @@ import org.simpleframework.xml.Root;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalInfoModalMultiModalSeguro extends DFBase {
     private static final long serialVersionUID = -866058288053801394L;
-    
-    @Element(name = "infSeg")
+
+    @Element(name = "infSeg", required = true)
     private CTeNotaInfoCTeNormalInfoModalMultiModalSeguroInfo info;
-    
-    @Element(name = "nApol")
+
+    @Element(name = "nApol", required = true)
     private String apolice;
-    
-    @Element(name = "nAver")
+
+    @Element(name = "nAver", required = true)
     private String averbacao;
 
     public CTeNotaInfoCTeNormalInfoModalMultiModalSeguro() {
@@ -51,7 +52,7 @@ public class CTeNotaInfoCTeNormalInfoModalMultiModalSeguro extends DFBase {
      * Obrigatório pela lei 11.442/07 (RCTRC)
      */
     public void setApolice(final String apolice) {
-        DFStringValidador.tamanho20(apolice, "Número da Apólice");
+        StringValidador.tamanho20(apolice, "Número da Apólice");
         this.apolice = apolice;
     }
 
@@ -64,7 +65,7 @@ public class CTeNotaInfoCTeNormalInfoModalMultiModalSeguro extends DFBase {
      * Não é obrigatório, pois muitas averbações ocorrem aapós a emissão do CT, mensalmente, por exemplo.
      */
     public void setAverbacao(final String averbacao) {
-        DFStringValidador.tamanho20(averbacao, "Número da Averbação");
+        StringValidador.tamanho20(averbacao, "Número da Averbação");
         this.averbacao = averbacao;
     }
 }

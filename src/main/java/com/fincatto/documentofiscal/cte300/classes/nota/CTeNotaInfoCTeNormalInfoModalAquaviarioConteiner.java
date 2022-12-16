@@ -1,14 +1,15 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFListValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.util.List;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.util.List;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.ListValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -19,8 +20,8 @@ import java.util.List;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalInfoModalAquaviarioConteiner extends DFBase {
     private static final long serialVersionUID = -6316603016118768000L;
-    
-    @Element(name = "nCont")
+
+    @Element(name = "nCont", required = true)
     private String identificacao;
 
     @ElementList(name = "lacre", inline = true, required = false)
@@ -43,7 +44,7 @@ public class CTeNotaInfoCTeNormalInfoModalAquaviarioConteiner extends DFBase {
      * Identificação do Container
      */
     public void setIdentificacao(final String identificacao) {
-        DFStringValidador.tamanho20(identificacao, "Identificação do Containe");
+        StringValidador.tamanho20(identificacao, "Identificação do Containe");
         this.identificacao = identificacao;
     }
 
@@ -55,7 +56,7 @@ public class CTeNotaInfoCTeNormalInfoModalAquaviarioConteiner extends DFBase {
      * Grupo de informações dos lacres dos cointainers da qtde da carga
      */
     public void setLacre(final List<CTeNotaInfoCTeNormalInfoModalAquaviarioConteinerLacre> lacre) {
-        DFListValidador.tamanho3(lacre, "Grupo de informações dos lacres dos cointainers da qtde da carga");
+        ListValidador.tamanho3(lacre, "Grupo de informações dos lacres dos cointainers da qtde da carga");
         this.lacre = lacre;
     }
 

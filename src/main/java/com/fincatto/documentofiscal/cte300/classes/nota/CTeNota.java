@@ -1,11 +1,11 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.cte300.classes.nota.assinatura.CTeSignature;
-
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.cte300.classes.nota.assinatura.CTeSignature;
 
 /**
  * @author Caio
@@ -16,12 +16,9 @@ import org.simpleframework.xml.Root;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNota extends DFBase {
     private static final long serialVersionUID = -3697915253635990400L;
-    
-    @Element(name = "infCte")
-    private CTeNotaInfo info;
 
-    @Element(name="infCTeSupl", required = false)
-    private CTeNotaInfoSuplementares infoSuplementares;
+    @Element(name = "infCte", required = true)
+    private CTeNotaInfo info;
 
     @Element(name = "Signature", required = false)
     private CTeSignature signature;
@@ -37,15 +34,6 @@ public class CTeNota extends DFBase {
 
     public void setCteNotaInfo(final CTeNotaInfo info) {
         this.info = info;
-    }
-
-    public CTeNotaInfoSuplementares getInfoSuplementares() {
-        return infoSuplementares;
-    }
-
-    public CTeNota setInfoSuplementares(CTeNotaInfoSuplementares infoSuplementares) {
-        this.infoSuplementares = infoSuplementares;
-        return this;
     }
 
     public CTeSignature getSignature() {

@@ -1,41 +1,42 @@
 package com.fincatto.documentofiscal.nfe310.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.DFUnidadeFederativa;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+import java.util.List;
+
+import java.time.LocalDate;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.DFUnidadeFederativa;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFNotaInfoItemProdutoDeclaracaoImportacao extends DFBase {
     private static final long serialVersionUID = 4173954108879768633L;
-    
-    @Element(name = "nDI")
+
+    @Element(name = "nDI", required = true)
     private String numeroRegistro;
-    
-    @Element(name = "dDI")
+
+    @Element(name = "dDI", required = true)
     private LocalDate dataRegistro;
-    
-    @Element(name = "xLocDesemb")
+
+    @Element(name = "xLocDesemb", required = true)
     private String localDesembaraco;
-    
-    @Element(name = "UFDesemb")
+
+    @Element(name = "UFDesemb", required = true)
     private String ufDesembaraco;
-    
-    @Element(name = "dDesemb")
+
+    @Element(name = "dDesemb", required = true)
     private LocalDate dataDesembaraco;
-    
-    @Element(name = "tpViaTransp")
+
+    @Element(name = "tpViaTransp", required = true)
     private NFViaTransporteInternacional transporteInternacional;
 
     @Element(name = "vAFRMM", required = false)
     private String valorAFRMM;
-    
-    @Element(name = "tpIntermedio")
+
+    @Element(name = "tpIntermedio", required = true)
     private NFFormaImportacaoIntermediacao formaImportacaoIntermediacao;
 
     @Element(name = "CNPJ", required = false)
@@ -43,15 +44,15 @@ public class NFNotaInfoItemProdutoDeclaracaoImportacao extends DFBase {
 
     @Element(name = "UFTerceiro", required = false)
     private String ufTerceiro;
-    
-    @Element(name = "cExportador")
+
+    @Element(name = "cExportador", required = true)
     private String codigoExportador;
-    
-    @ElementList(entry = "adi", inline = true)
+
+    @ElementList(entry = "adi", inline = true, required = true)
     private List<NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao> adicoes;
 
     public void setNumeroRegistro(final String numeroRegistro) {
-        DFStringValidador.tamanho12(numeroRegistro, "Numero Registro Declaracao Importacao");
+        StringValidador.tamanho12(numeroRegistro, "Numero Registro Declaracao Importacao");
         this.numeroRegistro = numeroRegistro;
     }
 
@@ -60,7 +61,7 @@ public class NFNotaInfoItemProdutoDeclaracaoImportacao extends DFBase {
     }
 
     public void setLocalDesembaraco(final String localDesembaraco) {
-        DFStringValidador.tamanho60(localDesembaraco, "Desembaraco Declaracao Importacao");
+        StringValidador.tamanho60(localDesembaraco, "Desembaraco Declaracao Importacao");
         this.localDesembaraco = localDesembaraco;
     }
 
@@ -73,7 +74,7 @@ public class NFNotaInfoItemProdutoDeclaracaoImportacao extends DFBase {
     }
 
     public void setCodigoExportador(final String codigoExportador) {
-        DFStringValidador.tamanho60(codigoExportador, "Codigo Exportador Declaracao Importacao");
+        StringValidador.tamanho60(codigoExportador, "Codigo Exportador Declaracao Importacao");
         this.codigoExportador = codigoExportador;
     }
 
@@ -86,7 +87,7 @@ public class NFNotaInfoItemProdutoDeclaracaoImportacao extends DFBase {
     }
 
     public void setValorAFRMM(final BigDecimal valorAFRMM) {
-        this.valorAFRMM = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorAFRMM, "Valor AFRMM Declaracao Importacao");
+        this.valorAFRMM = BigDecimalParser.tamanho15Com2CasasDecimais(valorAFRMM, "Valor AFRMM Declaracao Importacao");
     }
 
     public void setFormaImportacaoIntermediacao(final NFFormaImportacaoIntermediacao formaImportacaoIntermediacao) {
@@ -94,7 +95,7 @@ public class NFNotaInfoItemProdutoDeclaracaoImportacao extends DFBase {
     }
 
     public void setCnpj(final String cnpj) {
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 

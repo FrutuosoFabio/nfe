@@ -1,33 +1,34 @@
 package com.fincatto.documentofiscal.nfe400.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.DFUnidadeFederativa;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
+import java.time.LocalDate;
 import org.simpleframework.xml.Element;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.DFUnidadeFederativa;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFNotaInfoAvulsa extends DFBase {
     private static final long serialVersionUID = 724335920156427201L;
-    
-    @Element(name = "CNPJ")
+
+    @Element(name = "CNPJ", required = true)
     private String cnpj;
-    
-    @Element(name = "xOrgao")
+
+    @Element(name = "xOrgao", required = true)
     private String orgaoEmitente;
-    
-    @Element(name = "matr")
+
+    @Element(name = "matr", required = true)
     private String matriculaAgente;
-    
-    @Element(name = "xAgente")
+
+    @Element(name = "xAgente", required = true)
     private String nomeAgente;
 
     @Element(name = "fone", required = false)
     private String fone;
-    
-    @Element(name = "UF")
+
+    @Element(name = "UF", required = true)
     private String uf;
 
     @Element(name = "nDAR", required = false)
@@ -38,35 +39,35 @@ public class NFNotaInfoAvulsa extends DFBase {
 
     @Element(name = "vDAR", required = false)
     private String valorTotalConstanteDocumentoArrecadacaoReceita;
-    
-    @Element(name = "repEmi")
+
+    @Element(name = "repEmi", required = true)
     private String reparticaoFiscalEmitente;
 
     @Element(name = "dPag", required = false)
     private LocalDate dataPagamentoDocumentoArrecadacao;
 
     public void setCnpj(final String cnpj) {
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
     public void setOrgaoEmitente(final String orgaoEmitente) {
-        DFStringValidador.tamanho60(orgaoEmitente, "Orgao Emitente");
+        StringValidador.tamanho60(orgaoEmitente, "Orgao Emitente");
         this.orgaoEmitente = orgaoEmitente;
     }
 
     public void setMatriculaAgente(final String matriculaAgente) {
-        DFStringValidador.tamanho60(matriculaAgente, "Matricula Agente");
+        StringValidador.tamanho60(matriculaAgente, "Matricula Agente");
         this.matriculaAgente = matriculaAgente;
     }
 
     public void setNomeAgente(final String nomeAgente) {
-        DFStringValidador.tamanho60(nomeAgente, "Nome Agente");
+        StringValidador.tamanho60(nomeAgente, "Nome Agente");
         this.nomeAgente = nomeAgente;
     }
 
     public void setFone(final String fone) {
-        DFStringValidador.telefone(fone);
+        StringValidador.telefone(fone);
         this.fone = fone;
     }
 
@@ -75,7 +76,7 @@ public class NFNotaInfoAvulsa extends DFBase {
     }
 
     public void setNumeroDocumentoArrecadacaoReceita(final String numeroDocumentoArrecadacaoReceita) {
-        DFStringValidador.tamanho60(numeroDocumentoArrecadacaoReceita, "Numero Documento Arrecadacao Receita");
+        StringValidador.tamanho60(numeroDocumentoArrecadacaoReceita, "Numero Documento Arrecadacao Receita");
         this.numeroDocumentoArrecadacaoReceita = numeroDocumentoArrecadacaoReceita;
     }
 
@@ -84,11 +85,11 @@ public class NFNotaInfoAvulsa extends DFBase {
     }
 
     public void setValorTotalConstanteDocumentoArrecadacaoReceita(final BigDecimal valorTotalConstanteDocumentoArrecadacaoReceita) {
-        this.valorTotalConstanteDocumentoArrecadacaoReceita = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorTotalConstanteDocumentoArrecadacaoReceita, "Valor Total Constante Documento Arrecadacao Receita");
+        this.valorTotalConstanteDocumentoArrecadacaoReceita = BigDecimalParser.tamanho15Com2CasasDecimais(valorTotalConstanteDocumentoArrecadacaoReceita, "Valor Total Constante Documento Arrecadacao Receita");
     }
 
     public void setReparticaoFiscalEmitente(final String reparticaoFiscalEmitente) {
-        DFStringValidador.tamanho60(reparticaoFiscalEmitente, "Reparticao Fiscal Emitente");
+        StringValidador.tamanho60(reparticaoFiscalEmitente, "Reparticao Fiscal Emitente");
         this.reparticaoFiscalEmitente = reparticaoFiscalEmitente;
     }
 

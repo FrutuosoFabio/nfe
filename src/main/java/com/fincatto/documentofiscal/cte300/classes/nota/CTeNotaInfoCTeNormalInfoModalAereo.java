@@ -1,14 +1,15 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.util.List;
+
+import java.time.LocalDate;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.time.LocalDate;
-import java.util.List;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -25,14 +26,14 @@ public class CTeNotaInfoCTeNormalInfoModalAereo extends DFBase {
 
     @Element(name = "nOCA", required = false)
     private String numOperConhecimentoaereo;
-    
-    @Element(name = "dPrevAereo")
+
+    @Element(name = "dPrevAereo", required = true)
     private LocalDate dataEntrega;
-    
-    @Element(name = "natCarga")
+
+    @Element(name = "natCarga", required = true)
     private CTeNotaInfoCTeNormalInfoModalAereoNaturezaCarga naturezaCarga;
-    
-    @Element(name = "tarifa")
+
+    @Element(name = "tarifa", required = true)
     private CTeNotaInfoCTeNormalInfoModalAereoTarifa tarifa;
 
     @ElementList(name = "peri", inline = true, required = false)
@@ -56,7 +57,7 @@ public class CTeNotaInfoCTeNormalInfoModalAereo extends DFBase {
      * Documento que precede o CT-e, assinado pelo expedidor, espécie de pedido de serviço
      */
     public void setMinuta(final String minuta) {
-        DFStringValidador.exatamente9N(minuta, "Número da Minuta");
+        StringValidador.exatamente9N(minuta, "Número da Minuta");
         this.minuta = minuta;
     }
 
@@ -69,7 +70,7 @@ public class CTeNotaInfoCTeNormalInfoModalAereo extends DFBase {
      * Representa o número de controle comumente utilizado pelo conhecimento aéreo composto por uma sequência numérica de onze dígitos. Os três primeiros dígitos representam um código que os operadores de transporte aéreo associados à IATA possuem. Em seguida um número de série de sete dígitos determinados pelo operador de transporte aéreo. Para finalizar, um dígito verificador, que é um sistema de módulo sete imponderado o qual divide o número de série do conhecimento aéreo por sete e usa o resto como dígito de verificação.
      */
     public void setNumOperConhecimentoaereo(final String numOperConhecimentoaereo) {
-        DFStringValidador.exatamente11N(numOperConhecimentoaereo, "Número Operacional do Conhecimento Aéreo");
+        StringValidador.exatamente11N(numOperConhecimentoaereo, "Número Operacional do Conhecimento Aéreo");
         this.numOperConhecimentoaereo = numOperConhecimentoaereo;
     }
 

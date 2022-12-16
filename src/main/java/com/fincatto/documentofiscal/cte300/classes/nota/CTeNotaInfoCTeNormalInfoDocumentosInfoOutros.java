@@ -1,17 +1,18 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.cte300.classes.CTTipoDocumento;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+import java.util.List;
+
+import java.time.LocalDate;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.cte300.classes.CTTipoDocumento;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -22,8 +23,8 @@ import java.util.List;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalInfoDocumentosInfoOutros extends DFBase {
     private static final long serialVersionUID = -2282041203753433659L;
-    
-    @Element(name = "tpDoc")
+
+    @Element(name = "tpDoc", required = true)
     private CTTipoDocumento tipoDocumento;
 
     @Element(name = "descOutros", required = false)
@@ -83,7 +84,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoOutros extends DFBase {
      * Descrição do documento
      */
     public void setDescricao(final String descricao) {
-        DFStringValidador.tamanho100(descricao, "Descrição do documento");
+        StringValidador.tamanho100(descricao, "Descrição do documento");
         this.descricao = descricao;
     }
 
@@ -95,7 +96,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoOutros extends DFBase {
      * Número
      */
     public void setNumero(final String numero) {
-        DFStringValidador.tamanho20(numero, "Número documento");
+        StringValidador.tamanho20(numero, "Número documento");
         this.numero = numero;
     }
 
@@ -119,7 +120,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoOutros extends DFBase {
      * Valor do documento
      */
     public void setValorDocumentoFiscal(final BigDecimal valorDocumentoFiscal) {
-        this.valorDocumentoFiscal = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorDocumentoFiscal, "Valor do documento");
+        this.valorDocumentoFiscal = BigDecimalParser.tamanho15Com2CasasDecimais(valorDocumentoFiscal, "Valor do documento");
     }
 
     public LocalDate getDataPrevisaoEntrega() {

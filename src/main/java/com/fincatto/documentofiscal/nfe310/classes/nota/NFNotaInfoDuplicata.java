@@ -1,12 +1,13 @@
 package com.fincatto.documentofiscal.nfe310.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
+import java.time.LocalDate;
 import org.simpleframework.xml.Element;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFNotaInfoDuplicata extends DFBase {
     private static final long serialVersionUID = 4401957395684813604L;
@@ -16,12 +17,12 @@ public class NFNotaInfoDuplicata extends DFBase {
 
     @Element(name = "dVenc", required = false)
     private LocalDate dataVencimento;
-    
-    @Element(name = "vDup")
+
+    @Element(name = "vDup", required = true)
     private String valorDuplicata;
 
     public void setNumeroDuplicata(final String numeroDuplicata) {
-        DFStringValidador.tamanho60(numeroDuplicata, "Numero Duplicata");
+        StringValidador.tamanho60(numeroDuplicata, "Numero Duplicata");
         this.numeroDuplicata = numeroDuplicata;
     }
 
@@ -30,7 +31,7 @@ public class NFNotaInfoDuplicata extends DFBase {
     }
 
     public void setValorDuplicata(final BigDecimal valorDuplicata) {
-        this.valorDuplicata = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorDuplicata, "Valor Duplicata");
+        this.valorDuplicata = BigDecimalParser.tamanho15Com2CasasDecimais(valorDuplicata, "Valor Duplicata");
     }
 
     public String getValorDuplicata() {

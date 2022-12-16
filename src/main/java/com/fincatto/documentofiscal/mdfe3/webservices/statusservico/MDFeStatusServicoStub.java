@@ -10,9 +10,6 @@ import org.apache.axis2.client.Stub;
 
 import javax.xml.namespace.QName;
 
-import com.fincatto.documentofiscal.DFConfig;
-import com.fincatto.documentofiscal.utils.MessageContextFactory;
-
 /*
  * MDFeStatusServicoStub java implementation
  */
@@ -35,7 +32,7 @@ public class MDFeStatusServicoStub extends org.apache.axis2.client.Stub {
             MDFeStatusServicoStub.counter = 0;
         }
         MDFeStatusServicoStub.counter = MDFeStatusServicoStub.counter + 1;
-        return System.currentTimeMillis() + "_" + MDFeStatusServicoStub.counter;
+        return java.lang.Long.toString(java.lang.System.currentTimeMillis()) + "_" + MDFeStatusServicoStub.counter;
     }
 
     private void populateAxisService() {
@@ -59,14 +56,14 @@ public class MDFeStatusServicoStub extends org.apache.axis2.client.Stub {
      * Constructor that takes in a configContext
      */
 
-    public MDFeStatusServicoStub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, DFConfig config) throws org.apache.axis2.AxisFault {
-        this(configurationContext, targetEndpoint, false, config);
+    public MDFeStatusServicoStub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
+        this(configurationContext, targetEndpoint, false);
     }
 
     /**
      * Constructor that takes in a configContext and useseperate listner
      */
-    public MDFeStatusServicoStub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, final boolean useSeparateListener, DFConfig config) throws org.apache.axis2.AxisFault {
+    public MDFeStatusServicoStub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, final boolean useSeparateListener) throws org.apache.axis2.AxisFault {
         // To populate AxisService
         this.populateAxisService();
         this.populateFaults();
@@ -75,14 +72,27 @@ public class MDFeStatusServicoStub extends org.apache.axis2.client.Stub {
         this._serviceClient.getOptions().setUseSeparateListener(useSeparateListener);
         // Set the soap version
         this._serviceClient.getOptions().setSoapVersionURI(org.apache.axiom.soap.SOAP12Constants.SOAP_ENVELOPE_NAMESPACE_URI);
-        this.config = config;
+    }
+
+    /**
+     * Default Constructor
+     */
+    public MDFeStatusServicoStub(final org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
+        this(configurationContext, "https://mdfe.sefaz.rs.gov.br/ws/MDFeStatusServico/MDFeStatusServico.asmx");
+    }
+
+    /**
+     * Default Constructor
+     */
+    public MDFeStatusServicoStub() throws org.apache.axis2.AxisFault {
+        this("https://mdfe.sefaz.rs.gov.br/ws/MDFeStatusServico/MDFeStatusServico.asmx");
     }
 
     /**
      * Constructor taking the target endpoint
      */
-    public MDFeStatusServicoStub(final java.lang.String targetEndpoint, DFConfig config) throws org.apache.axis2.AxisFault {
-        this(null, targetEndpoint, config);
+    public MDFeStatusServicoStub(final java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
+        this(null, targetEndpoint);
     }
 
     /**
@@ -101,7 +111,7 @@ public class MDFeStatusServicoStub extends org.apache.axis2.client.Stub {
             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
             this.addPropertyToOperationClient(_operationClient, org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR, "&");
             // create a message context
-            _messageContext = MessageContextFactory.INSTANCE.create(config);
+            _messageContext = new org.apache.axis2.context.MessageContext();
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env;
             env = this.toEnvelope(Stub.getFactory(_operationClient.getOptions().getSoapVersionURI()), mdfeDadosMsg0, this.optimizeContent(new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/mdfe/wsdl/MDFeStatusServico", "mdfeStatusServicoMDF")), new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/mdfe/wsdl/MDFeStatusServico", "mdfeStatusServicoMDF"));
@@ -170,7 +180,7 @@ public class MDFeStatusServicoStub extends org.apache.axis2.client.Stub {
         this.addPropertyToOperationClient(_operationClient, org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR, "&");
         // create SOAP envelope with that payload
         org.apache.axiom.soap.SOAPEnvelope env;
-        final org.apache.axis2.context.MessageContext _messageContext = MessageContextFactory.INSTANCE.create(config);
+        final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
         // Style is Doc.
         env = this.toEnvelope(Stub.getFactory(_operationClient.getOptions().getSoapVersionURI()), mdfeDadosMsg0, this.optimizeContent(new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/mdfe/wsdl/MDFeStatusServico", "mdfeStatusServicoMDF")), new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/mdfe/wsdl/MDFeStatusServico", "mdfeStatusServicoMDF"));
         // add the soap_headers only if they are not null
@@ -271,7 +281,6 @@ public class MDFeStatusServicoStub extends org.apache.axis2.client.Stub {
     }
 
     private final javax.xml.namespace.QName[] opNameArray = null;
-    private final DFConfig config;
 
     private boolean optimizeContent(final javax.xml.namespace.QName opName) {
         if (this.opNameArray == null) {
@@ -1688,6 +1697,9 @@ public class MDFeStatusServicoStub extends org.apache.axis2.client.Stub {
             }
             if (com.fincatto.documentofiscal.mdfe3.webservices.statusservico.MDFeStatusServicoStub.MdfeStatusServicoMDFResult.class.equals(type)) {
                 return com.fincatto.documentofiscal.mdfe3.webservices.statusservico.MDFeStatusServicoStub.MdfeStatusServicoMDFResult.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+            }
+            if (com.fincatto.documentofiscal.mdfe3.webservices.statusservico.MDFeStatusServicoStub.MdfeCabecMsgE.class.equals(type)) {
+                return com.fincatto.documentofiscal.mdfe3.webservices.statusservico.MDFeStatusServicoStub.MdfeCabecMsgE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
             }
             if (com.fincatto.documentofiscal.mdfe3.webservices.statusservico.MDFeStatusServicoStub.MdfeCabecMsgE.class.equals(type)) {
                 return com.fincatto.documentofiscal.mdfe3.webservices.statusservico.MDFeStatusServicoStub.MdfeCabecMsgE.Factory.parse(param.getXMLStreamReaderWithoutCaching());

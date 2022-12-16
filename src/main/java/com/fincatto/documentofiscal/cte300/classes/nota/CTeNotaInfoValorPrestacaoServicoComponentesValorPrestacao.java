@@ -1,13 +1,14 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -18,11 +19,11 @@ import java.math.BigDecimal;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoValorPrestacaoServicoComponentesValorPrestacao extends DFBase {
     private static final long serialVersionUID = -8330894109802841158L;
-    
-    @Element(name = "xNome")
+
+    @Element(name = "xNome", required = true)
     private String nomeComponente;
-    
-    @Element(name = "vComp")
+
+    @Element(name = "vComp", required = true)
     private String valorComponente;
 
     public CTeNotaInfoValorPrestacaoServicoComponentesValorPrestacao() {
@@ -39,7 +40,7 @@ public class CTeNotaInfoValorPrestacaoServicoComponentesValorPrestacao extends D
      * Exemplos: FRETE PESO, FRETE VALOR, SEC/CAT, ADEME, AGENDAMENTO, etc
      */
     public void setNomeComponente(final String nomeComponente) {
-        DFStringValidador.tamanho15(nomeComponente, "Nome do componente");
+        StringValidador.tamanho15(nomeComponente, "Nome do componente");
         this.nomeComponente = nomeComponente;
     }
 
@@ -51,6 +52,6 @@ public class CTeNotaInfoValorPrestacaoServicoComponentesValorPrestacao extends D
      * Valor do componente
      */
     public void setValorComponente(final BigDecimal valorComponente) {
-        this.valorComponente = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorComponente, "Valor do componente");
+        this.valorComponente = BigDecimalParser.tamanho15Com2CasasDecimais(valorComponente, "Valor do componente");
     }
 }

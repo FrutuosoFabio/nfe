@@ -1,25 +1,26 @@
 package com.fincatto.documentofiscal.nfe310.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFBigIntegerValidador;
-import com.fincatto.documentofiscal.validadores.DFIntegerValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
-import org.simpleframework.xml.Element;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.simpleframework.xml.Element;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.BigIntegerValidador;
+import com.fincatto.documentofiscal.validadores.IntegerValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
+
 public class NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao extends DFBase {
     private static final long serialVersionUID = -7286071184901675008L;
-    
-    @Element(name = "nAdicao")
+
+    @Element(name = "nAdicao", required = true)
     private Integer numero;
-    
-    @Element(name = "nSeqAdic")
+
+    @Element(name = "nSeqAdic", required = true)
     private Integer sequencial;
-    
-    @Element(name = "cFabricante")
+
+    @Element(name = "cFabricante", required = true)
     private String codigoFabricante;
 
     @Element(name = "vDescDI", required = false)
@@ -29,26 +30,26 @@ public class NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao extends DFBase {
     private BigInteger numeroAtoConcessorioDrawback;
 
     public void setNumero(final Integer numero) {
-        DFIntegerValidador.tamanho3(numero, "Numero Declaracao Importacao Adicao");
+        IntegerValidador.tamanho3(numero, "Numero Declaracao Importacao Adicao");
         this.numero = numero;
     }
 
     public void setSequencial(final Integer sequencial) {
-        DFIntegerValidador.tamanho3(sequencial, "Sequencial Declaracao Importacao Adicao");
+        IntegerValidador.tamanho3(sequencial, "Sequencial Declaracao Importacao Adicao");
         this.sequencial = sequencial;
     }
 
     public void setCodigoFabricante(final String codigoFabricante) {
-        DFStringValidador.tamanho60(codigoFabricante, "Codigo Fabricante Declaracao Importacao Adicao");
+        StringValidador.tamanho60(codigoFabricante, "Codigo Fabricante Declaracao Importacao Adicao");
         this.codigoFabricante = codigoFabricante;
     }
 
     public void setDesconto(final BigDecimal desconto) {
-        this.desconto = DFBigDecimalValidador.tamanho15Com2CasasDecimais(desconto, "Desconto Declaracao Importacao Adicao");
+        this.desconto = BigDecimalParser.tamanho15Com2CasasDecimais(desconto, "Desconto Declaracao Importacao Adicao");
     }
 
     public void setNumeroAtoConcessorioDrawback(final BigInteger numeroAtoConcessorioDrawback) {
-        DFBigIntegerValidador.tamanho11(numeroAtoConcessorioDrawback, "Numero Ato Concessorio Declaracao Importacao Adicao");
+        BigIntegerValidador.tamanho11(numeroAtoConcessorioDrawback, "Numero Ato Concessorio Declaracao Importacao Adicao");
         this.numeroAtoConcessorioDrawback = numeroAtoConcessorioDrawback;
     }
 

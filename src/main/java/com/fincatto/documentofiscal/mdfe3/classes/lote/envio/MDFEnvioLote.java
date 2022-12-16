@@ -7,7 +7,7 @@ import org.simpleframework.xml.Root;
 
 import com.fincatto.documentofiscal.DFBase;
 import com.fincatto.documentofiscal.mdfe3.classes.nota.MDFe;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * Created by Eldevan Nery Junior on 08/11/17. Envio de Lote MDF-e para concessão de autorização.
@@ -37,7 +37,7 @@ public class MDFEnvioLote extends DFBase {
     }
 
     public void setIdLote(final String idLote) {
-        DFStringValidador.tamanho15N(idLote, "ID do Lote do MDFe");
+        StringValidador.tamanho15N(idLote, "ID do Lote do MDFe");
         this.idLote = idLote;
     }
 
@@ -46,7 +46,7 @@ public class MDFEnvioLote extends DFBase {
     }
 
     public void setVersao(final String versao) {
-        DFStringValidador.equals(MDFe.VERSAO, versao);
+        StringValidador.equals(MDFe.VERSAO, versao);
         this.versao = versao;
     }
 

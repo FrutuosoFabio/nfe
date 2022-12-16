@@ -1,13 +1,14 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -18,23 +19,23 @@ import java.math.BigDecimal;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalVeiculosTransportados extends DFBase {
     private static final long serialVersionUID = 1369667859453686493L;
-    
-    @Element(name = "chassi")
+
+    @Element(name = "chassi", required = true)
     private String chassi;
-    
-    @Element(name = "cCor")
+
+    @Element(name = "cCor", required = true)
     private String codigoCor;
-    
-    @Element(name = "xCor")
+
+    @Element(name = "xCor", required = true)
     private String descricaoCor;
-    
-    @Element(name = "cMod")
+
+    @Element(name = "cMod", required = true)
     private String codigoMarcaModelo;
-    
-    @Element(name = "vUnit")
+
+    @Element(name = "vUnit", required = true)
     private String valorUnitario;
-    
-    @Element(name = "vFrete")
+
+    @Element(name = "vFrete", required = true)
     private String valorFrete;
 
     public CTeNotaInfoCTeNormalVeiculosTransportados() {
@@ -54,7 +55,7 @@ public class CTeNotaInfoCTeNormalVeiculosTransportados extends DFBase {
      * Chassi do veículo
      */
     public void setChassi(final String chassi) {
-        DFStringValidador.exatamente17(chassi, "Chassi do veículo");
+        StringValidador.exatamente17(chassi, "Chassi do veículo");
         this.chassi = chassi;
     }
 
@@ -67,7 +68,7 @@ public class CTeNotaInfoCTeNormalVeiculosTransportados extends DFBase {
      * Código de cada montadora
      */
     public void setCodigoCor(final String codigoCor) {
-        DFStringValidador.tamanho4(codigoCor, "Cor do veículo");
+        StringValidador.tamanho4(codigoCor, "Cor do veículo");
         this.codigoCor = codigoCor;
     }
 
@@ -79,7 +80,7 @@ public class CTeNotaInfoCTeNormalVeiculosTransportados extends DFBase {
      * Descrição da cor
      */
     public void setDescricaoCor(final String descricaoCor) {
-        DFStringValidador.tamanho40(descricaoCor, "Descrição da cor");
+        StringValidador.tamanho40(descricaoCor, "Descrição da cor");
         this.descricaoCor = descricaoCor;
     }
 
@@ -92,7 +93,7 @@ public class CTeNotaInfoCTeNormalVeiculosTransportados extends DFBase {
      * Utilizar tabela RENAVAM
      */
     public void setCodigoMarcaModelo(final String codigoMarcaModelo) {
-        DFStringValidador.tamanho6(codigoMarcaModelo, "Código Marca Modelo");
+        StringValidador.tamanho6(codigoMarcaModelo, "Código Marca Modelo");
         this.codigoMarcaModelo = codigoMarcaModelo;
     }
 
@@ -104,7 +105,7 @@ public class CTeNotaInfoCTeNormalVeiculosTransportados extends DFBase {
      * Valor Unitário do Veículo
      */
     public void setValorUnitario(final BigDecimal valorUnitario) {
-        this.valorUnitario = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorUnitario, "Valor Unitário do Veículo");
+        this.valorUnitario = BigDecimalParser.tamanho15Com2CasasDecimais(valorUnitario, "Valor Unitário do Veículo");
     }
 
     public String getValorFrete() {
@@ -115,6 +116,6 @@ public class CTeNotaInfoCTeNormalVeiculosTransportados extends DFBase {
      * Frete Unitário
      */
     public void setValorFrete(final BigDecimal valorFrete) {
-        this.valorFrete = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorFrete, "Frete Unitário");
+        this.valorFrete = BigDecimalParser.tamanho15Com2CasasDecimais(valorFrete, "Frete Unitário");
     }
 }

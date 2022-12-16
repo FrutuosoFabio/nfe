@@ -1,10 +1,11 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -15,7 +16,7 @@ import org.simpleframework.xml.Root;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeComplementar extends DFBase {
     private static final long serialVersionUID = -5820790322163765078L;
-    @Element(name = "chCTe")
+    @Element(name = "chCTe", required = true)
     private String chave;
 
     public CTeNotaInfoCTeComplementar() {
@@ -30,7 +31,7 @@ public class CTeNotaInfoCTeComplementar extends DFBase {
      * Chave do CT-e complementado
      */
     public void setChave(final String chave) {
-        DFStringValidador.exatamente44N(chave, "Chave do CT-e complementado");
+        StringValidador.exatamente44N(chave, "Chave do CT-e complementado");
         this.chave = chave;
     }
 }

@@ -1,14 +1,15 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.cte300.classes.CTClasseTarifa;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.cte300.classes.CTClasseTarifa;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -19,14 +20,14 @@ import java.math.BigDecimal;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalInfoModalAereoTarifa extends DFBase {
     private static final long serialVersionUID = 4117608894098820892L;
-    
-    @Element(name = "CL")
+
+    @Element(name = "CL", required = true)
     private CTClasseTarifa classe;
 
     @Element(name = "cTar", required = false)
     private String codigo;
-    
-    @Element(name = "vTar")
+
+    @Element(name = "vTar", required = true)
     private String valor;
 
     public CTeNotaInfoCTeNormalInfoModalAereoTarifa() {
@@ -58,7 +59,7 @@ public class CTeNotaInfoCTeNormalInfoModalAereoTarifa extends DFBase {
      * Deverão ser incluídos os códigos de três dígitos, correspondentes à tarifa.
      */
     public void setCodigo(final String codigo) {
-        DFStringValidador.tamanho4(codigo, "Código da Tarifa");
+        StringValidador.tamanho4(codigo, "Código da Tarifa");
         this.codigo = codigo;
     }
 
@@ -71,6 +72,6 @@ public class CTeNotaInfoCTeNormalInfoModalAereoTarifa extends DFBase {
      * Valor da tarifa por kg quando for o caso.
      */
     public void setValor(final BigDecimal valor) {
-        this.valor = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valor, "Valor da Tarifa");
+        this.valor = BigDecimalParser.tamanho15Com2CasasDecimais(valor, "Valor da Tarifa");
     }
 }

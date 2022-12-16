@@ -1,32 +1,32 @@
 package com.fincatto.documentofiscal.nfe310.classes.evento.inutilizacao;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.DFUnidadeFederativa;
+import java.time.LocalDateTime;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 
-import java.time.LocalDateTime;
+import com.fincatto.documentofiscal.DFAmbiente;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.DFUnidadeFederativa;
 
 public class NFRetornoEventoInutilizacaoDados extends DFBase {
     private static final long serialVersionUID = -6732103693589079116L;
 
     @Attribute(name = "Id", required = false)
     private String identificador;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
-    
-    @Element(name = "verAplic")
+
+    @Element(name = "verAplic", required = true)
     private String versaoAplicacao;
-    
-    @Element(name = "cStat")
+
+    @Element(name = "cStat", required = true)
     private String status;
-    
-    @Element(name = "xMotivo")
+
+    @Element(name = "xMotivo", required = true)
     private String motivo;
-    
-    @Element(name = "cUF")
+
+    @Element(name = "cUF", required = true)
     private DFUnidadeFederativa uf;
 
     @Element(name = "ano", required = false)

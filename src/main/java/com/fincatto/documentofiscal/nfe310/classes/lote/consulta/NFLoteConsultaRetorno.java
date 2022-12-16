@@ -1,41 +1,42 @@
 package com.fincatto.documentofiscal.nfe310.classes.lote.consulta;
 
+import java.util.List;
+
+import java.time.LocalDateTime;
+import org.simpleframework.xml.*;
+
 import com.fincatto.documentofiscal.DFAmbiente;
 import com.fincatto.documentofiscal.DFBase;
 import com.fincatto.documentofiscal.DFUnidadeFederativa;
 import com.fincatto.documentofiscal.nfe310.classes.NFProtocolo;
-import org.simpleframework.xml.*;
-
-import java.time.ZonedDateTime;
-import java.util.List;
 
 @Root(name = "retConsReciNFe")
 @Namespace(reference = "http://www.portalfiscal.inf.br/nfe")
 public class NFLoteConsultaRetorno extends DFBase {
     private static final long serialVersionUID = -4164491132370082153L;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
-    
-    @Element(name = "verAplic")
+
+    @Element(name = "verAplic", required = true)
     private String versaoAplicacao;
 
     @Element(name = "nRec", required = false)
     private String numeroRecibo;
-    
-    @Element(name = "cStat")
+
+    @Element(name = "cStat", required = true)
     private String status;
-    
-    @Element(name = "dhRecbto")
-    private ZonedDateTime dataHoraRecebimento;
-    
-    @Element(name = "xMotivo")
+
+    @Element(name = "dhRecbto", required = true)
+    private LocalDateTime dataHoraRecebimento;
+
+    @Element(name = "xMotivo", required = true)
     private String motivo;
-    
-    @Element(name = "cUF")
+
+    @Element(name = "cUF", required = true)
     private DFUnidadeFederativa uf;
 
     @Element(name = "cMsg", required = false)
@@ -126,12 +127,12 @@ public class NFLoteConsultaRetorno extends DFBase {
     public void setMensagem(final String mensagem) {
         this.mensagem = mensagem;
     }
-    
-    public ZonedDateTime getDataHoraRecebimento() {
+
+    public LocalDateTime getDataHoraRecebimento() {
         return this.dataHoraRecebimento;
     }
-    
-    public void setDataHoraRecebimento(final ZonedDateTime dataHoraRecebimento) {
+
+    public void setDataHoraRecebimento(final LocalDateTime dataHoraRecebimento) {
         this.dataHoraRecebimento = dataHoraRecebimento;
     }
 }

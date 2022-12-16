@@ -1,11 +1,11 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.cte300.classes.CTTipoRegimeTributario;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -16,27 +16,24 @@ import org.simpleframework.xml.Root;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoEmitente extends DFBase {
     private static final long serialVersionUID = -316869143177543788L;
-    
-    @Element(name = "CNPJ")
+
+    @Element(name = "CNPJ", required = true)
     private String cnpj;
-    
-    @Element(name = "IE")
+
+    @Element(name = "IE", required = true)
     private String inscricaoEstadual;
 
     @Element(name = "IEST", required = false)
     private String inscricaoEstadualST;
-    
-    @Element(name = "xNome")
+
+    @Element(name = "xNome", required = true)
     private String razaoSocial;
 
     @Element(name = "xFant", required = false)
     private String nomeFantasia;
-    
-    @Element(name = "enderEmit")
-    private CTeNotaEnderecoEmitente endereco;
 
-    @Element(name = "CRT", required = false)
-    private CTTipoRegimeTributario tipoRegimeTributario;
+    @Element(name = "enderEmit", required = true)
+    private CTeNotaEnderecoEmitente endereco;
 
     public CTeNotaInfoEmitente() {
         this.cnpj = null;
@@ -45,7 +42,6 @@ public class CTeNotaInfoEmitente extends DFBase {
         this.razaoSocial = null;
         this.nomeFantasia = null;
         this.endereco = null;
-        this.tipoRegimeTributario = null;
     }
 
     public String getCnpj() {
@@ -57,7 +53,7 @@ public class CTeNotaInfoEmitente extends DFBase {
      * Informar zeros não significativos
      */
     public void setCnpj(final String cnpj) {
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
@@ -69,7 +65,7 @@ public class CTeNotaInfoEmitente extends DFBase {
      * Inscrição Estadual do Emitente
      */
     public void setInscricaoEstadual(final String inscricaoEstadual) {
-        DFStringValidador.inscricaoEstadualSemIsencao(inscricaoEstadual);
+        StringValidador.inscricaoEstadualSemIsencao(inscricaoEstadual);
         this.inscricaoEstadual = inscricaoEstadual;
     }
 
@@ -81,7 +77,7 @@ public class CTeNotaInfoEmitente extends DFBase {
      * Inscrição Estadual do Substituto Tributário
      */
     public void setInscricaoEstadualST(final String inscricaoEstadualST) {
-        DFStringValidador.tamanho14N(inscricaoEstadualST, "Inscrição Estadual do Substituto Tributário");
+        StringValidador.tamanho14N(inscricaoEstadualST, "Inscrição Estadual do Substituto Tributário");
         this.inscricaoEstadualST = inscricaoEstadualST;
     }
 
@@ -93,7 +89,7 @@ public class CTeNotaInfoEmitente extends DFBase {
      * Razão social ou Nome do emitente
      */
     public void setRazaoSocial(final String xNome) {
-        DFStringValidador.tamanho2ate60(xNome, "Razão social ou Nome do emitente");
+        StringValidador.tamanho2ate60(xNome, "Razão social ou Nome do emitente");
         this.razaoSocial = xNome;
     }
 
@@ -105,7 +101,7 @@ public class CTeNotaInfoEmitente extends DFBase {
      * Nome fantasia
      */
     public void setNomeFantasia(final String xFant) {
-        DFStringValidador.tamanho2ate60(xFant, "Nome fantasia");
+        StringValidador.tamanho2ate60(xFant, "Nome fantasia");
         this.nomeFantasia = xFant;
     }
 
@@ -118,14 +114,5 @@ public class CTeNotaInfoEmitente extends DFBase {
      */
     public void setEnderEmit(final CTeNotaEnderecoEmitente enderEmit) {
         this.endereco = enderEmit;
-    }
-
-    public CTTipoRegimeTributario getTipoRegimeTributario() {
-        return tipoRegimeTributario;
-    }
-
-    public CTeNotaInfoEmitente setTipoRegimeTributario(CTTipoRegimeTributario tipoRegimeTributario) {
-        this.tipoRegimeTributario = tipoRegimeTributario;
-        return this;
     }
 }

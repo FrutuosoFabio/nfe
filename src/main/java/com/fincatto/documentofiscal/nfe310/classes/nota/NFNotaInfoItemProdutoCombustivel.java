@@ -2,16 +2,16 @@ package com.fincatto.documentofiscal.nfe310.classes.nota;
 
 import com.fincatto.documentofiscal.DFBase;
 import com.fincatto.documentofiscal.DFUnidadeFederativa;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 import org.simpleframework.xml.Element;
 
 import java.math.BigDecimal;
 
 public class NFNotaInfoItemProdutoCombustivel extends DFBase {
     private static final long serialVersionUID = -2899516480924530882L;
-    
-    @Element(name = "cProdANP")
+
+    @Element(name = "cProdANP", required = true)
     private String codigoProdutoANP;
 
     @Element(name = "pMixGN", required = false)
@@ -22,8 +22,8 @@ public class NFNotaInfoItemProdutoCombustivel extends DFBase {
 
     @Element(name = "qTemp", required = false)
     private String quantidade;
-    
-    @Element(name = "UFCons")
+
+    @Element(name = "UFCons", required = true)
     private String uf;
 
     @Element(name = "CIDE", required = false)
@@ -42,17 +42,17 @@ public class NFNotaInfoItemProdutoCombustivel extends DFBase {
     }
 
     public void setCodigoProdutoANP(final String codigoProdutoANP) {
-        DFStringValidador.exatamente9(codigoProdutoANP, "Codigo Produto ANP Combustivel");
+        StringValidador.exatamente9(codigoProdutoANP, "Codigo Produto ANP Combustivel");
         this.codigoProdutoANP = codigoProdutoANP;
     }
 
     public void setCodigoAutorizacaoCODIF(final String codigoAutorizacaoCODIF) {
-        DFStringValidador.tamanho21(codigoAutorizacaoCODIF, "Codigo Autorizacao CODIF Combustivel");
+        StringValidador.tamanho21(codigoAutorizacaoCODIF, "Codigo Autorizacao CODIF Combustivel");
         this.codigoAutorizacaoCOFIF = codigoAutorizacaoCODIF;
     }
 
     public void setQuantidade(final BigDecimal quantidade) {
-        this.quantidade = DFBigDecimalValidador.tamanho16Com4CasasDecimais(quantidade, "Quantidade Combustivel");
+        this.quantidade = BigDecimalParser.tamanho16Com4CasasDecimais(quantidade, "Quantidade Combustivel");
     }
 
     public void setUf(final DFUnidadeFederativa uf) {
@@ -64,7 +64,7 @@ public class NFNotaInfoItemProdutoCombustivel extends DFBase {
     }
 
     public void setPercentualGasNatural(final BigDecimal percentualGasNatural) {
-        this.percentualGasNatural = DFBigDecimalValidador.tamanho5Com2CasasDecimais(percentualGasNatural, "Percentual Gas Natural Combustivel");
+        this.percentualGasNatural = BigDecimalParser.tamanho5Com2CasasDecimais(percentualGasNatural, "Percentual Gas Natural Combustivel");
     }
 
     public void setEncerrante(final NFNotaInfoItemProdutoCombustivelEncerrante encerrante) {

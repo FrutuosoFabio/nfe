@@ -1,8 +1,8 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
 import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFListValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import com.fincatto.documentofiscal.validadores.ListValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
@@ -23,19 +23,16 @@ public class CTeNotaInfo extends DFBase {
 
     public static final String IDENT = "CTe";
 
-    @Attribute(name = "Id")
+    @Attribute(name = "Id", required = true)
     private String identificador;
 
-    @Attribute(name = "versao")
-    private String versao;
-
-    @Element(name = "ide")
+    @Element(name = "ide", required = true)
     private CTeNotaInfoIdentificacao identificacao;
 
     @Element(name = "compl", required = false)
     private CTeNotaInfoDadosComplementares dadosComplementares;
 
-    @Element(name = "emit")
+    @Element(name = "emit", required = true)
     private CTeNotaInfoEmitente emitente;
 
     @Element(name = "rem", required = false)
@@ -50,10 +47,10 @@ public class CTeNotaInfo extends DFBase {
     @Element(name = "dest", required = false)
     private CTeNotaInfoDestinatario destinatario;
 
-    @Element(name = "vPrest")
+    @Element(name = "vPrest", required = true)
     private CTeNotaInfoValorPrestacaoServico valorPrestacaoServico;
 
-    @Element(name = "imp")
+    @Element(name = "imp", required = true)
     private CTeNotaInfoInformacoesRelativasImpostos informacoesRelativasImpostos;
 
     @Element(name = "infCTeNorm", required = false)
@@ -68,8 +65,8 @@ public class CTeNotaInfo extends DFBase {
     @ElementList(name = "autXML", inline = true, required = false)
     private List<CTeNotaInfoAutorizacaoDownload> autorizacaoDownload;
 
-    @Element(name="infRespTec", required = false)
-    private CTeNotaInfoResponsavelTecnico informacaoResposavelTecnico;
+    @Attribute(name = "versao", required = true)
+    private String versao;
 
     public CTeNotaInfo() {
         this.identificacao = null;
@@ -98,7 +95,7 @@ public class CTeNotaInfo extends DFBase {
      * Informar a chave de acesso do CT-e e precedida do literal "CTe"
      */
     public void setIdentificador(final String identificador) {
-        DFStringValidador.exatamente44N(identificador, "Identificador");
+        StringValidador.exatamente44N(identificador, "Identificador");
         this.identificador = CTeNotaInfo.IDENT + identificador;
     }
 
@@ -253,7 +250,7 @@ public class CTeNotaInfo extends DFBase {
      * Informar CNPJ ou CPF. Preencher os zeros não significativos.
      */
     public void setAutorizacaoDownload(final List<CTeNotaInfoAutorizacaoDownload> autorizacaoDownload) {
-        DFListValidador.tamanho10(autorizacaoDownload, "Autorizados para download do XML do DF-e");
+        ListValidador.tamanho10(autorizacaoDownload, "Autorizados para download do XML do DF-e");
         this.autorizacaoDownload = autorizacaoDownload;
     }
 
@@ -268,12 +265,4 @@ public class CTeNotaInfo extends DFBase {
         this.versao = versao;
     }
 
-    public CTeNotaInfoResponsavelTecnico getInformacaoResposavelTecnico() {
-        return informacaoResposavelTecnico;
-    }
-
-    public CTeNotaInfo setInformacaoResposavelTecnico(CTeNotaInfoResponsavelTecnico informacaoResposavelTecnico) {
-        this.informacaoResposavelTecnico = informacaoResposavelTecnico;
-        return this;
-    }
 }

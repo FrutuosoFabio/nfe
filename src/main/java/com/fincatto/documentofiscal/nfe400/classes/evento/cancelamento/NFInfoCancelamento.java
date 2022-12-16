@@ -1,62 +1,26 @@
 package com.fincatto.documentofiscal.nfe400.classes.evento.cancelamento;
 
-import com.fincatto.documentofiscal.DFUnidadeFederativa;
-import com.fincatto.documentofiscal.nfe400.classes.evento.NFTipoEvento;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Element;
+
+import com.fincatto.documentofiscal.nfe400.classes.evento.NFTipoEvento;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFInfoCancelamento extends NFTipoEvento {
     private static final long serialVersionUID = 7427073073940993756L;
-    
-    @Element(name = "cOrgaoAutor", required = false)
-    private DFUnidadeFederativa ufAutorizador;//campo destinado ao cancelamento por substituicao
-    
-    @Element(name = "tpAutor", required = false)
-    private String tipoAutorizador;//campo destinado ao cancelamento por substituicao
-    
-    @Element(name = "verAplic", required = false)
-    private String versaoAplicativo;//campo destinado ao cancelamento por substituicao
-    
-    @Element(name = "nProt")
+
+    @Element(name = "nProt", required = true)
     private String protocoloAutorizacao;
-    
-    @Element(name = "xJust")
+
+    @Element(name = "xJust", required = true)
     private String justificativa;
-    
-    @Element(name = "chNFeRef", required = false)
-    private String chaveAcessoSubstituta;//campo destinado ao cancelamento por substituicao
 
-    public DFUnidadeFederativa getUfAutorizador() {
-		return ufAutorizador;
-	}
-
-	public void setUfAutorizador(DFUnidadeFederativa ufAutorizador) {
-		this.ufAutorizador = ufAutorizador;
-	}
-
-	public String getTipoAutorizador() {
-		return tipoAutorizador;
-	}
-
-	public void setTipoAutorizador(String tipoAutorizador) {
-		this.tipoAutorizador = tipoAutorizador;
-	}
-
-	public String getVersaoAplicativo() {
-		return versaoAplicativo;
-	}
-
-	public void setVersaoAplicativo(String versaoAplicativo) {
-		this.versaoAplicativo = versaoAplicativo;
-	}
-
-	public void setJustificativa(final String justificativa) {
-        DFStringValidador.tamanho15a256(justificativa, "Justificativa");
+    public void setJustificativa(final String justificativa) {
+        StringValidador.tamanho15a256(justificativa, "Justificativa");
         this.justificativa = justificativa;
     }
 
     public void setProtocoloAutorizacao(final String protocoloAutorizacao) {
-        DFStringValidador.exatamente15N(protocoloAutorizacao, "Protocolo de Autorizacao");
+        StringValidador.exatamente15N(protocoloAutorizacao, "Protocolo de Autorizacao");
         this.protocoloAutorizacao = protocoloAutorizacao;
     }
 
@@ -68,15 +32,7 @@ public class NFInfoCancelamento extends NFTipoEvento {
         return this.protocoloAutorizacao;
     }
 
-    public String getChaveAcessoSubstituta() {
-		return chaveAcessoSubstituta;
-	}
-
-	public void setChaveAcessoSubstituta(String chaveAcessoSubstituta) {
-		this.chaveAcessoSubstituta = chaveAcessoSubstituta;
-	}
-
-	@Override
+    @Override
     public void setCondicaoUso(final String condicaoUso) {
         throw new UnsupportedOperationException("Evento de cancelamento nao possui condicao de uso");
     }

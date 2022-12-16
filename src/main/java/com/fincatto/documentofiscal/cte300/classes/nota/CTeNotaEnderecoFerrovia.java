@@ -1,10 +1,11 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -15,29 +16,29 @@ import org.simpleframework.xml.Root;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaEnderecoFerrovia extends DFBase {
     private static final long serialVersionUID = -3577887454042477166L;
-    
-    @Element(name = "xLgr")
+
+    @Element(name = "xLgr", required = true)
     private String logradouro;
-    
-    @Element(name = "nro")
+
+    @Element(name = "nro", required = true)
     private String numero;
 
     @Element(name = "xCpl", required = false)
     private String complemento;
-    
-    @Element(name = "xBairro")
+
+    @Element(name = "xBairro", required = true)
     private String bairro;
-    
-    @Element(name = "cMun")
+
+    @Element(name = "cMun", required = true)
     private String codigoMunicipio;
-    
-    @Element(name = "xMun")
+
+    @Element(name = "xMun", required = true)
     private String descricaoMunicipio;
 
     @Element(name = "CEP", required = false)
     private String cep;
-    
-    @Element(name = "UF")
+
+    @Element(name = "UF", required = true)
     private String siglaUF;
 
     public CTeNotaEnderecoFerrovia() {
@@ -59,7 +60,7 @@ public class CTeNotaEnderecoFerrovia extends DFBase {
      * Logradouro
      */
     public void setLogradouro(final String logradouro) {
-        DFStringValidador.tamanho2ate60(logradouro, "Logradouro no endereço do Emitente");
+        StringValidador.tamanho2ate60(logradouro, "Logradouro no endereço do Emitente");
         this.logradouro = logradouro;
     }
 
@@ -71,7 +72,7 @@ public class CTeNotaEnderecoFerrovia extends DFBase {
      * Número
      */
     public void setNumero(final String numero) {
-        DFStringValidador.tamanho60(numero, "Número no endereço do Emitente");
+        StringValidador.tamanho60(numero, "Número no endereço do Emitente");
         this.numero = numero;
     }
 
@@ -83,7 +84,7 @@ public class CTeNotaEnderecoFerrovia extends DFBase {
      * Complemento
      */
     public void setComplemento(final String complemento) {
-        DFStringValidador.tamanho60(complemento, "Complemento no endereço do Emitente");
+        StringValidador.tamanho60(complemento, "Complemento no endereço do Emitente");
         this.complemento = complemento;
     }
 
@@ -95,7 +96,7 @@ public class CTeNotaEnderecoFerrovia extends DFBase {
      * Bairro
      */
     public void setBairro(final String bairro) {
-        DFStringValidador.tamanho2ate60(bairro, "Bairro no endereço do Emitente");
+        StringValidador.tamanho2ate60(bairro, "Bairro no endereço do Emitente");
         this.bairro = bairro;
     }
 
@@ -108,7 +109,7 @@ public class CTeNotaEnderecoFerrovia extends DFBase {
      * Informar 9999999 para operações com o exterior.
      */
     public void setCodigoMunicipio(final String codigoMunicipio) {
-        DFStringValidador.exatamente7N(codigoMunicipio, "Código do município no endereço do Emitente");
+        StringValidador.exatamente7N(codigoMunicipio, "Código do município no endereço do Emitente");
         this.codigoMunicipio = codigoMunicipio;
     }
 
@@ -121,7 +122,7 @@ public class CTeNotaEnderecoFerrovia extends DFBase {
      * Informar EXTERIOR para operações com o exterior.
      */
     public void setDescricaoMunicipio(final String descricaoMunicipio) {
-        DFStringValidador.tamanho2ate60(descricaoMunicipio, "Nome do município no endereço do Emitente");
+        StringValidador.tamanho2ate60(descricaoMunicipio, "Nome do município no endereço do Emitente");
         this.descricaoMunicipio = descricaoMunicipio;
     }
 
@@ -134,7 +135,7 @@ public class CTeNotaEnderecoFerrovia extends DFBase {
      * Informar os zeros não significativos
      */
     public void setCep(final String cep) {
-        DFStringValidador.exatamente8N(cep, "CEP no endereço do Emitente");
+        StringValidador.exatamente8N(cep, "CEP no endereço do Emitente");
         this.cep = cep;
     }
 
@@ -147,7 +148,7 @@ public class CTeNotaEnderecoFerrovia extends DFBase {
      * Informar EX para operações com o exterior.
      */
     public void setSiglaUF(final String siglaUF) {
-        DFStringValidador.exatamente2(siglaUF, "Sigla da UF no endereço do Emitente");
+        StringValidador.exatamente2(siglaUF, "Sigla da UF no endereço do Emitente");
         this.siglaUF = siglaUF;
     }
 }

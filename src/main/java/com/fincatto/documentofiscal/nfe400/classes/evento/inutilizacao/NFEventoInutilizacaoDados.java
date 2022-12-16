@@ -1,49 +1,50 @@
 package com.fincatto.documentofiscal.nfe400.classes.evento.inutilizacao;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.DFUnidadeFederativa;
-import com.fincatto.documentofiscal.validadores.DFIntegerValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
+import com.fincatto.documentofiscal.DFAmbiente;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.DFUnidadeFederativa;
+import com.fincatto.documentofiscal.validadores.IntegerValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
+
 @Root(name = "infInut")
 public class NFEventoInutilizacaoDados extends DFBase {
     private static final long serialVersionUID = -5481681546706524562L;
-    
-    @Attribute(name = "Id")
+
+    @Attribute(name = "Id", required = true)
     private String identificador;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
-    
-    @Element(name = "xServ")
+
+    @Element(name = "xServ", required = true)
     private String nomeServico;
-    
-    @Element(name = "cUF")
+
+    @Element(name = "cUF", required = true)
     private DFUnidadeFederativa uf;
-    
-    @Element(name = "ano")
+
+    @Element(name = "ano", required = true)
     private Integer ano;
-    
-    @Element(name = "CNPJ")
+
+    @Element(name = "CNPJ", required = true)
     private String cnpj;
-    
-    @Element(name = "mod")
+
+    @Element(name = "mod", required = true)
     private String modeloDocumentoFiscal;
-    
-    @Element(name = "serie")
+
+    @Element(name = "serie", required = true)
     private String serie;
-    
-    @Element(name = "nNFIni")
+
+    @Element(name = "nNFIni", required = true)
     private String numeroNFInicial;
-    
-    @Element(name = "nNFFin")
+
+    @Element(name = "nNFFin", required = true)
     private String numeroNFFinal;
-    
-    @Element(name = "xJust")
+
+    @Element(name = "xJust", required = true)
     private String justificativa;
 
     public String getIdentificador() {
@@ -51,7 +52,7 @@ public class NFEventoInutilizacaoDados extends DFBase {
     }
 
     public void setIdentificador(final String identificador) {
-        DFStringValidador.identificador(identificador);
+        StringValidador.identificador(identificador);
         this.identificador = identificador;
     }
 
@@ -87,7 +88,7 @@ public class NFEventoInutilizacaoDados extends DFBase {
     }
 
     public void setAno(final Integer ano) {
-        DFIntegerValidador.exatamente2(ano, "Ano");
+        IntegerValidador.exatamente2(ano, "Ano");
         this.ano = ano;
     }
 
@@ -96,7 +97,7 @@ public class NFEventoInutilizacaoDados extends DFBase {
     }
 
     public void setCnpj(final String cnpj) {
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
@@ -105,7 +106,7 @@ public class NFEventoInutilizacaoDados extends DFBase {
     }
 
     public void setModeloDocumentoFiscal(final String modeloDocumentoFiscal) {
-        DFStringValidador.modeloDocumentoFiscal(modeloDocumentoFiscal);
+        StringValidador.modeloDocumentoFiscal(modeloDocumentoFiscal);
         this.modeloDocumentoFiscal = modeloDocumentoFiscal;
     }
 
@@ -114,7 +115,7 @@ public class NFEventoInutilizacaoDados extends DFBase {
     }
 
     public void setSerie(final String serie) {
-        DFStringValidador.tamanho3N(serie, "Serie");
+        StringValidador.tamanho3N(serie, "Serie");
         this.serie = serie;
     }
 
@@ -123,7 +124,7 @@ public class NFEventoInutilizacaoDados extends DFBase {
     }
 
     public void setNumeroNFInicial(final String numeroNFInicial) {
-        DFStringValidador.tamanho9N(numeroNFInicial, "Numero NF Inicial");
+        StringValidador.tamanho9N(numeroNFInicial, "Numero NF Inicial");
         this.numeroNFInicial = numeroNFInicial;
     }
 
@@ -132,7 +133,7 @@ public class NFEventoInutilizacaoDados extends DFBase {
     }
 
     public void setNumeroNFFinal(final String numeroNFFinal) {
-        DFStringValidador.tamanho9N(numeroNFFinal, "Numero NF Final");
+        StringValidador.tamanho9N(numeroNFFinal, "Numero NF Final");
         this.numeroNFFinal = numeroNFFinal;
     }
 
@@ -141,7 +142,7 @@ public class NFEventoInutilizacaoDados extends DFBase {
     }
 
     public void setJustificativa(final String justificativa) {
-        DFStringValidador.tamanho15a255(justificativa, "Justificativa");
+        StringValidador.tamanho15a255(justificativa, "Justificativa");
         this.justificativa = justificativa;
     }
 }

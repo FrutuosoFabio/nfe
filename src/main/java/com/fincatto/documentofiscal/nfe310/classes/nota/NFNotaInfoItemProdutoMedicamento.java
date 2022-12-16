@@ -1,29 +1,30 @@
 package com.fincatto.documentofiscal.nfe310.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
+import java.time.LocalDate;
 import org.simpleframework.xml.Element;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFNotaInfoItemProdutoMedicamento extends DFBase {
     private static final long serialVersionUID = 3127772234811692432L;
-    
-    @Element(name = "nLote")
+
+    @Element(name = "nLote", required = true)
     private String lote;
-    
-    @Element(name = "qLote")
+
+    @Element(name = "qLote", required = true)
     private String quantidade;
-    
-    @Element(name = "dFab")
+
+    @Element(name = "dFab", required = true)
     private LocalDate dataFabricacao;
-    
-    @Element(name = "dVal")
+
+    @Element(name = "dVal", required = true)
     private LocalDate dataValidade;
-    
-    @Element(name = "vPMC")
+
+    @Element(name = "vPMC", required = true)
     private String precoMaximoConsumidor;
 
     public NFNotaInfoItemProdutoMedicamento() {
@@ -35,12 +36,12 @@ public class NFNotaInfoItemProdutoMedicamento extends DFBase {
     }
 
     public void setLote(final String lote) {
-        DFStringValidador.tamanho20(lote, "Lote Medicamento");
+        StringValidador.tamanho20(lote, "Lote Medicamento");
         this.lote = lote;
     }
 
     public void setQuantidade(final BigDecimal quantidade) {
-        this.quantidade = DFBigDecimalValidador.tamanho11Com3CasasDecimais(quantidade, "Quantidade Medicamento");
+        this.quantidade = BigDecimalParser.tamanho11Com3CasasDecimais(quantidade, "Quantidade Medicamento");
     }
 
     public void setDataFabricacao(final LocalDate dataFabricacao) {
@@ -52,7 +53,7 @@ public class NFNotaInfoItemProdutoMedicamento extends DFBase {
     }
 
     public void setPrecoMaximoConsumidor(final BigDecimal precoMaximoConsumidor) {
-        this.precoMaximoConsumidor = DFBigDecimalValidador.tamanho15Com2CasasDecimais(precoMaximoConsumidor, "Preco Maximo Consumidor Medicamento");
+        this.precoMaximoConsumidor = BigDecimalParser.tamanho15Com2CasasDecimais(precoMaximoConsumidor, "Preco Maximo Consumidor Medicamento");
     }
 
     public String getLote() {

@@ -1,6 +1,6 @@
 package com.fincatto.documentofiscal.mdfe3.classes.nota.evento;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
@@ -46,7 +46,7 @@ public class MDFeInfoEventoRetorno extends DFBase {
     private Integer numeroSequencialEvento;
 
     @Element(name = "dhRegEvento", required = false)
-    private ZonedDateTime dataHoraRegistro;
+    private LocalDateTime dataHoraRegistro;
 
     @Element(name = "nProt", required = false)
     private String numeroProtocolo;
@@ -131,11 +131,11 @@ public class MDFeInfoEventoRetorno extends DFBase {
         this.numeroSequencialEvento = numeroSequencialEvento;
     }
 
-    public ZonedDateTime getDataHoraRegistro() {
+    public LocalDateTime getDataHoraRegistro() {
         return this.dataHoraRegistro;
     }
 
-    public void setDataHoraRegistro(final ZonedDateTime dataHoraRegistro) {
+    public void setDataHoraRegistro(final LocalDateTime dataHoraRegistro) {
         this.dataHoraRegistro = dataHoraRegistro;
     }
 

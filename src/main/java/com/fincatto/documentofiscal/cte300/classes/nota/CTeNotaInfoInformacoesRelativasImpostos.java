@@ -1,13 +1,14 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -18,8 +19,8 @@ import java.math.BigDecimal;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoInformacoesRelativasImpostos extends DFBase {
     private static final long serialVersionUID = -1424546812171486009L;
-    
-    @Element(name = "ICMS")
+
+    @Element(name = "ICMS", required = true)
     private CTeNotaInfoInformacoesRelativasImpostosICMS icms;
 
     @Element(name = "vTotTrib", required = false)
@@ -57,7 +58,7 @@ public class CTeNotaInfoInformacoesRelativasImpostos extends DFBase {
      * Valor Total dos Tributos
      */
     public void setValorTotalTributos(final BigDecimal valorTotalTributos) {
-        this.valorTotalTributos = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorTotalTributos, "Valor Total dos Tributos");
+        this.valorTotalTributos = BigDecimalParser.tamanho15Com2CasasDecimais(valorTotalTributos, "Valor Total dos Tributos");
     }
 
     public String getInformacoesAdicionaisFisco() {
@@ -69,7 +70,7 @@ public class CTeNotaInfoInformacoesRelativasImpostos extends DFBase {
      * Norma referenciada, informações complementares, etc
      */
     public void setInformacoesAdicionaisFisco(final String informacoesAdicionaisFisco) {
-        DFStringValidador.tamanho2000(informacoesAdicionaisFisco, "Informações adicionais de interesse do Fisco");
+        StringValidador.tamanho2000(informacoesAdicionaisFisco, "Informações adicionais de interesse do Fisco");
         this.informacoesAdicionaisFisco = informacoesAdicionaisFisco;
     }
 

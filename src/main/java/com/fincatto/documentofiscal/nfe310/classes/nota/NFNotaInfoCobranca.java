@@ -6,7 +6,7 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
 import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFListValidador;
+import com.fincatto.documentofiscal.validadores.ListValidador;
 
 public class NFNotaInfoCobranca extends DFBase {
     private static final long serialVersionUID = -2471735975201108151L;
@@ -22,7 +22,7 @@ public class NFNotaInfoCobranca extends DFBase {
     }
 
     public void setDuplicatas(final List<NFNotaInfoDuplicata> duplicatas) {
-        DFListValidador.tamanho120(duplicatas, "Duplicatas");
+        ListValidador.tamanho120(duplicatas, "Duplicatas");
         this.duplicatas = duplicatas;
     }
 

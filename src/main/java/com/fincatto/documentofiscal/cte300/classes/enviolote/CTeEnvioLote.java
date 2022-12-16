@@ -1,12 +1,13 @@
 package com.fincatto.documentofiscal.cte300.classes.enviolote;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.cte300.classes.nota.CTeNota;
-import com.fincatto.documentofiscal.validadores.DFListValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.util.List;
+
 import org.simpleframework.xml.*;
 
-import java.util.List;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.cte300.classes.nota.CTeNota;
+import com.fincatto.documentofiscal.validadores.ListValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -17,14 +18,14 @@ import java.util.List;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeEnvioLote extends DFBase {
     private static final long serialVersionUID = -6451397314955370262L;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
-    
-    @Element(name = "idLote")
+
+    @Element(name = "idLote", required = true)
     private String idLote;
-    
-    @ElementList(name = "CTe", inline = true)
+
+    @ElementList(name = "CTe", inline = true, required = true)
     private List<CTeNota> nota;
 
     public CTeEnvioLote() {
@@ -46,7 +47,7 @@ public class CTeEnvioLote extends DFBase {
     }
 
     public void setIdLote(final String idLote) {
-        DFStringValidador.tamanho15N(idLote, "ID do Lote");
+        StringValidador.tamanho15N(idLote, "ID do Lote");
         this.idLote = idLote;
     }
 
@@ -55,7 +56,7 @@ public class CTeEnvioLote extends DFBase {
     }
 
     public void setNota(final List<CTeNota> nota) {
-        DFListValidador.tamanho50(nota, "Notas");
+        ListValidador.tamanho50(nota, "Notas");
         this.nota = nota;
     }
 }

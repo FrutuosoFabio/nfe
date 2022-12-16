@@ -1,7 +1,6 @@
 package com.fincatto.documentofiscal.nfe400.classes.cartacorrecao;
 
 import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFConfig;
 import com.fincatto.documentofiscal.DFUnidadeFederativa;
 import com.fincatto.documentofiscal.nfe400.FabricaDeObjetosFake;
 import com.fincatto.documentofiscal.nfe400.classes.evento.NFEventoRetorno;
@@ -10,7 +9,8 @@ import com.fincatto.documentofiscal.nfe400.classes.evento.cartacorrecao.NFProtoc
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class NFProtocoloEventoCartaCorrecaoTest {
 
@@ -49,8 +49,8 @@ public class NFProtocoloEventoCartaCorrecaoTest {
         infoEventoRetorno.setAmbiente(DFAmbiente.PRODUCAO);
         infoEventoRetorno.setChave("hluU2zKt4QK5bEktOiGfpZw64535p2A4Z5m5egLQbMpjnCH48c1aw6");
         infoEventoRetorno.setCodigoStatus(1);
-        infoEventoRetorno.setCnpj("99999999999999");
-        infoEventoRetorno.setDataHoraRegistro(ZonedDateTime.of(2016, 11, 30, 2, 30, 0, 0, DFConfig.TIMEZONE_SP.toZoneId()));
+        infoEventoRetorno.setCpnj("99999999999999");
+        infoEventoRetorno.setDataHoraRegistro(LocalDateTime.from(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").parse("2016-11-30 02:30:00")));
         infoEventoRetorno.setDescricaoEvento("sdskjdkjdsdcklkjdsakndcsakjdckdljsdckjasldnclakjdsalkdcskdjacdsadcsacd");
         infoEventoRetorno.setId("123456789123456789123456789123456789123456789");
         infoEventoRetorno.setMotivo("asdsdsjdslkdjsaldjsldk");

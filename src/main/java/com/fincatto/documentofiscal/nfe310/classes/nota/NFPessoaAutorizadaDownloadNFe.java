@@ -3,7 +3,7 @@ package com.fincatto.documentofiscal.nfe310.classes.nota;
 import org.simpleframework.xml.Element;
 
 import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFPessoaAutorizadaDownloadNFe extends DFBase {
     private static final long serialVersionUID = -2909265137420776696L;
@@ -18,7 +18,7 @@ public class NFPessoaAutorizadaDownloadNFe extends DFBase {
         if (this.cpf != null) {
             throw new IllegalStateException("Nao deve setar CNPJ se CPF esteja setado");
         }
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
@@ -26,7 +26,7 @@ public class NFPessoaAutorizadaDownloadNFe extends DFBase {
         if (this.cnpj != null) {
             throw new IllegalStateException("Nao deve setar CPF se CNPJ esteja setado");
         }
-        DFStringValidador.cpf(cpf);
+        StringValidador.cpf(cpf);
         this.cpf = cpf;
     }
 }

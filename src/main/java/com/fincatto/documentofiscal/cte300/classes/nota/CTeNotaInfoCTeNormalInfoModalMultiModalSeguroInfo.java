@@ -1,10 +1,11 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -15,11 +16,11 @@ import org.simpleframework.xml.Root;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalInfoModalMultiModalSeguroInfo extends DFBase {
     private static final long serialVersionUID = 1853696818718851264L;
-    
-    @Element(name = "xSeg")
+
+    @Element(name = "xSeg", required = true)
     private String seguradora;
-    
-    @Element(name = "CNPJ")
+
+    @Element(name = "CNPJ", required = true)
     private String cnpj;
 
     public CTeNotaInfoCTeNormalInfoModalMultiModalSeguroInfo() {
@@ -35,7 +36,7 @@ public class CTeNotaInfoCTeNormalInfoModalMultiModalSeguroInfo extends DFBase {
      * Nome da Seguradora
      */
     public void setSeguradora(final String seguradora) {
-        DFStringValidador.tamanho30(seguradora, "Nome da Seguradora");
+        StringValidador.tamanho30(seguradora, "Nome da Seguradora");
         this.seguradora = seguradora;
     }
 
@@ -48,7 +49,7 @@ public class CTeNotaInfoCTeNormalInfoModalMultiModalSeguroInfo extends DFBase {
      * Obrigatório apenas se responsável pelo seguro for (2) responsável pela contratação do transporte - pessoa jurídica
      */
     public void setCnpj(final String cnpj) {
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 }

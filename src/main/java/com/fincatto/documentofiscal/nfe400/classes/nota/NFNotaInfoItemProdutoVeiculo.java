@@ -1,10 +1,17 @@
 package com.fincatto.documentofiscal.nfe400.classes.nota;
 
 import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.nfe400.classes.*;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFIntegerValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import com.fincatto.documentofiscal.nfe400.classes.NFNotaInfoCombustivelTipo;
+import com.fincatto.documentofiscal.nfe400.classes.NFNotaInfoEspecieVeiculo;
+import com.fincatto.documentofiscal.nfe400.classes.NFNotaInfoItemProdutoVeiculoCondicao;
+import com.fincatto.documentofiscal.nfe400.classes.NFNotaInfoItemProdutoVeiculoCondicaoChassi;
+import com.fincatto.documentofiscal.nfe400.classes.NFNotaInfoItemProdutoVeiculoRestricao;
+import com.fincatto.documentofiscal.nfe400.classes.NFNotaInfoItemProdutoVeiculoTipoOperacao;
+import com.fincatto.documentofiscal.nfe400.classes.NFNotaInfoTipoVeiculo;
+import com.fincatto.documentofiscal.nfe400.classes.NFNotaInfoVeiculoCor;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.IntegerValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 import org.simpleframework.xml.Element;
 
 import java.math.BigDecimal;
@@ -89,40 +96,40 @@ public class NFNotaInfoItemProdutoVeiculo extends DFBase {
     }
 
     public void setChassi(final String chassi) {
-        DFStringValidador.exatamente17(chassi, "Chassi Veiculo");
+        StringValidador.exatamente17(chassi, "Chassi Veiculo");
         this.chassi = chassi;
     }
 
     public void setCodigoCor(final String codigoCor) {
-        DFStringValidador.exatamente4(codigoCor, "Codigo Cor Veiculo");
+        StringValidador.exatamente4(codigoCor, "Codigo Cor Veiculo");
         this.codigoCor = codigoCor;
     }
 
     public void setDescricaoCor(final String descricaoCor) {
-        DFStringValidador.tamanho40(descricaoCor, "Descricao Cor Veiculo");
+        StringValidador.tamanho40(descricaoCor, "Descricao Cor Veiculo");
         this.descricaoCor = descricaoCor;
     }
 
     public void setPotencia(final String potencia) {
-        DFStringValidador.exatamente4(potencia, "Potencia Veiculo");
+        StringValidador.exatamente4(potencia, "Potencia Veiculo");
         this.potencia = potencia;
     }
 
     public void setCilindrada(final String cilindrada) {
-        DFStringValidador.exatamente4(cilindrada, "Cilindrada Veiculo");
+        StringValidador.exatamente4(cilindrada, "Cilindrada Veiculo");
         this.cilindrada = cilindrada;
     }
 
     public void setPesoLiquido(final BigDecimal pesoLiquido) {
-        this.pesoLiquido = DFBigDecimalValidador.tamanho9Com4CasasDecimais(pesoLiquido, "Peso Liquido Veiculo");
+        this.pesoLiquido = BigDecimalParser.tamanho9Com4CasasDecimais(pesoLiquido, "Peso Liquido Veiculo");
     }
 
     public void setPesoBruto(final BigDecimal pesoBruto) {
-        this.pesoBruto = DFBigDecimalValidador.tamanho9Com4CasasDecimais(pesoBruto, "Peso Bruto Veiculo");
+        this.pesoBruto = BigDecimalParser.tamanho9Com4CasasDecimais(pesoBruto, "Peso Bruto Veiculo");
     }
 
     public void setNumeroSerie(final String numeroSerie) {
-        DFStringValidador.exatamente9(numeroSerie, "Numero Serie Veiculo");
+        StringValidador.exatamente9(numeroSerie, "Numero Serie Veiculo");
         this.numeroSerie = numeroSerie;
     }
 
@@ -131,31 +138,31 @@ public class NFNotaInfoItemProdutoVeiculo extends DFBase {
     }
 
     public void setNumeroMotor(final String numeroMotor) {
-        DFStringValidador.validaIntervalo(numeroMotor,1,21, "Numero Motor Veiculo");
+        StringValidador.validaIntervalo(numeroMotor,1,21, "Numero Motor Veiculo");
         this.numeroMotor = numeroMotor;
     }
 
     public void setCapacidadeMaximaTracao(final BigDecimal capacidadeMaximaTracao) {
-        this.capacidadeMaximaTracao = DFBigDecimalValidador.tamanho9Com4CasasDecimais(capacidadeMaximaTracao, "Capacidade Maxima Tracao Veiculo");
+        this.capacidadeMaximaTracao = BigDecimalParser.tamanho9Com4CasasDecimais(capacidadeMaximaTracao, "Capacidade Maxima Tracao Veiculo");
     }
 
     public void setDistanciaEntreEixos(final String distanciaEntreEixos) {
-        DFStringValidador.exatamente4(distanciaEntreEixos, "Distancia Entre Eixos Veiculo");
+        StringValidador.exatamente4(distanciaEntreEixos, "Distancia Entre Eixos Veiculo");
         this.distanciaEntreEixos = distanciaEntreEixos;
     }
 
     public void setAnoModeloFabricacao(final int anoModeloFabricacao) {
-        DFIntegerValidador.exatamente4(anoModeloFabricacao, "Ano Modelo Fabricacao Veiculo");
+        IntegerValidador.exatamente4(anoModeloFabricacao, "Ano Modelo Fabricacao Veiculo");
         this.anoModeloFabricacao = anoModeloFabricacao;
     }
 
     public void setAnoFabricacao(final int anoFabricacao) {
-        DFIntegerValidador.exatamente4(anoFabricacao, "Ano Fabricacao Veiculo");
+        IntegerValidador.exatamente4(anoFabricacao, "Ano Fabricacao Veiculo");
         this.anoFabricacao = anoFabricacao;
     }
 
     public void setTipoPintura(final String tipoPintura) {
-        DFStringValidador.exatamente1(tipoPintura, "Tipo Pintura Veiculo");
+        StringValidador.exatamente1(tipoPintura, "Tipo Pintura Veiculo");
         this.tipoPintura = tipoPintura;
     }
 
@@ -176,7 +183,7 @@ public class NFNotaInfoItemProdutoVeiculo extends DFBase {
     }
 
     public void setCodigoMarcaModelo(final String codigoMarcaModelo) {
-        DFStringValidador.exatamente6N(codigoMarcaModelo, "Codigo Marca Modelo Veiculo");
+        StringValidador.exatamente6N(codigoMarcaModelo, "Codigo Marca Modelo Veiculo");
         this.codigoMarcaModelo = codigoMarcaModelo;
     }
 
@@ -185,7 +192,7 @@ public class NFNotaInfoItemProdutoVeiculo extends DFBase {
     }
 
     public void setLotacao(final int lotacao) {
-        DFIntegerValidador.tamanho3(lotacao, "Lotacao Veiculo");
+        IntegerValidador.tamanho3(lotacao, "Lotacao Veiculo");
         this.lotacao = lotacao;
     }
 

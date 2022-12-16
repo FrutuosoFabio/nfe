@@ -1,16 +1,17 @@
 package com.fincatto.documentofiscal.cte300.classes.evento.cancelamento;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.DFUnidadeFederativa;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFIntegerValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
+import java.time.ZonedDateTime;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 
-import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import com.fincatto.documentofiscal.DFAmbiente;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.DFUnidadeFederativa;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.IntegerValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class CTeInfoEventoCancelamento extends DFBase {
     private static final long serialVersionUID = -9071000192790378973L;
@@ -20,8 +21,8 @@ public class CTeInfoEventoCancelamento extends DFBase {
 
     @Element(name = "cOrgao", required = false)
     private DFUnidadeFederativa orgao;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
 
     @Element(name = "CNPJ", required = false)
@@ -29,17 +30,17 @@ public class CTeInfoEventoCancelamento extends DFBase {
 
     @Element(name = "CPF", required = false)
     private String cpf;
-    
-    @Element(name = "chCTe")
+
+    @Element(name = "chCTe", required = true)
     private String chave;
-    
-    @Element(name = "dhEvento")
+
+    @Element(name = "dhEvento", required = true)
     private ZonedDateTime dataHoraEvento;
-    
-    @Element(name = "tpEvento")
+
+    @Element(name = "tpEvento", required = true)
     private String codigoEvento;
-    
-    @Element(name = "nSeqEvento")
+
+    @Element(name = "nSeqEvento", required = true)
     private Integer numeroSequencialEvento;
 
     @Element(name = "verEvento", required = false)
@@ -53,7 +54,7 @@ public class CTeInfoEventoCancelamento extends DFBase {
     }
 
     public void setVersaoEvento(final BigDecimal versaoEvento) {
-        this.versaoEvento = DFBigDecimalValidador.tamanho5Com2CasasDecimais(versaoEvento, "Versao do Evento");
+        this.versaoEvento = BigDecimalParser.tamanho5Com2CasasDecimais(versaoEvento, "Versao do Evento");
     }
 
     public String getId() {
@@ -61,7 +62,7 @@ public class CTeInfoEventoCancelamento extends DFBase {
     }
 
     public void setId(final String id) {
-        DFStringValidador.exatamente54(id, "Info Evento Cancelamento ID");
+        StringValidador.exatamente54(id, "Info Evento Cancelamento ID");
         this.id = id;
     }
 
@@ -81,7 +82,7 @@ public class CTeInfoEventoCancelamento extends DFBase {
         if (this.cpf != null) {
             throw new IllegalStateException("CPF ja foi setado");
         }
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
@@ -93,7 +94,7 @@ public class CTeInfoEventoCancelamento extends DFBase {
         if (this.cnpj != null) {
             throw new IllegalStateException("CNPJ ja foi setado");
         }
-        DFStringValidador.cpf(cpf);
+        StringValidador.cpf(cpf);
         this.cpf = cpf;
     }
 
@@ -102,7 +103,7 @@ public class CTeInfoEventoCancelamento extends DFBase {
     }
 
     public void setChave(final String chave) {
-        DFStringValidador.exatamente44N(chave, "Info Evento Cancelamento Chave");
+        StringValidador.exatamente44N(chave, "Info Evento Cancelamento Chave");
         this.chave = chave;
     }
 
@@ -119,7 +120,7 @@ public class CTeInfoEventoCancelamento extends DFBase {
     }
 
     public void setCodigoEvento(final String codigoEvento) {
-        DFStringValidador.exatamente6N(codigoEvento, "Info Evento Cancelamento Codigo");
+        StringValidador.exatamente6N(codigoEvento, "Info Evento Cancelamento Codigo");
         this.codigoEvento = codigoEvento;
     }
 
@@ -128,7 +129,7 @@ public class CTeInfoEventoCancelamento extends DFBase {
     }
 
     public void setNumeroSequencialEvento(final int numeroSequencialEvento) {
-        DFIntegerValidador.tamanho1a2(numeroSequencialEvento, "Numero Sequencial Evento");
+        IntegerValidador.tamanho1a2(numeroSequencialEvento, "Numero Sequencial Evento");
         this.numeroSequencialEvento = numeroSequencialEvento;
     }
 

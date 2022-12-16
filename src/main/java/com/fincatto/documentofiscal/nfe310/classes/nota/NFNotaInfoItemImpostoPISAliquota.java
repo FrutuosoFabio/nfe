@@ -2,7 +2,7 @@ package com.fincatto.documentofiscal.nfe310.classes.nota;
 
 import com.fincatto.documentofiscal.DFBase;
 import com.fincatto.documentofiscal.nfe310.classes.NFNotaInfoSituacaoTributariaPIS;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
 import org.simpleframework.xml.Element;
 
 import java.math.BigDecimal;
@@ -13,17 +13,17 @@ public class NFNotaInfoItemImpostoPISAliquota extends DFBase {
     private static final long serialVersionUID = 4109084296960847091L;
 
     private static final List<NFNotaInfoSituacaoTributariaPIS> SITUACOES_VALIDAS = Arrays.asList(NFNotaInfoSituacaoTributariaPIS.OPERACAO_TRIBUTAVEL_CUMULATIVO_NAO_CUMULATIVO, NFNotaInfoSituacaoTributariaPIS.OPERACAO_TRIBUTAVEL_ALIQUOTA_DIFERENCIADA);
-    
-    @Element(name = "CST")
+
+    @Element(name = "CST", required = true)
     private NFNotaInfoSituacaoTributariaPIS situacaoTributaria;
-    
-    @Element(name = "vBC")
+
+    @Element(name = "vBC", required = true)
     private String valorBaseCalculo;
-    
-    @Element(name = "pPIS")
+
+    @Element(name = "pPIS", required = true)
     private String percentualAliquota;
-    
-    @Element(name = "vPIS")
+
+    @Element(name = "vPIS", required = true)
     private String valorTributo;
 
     public NFNotaInfoItemImpostoPISAliquota() {
@@ -41,15 +41,15 @@ public class NFNotaInfoItemImpostoPISAliquota extends DFBase {
     }
 
     public void setValorBaseCalculo(final BigDecimal valorBaseCalculo) {
-        this.valorBaseCalculo = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorBaseCalculo, "Valor BC PIS Item");
+        this.valorBaseCalculo = BigDecimalParser.tamanho15Com2CasasDecimais(valorBaseCalculo, "Valor BC PIS Item");
     }
 
     public void setPercentualAliquota(final BigDecimal aliquota) {
-        this.percentualAliquota = DFBigDecimalValidador.tamanho7ComAte4CasasDecimais(aliquota, "Aliquota PIS Item");
+        this.percentualAliquota = BigDecimalParser.tamanho7ComAte4CasasDecimais(aliquota, "Aliquota PIS Item");
     }
 
     public void setValorTributo(final BigDecimal valor) {
-        this.valorTributo = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valor, "Valor PIS Item");
+        this.valorTributo = BigDecimalParser.tamanho15Com2CasasDecimais(valor, "Valor PIS Item");
     }
 
     public NFNotaInfoSituacaoTributariaPIS getSituacaoTributaria() {

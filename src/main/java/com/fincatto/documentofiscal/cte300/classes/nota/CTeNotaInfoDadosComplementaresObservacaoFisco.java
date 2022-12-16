@@ -1,10 +1,11 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -14,11 +15,11 @@ import org.simpleframework.xml.Root;
 @Root(name = "ObsFisco")
 public class CTeNotaInfoDadosComplementaresObservacaoFisco extends DFBase {
     private static final long serialVersionUID = -7567824501077075601L;
-    
-    @Attribute(name = "xCampo")
+
+    @Attribute(name = "xCampo", required = true)
     private String campo;
-    
-    @Element(name = "xTexto")
+
+    @Element(name = "xTexto", required = true)
     private String texto;
 
     public CTeNotaInfoDadosComplementaresObservacaoFisco() {
@@ -34,7 +35,7 @@ public class CTeNotaInfoDadosComplementaresObservacaoFisco extends DFBase {
      * Identificação do campo
      */
     public void setCampo(final String campo) {
-        DFStringValidador.tamanho20(campo, "Identificação do campo");
+        StringValidador.tamanho20(campo, "Identificação do campo");
         this.campo = campo;
     }
 
@@ -46,7 +47,7 @@ public class CTeNotaInfoDadosComplementaresObservacaoFisco extends DFBase {
      * Identificação do texto
      */
     public void setTexto(final String texto) {
-        DFStringValidador.tamanho60(texto, "Identificação do texto");
+        StringValidador.tamanho60(texto, "Identificação do texto");
         this.texto = texto;
     }
 }

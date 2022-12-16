@@ -1,12 +1,12 @@
 package com.fincatto.documentofiscal.cte300.classes.enviolote.consulta;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.cte300.classes.nota.assinatura.CTeSignature;
-
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.cte300.classes.nota.assinatura.CTeSignature;
 
 /**
  * @author Caio
@@ -23,8 +23,8 @@ public class CTeProtocolo extends DFBase {
 
     @Element(name = "Signature", required = false)
     private CTeSignature signature;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
 
     public CTeProtocolo() {

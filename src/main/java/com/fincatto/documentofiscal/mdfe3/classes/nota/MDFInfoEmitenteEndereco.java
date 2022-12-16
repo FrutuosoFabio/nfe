@@ -1,8 +1,9 @@
 package com.fincatto.documentofiscal.mdfe3.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Element;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * Created by Eldevan Nery Junior on 03/11/17.
@@ -12,29 +13,29 @@ public class MDFInfoEmitenteEndereco extends DFBase {
     private static final long serialVersionUID = 6621163221326345587L;
 
     private static final String INFO = "endereço do Emitente";
-    
-    @Element(name = "xLgr")
+
+    @Element(name = "xLgr", required = true)
     private String logradouro;
-    
-    @Element(name = "nro")
+
+    @Element(name = "nro", required = true)
     private String numero;
 
     @Element(name = "xCpl", required = false)
     private String complemento;
-    
-    @Element(name = "xBairro")
+
+    @Element(name = "xBairro", required = true)
     private String bairro;
-    
-    @Element(name = "cMun")
+
+    @Element(name = "cMun", required = true)
     private String codigoMunicipio;
-    
-    @Element(name = "xMun")
+
+    @Element(name = "xMun", required = true)
     private String descricaoMunicipio;
 
     @Element(name = "CEP", required = false)
     private String cep;
-    
-    @Element(name = "UF")
+
+    @Element(name = "UF", required = true)
     private String siglaUF;
 
     @Element(name = "fone", required = false)
@@ -51,7 +52,7 @@ public class MDFInfoEmitenteEndereco extends DFBase {
      * Logradouro
      */
     public void setLogradouro(final String logradouro) {
-        DFStringValidador.tamanho2ate60(logradouro, "Logradouro no " + MDFInfoEmitenteEndereco.INFO);
+        StringValidador.tamanho2ate60(logradouro, "Logradouro no " + MDFInfoEmitenteEndereco.INFO);
         this.logradouro = logradouro;
     }
 
@@ -63,7 +64,7 @@ public class MDFInfoEmitenteEndereco extends DFBase {
      * Número
      */
     public void setNumero(final String numero) {
-        DFStringValidador.tamanho60(numero, "Número no " + MDFInfoEmitenteEndereco.INFO);
+        StringValidador.tamanho60(numero, "Número no " + MDFInfoEmitenteEndereco.INFO);
         this.numero = numero;
     }
 
@@ -75,7 +76,7 @@ public class MDFInfoEmitenteEndereco extends DFBase {
      * Complemento
      */
     public void setComplemento(final String complemento) {
-        DFStringValidador.tamanho60(complemento, "Complemento no " + MDFInfoEmitenteEndereco.INFO);
+        StringValidador.tamanho60(complemento, "Complemento no " + MDFInfoEmitenteEndereco.INFO);
         this.complemento = complemento;
     }
 
@@ -87,7 +88,7 @@ public class MDFInfoEmitenteEndereco extends DFBase {
      * Bairro
      */
     public void setBairro(final String bairro) {
-        DFStringValidador.tamanho2ate60(bairro, "Bairro no " + MDFInfoEmitenteEndereco.INFO);
+        StringValidador.tamanho2ate60(bairro, "Bairro no " + MDFInfoEmitenteEndereco.INFO);
         this.bairro = bairro;
     }
 
@@ -100,7 +101,7 @@ public class MDFInfoEmitenteEndereco extends DFBase {
      * Informar 9999999 para operações com o exterior.
      */
     public void setCodigoMunicipio(final String codigoMunicipio) {
-        DFStringValidador.exatamente7N(codigoMunicipio, "Código do município no " + MDFInfoEmitenteEndereco.INFO);
+        StringValidador.exatamente7N(codigoMunicipio, "Código do município no " + MDFInfoEmitenteEndereco.INFO);
         this.codigoMunicipio = codigoMunicipio;
     }
 
@@ -113,7 +114,7 @@ public class MDFInfoEmitenteEndereco extends DFBase {
      * Informar EXTERIOR para operações com o exterior.
      */
     public void setDescricaoMunicipio(final String descricaoMunicipio) {
-        DFStringValidador.tamanho2ate60(descricaoMunicipio, "Nome do município no " + MDFInfoEmitenteEndereco.INFO);
+        StringValidador.tamanho2ate60(descricaoMunicipio, "Nome do município no " + MDFInfoEmitenteEndereco.INFO);
         this.descricaoMunicipio = descricaoMunicipio;
     }
 
@@ -126,7 +127,7 @@ public class MDFInfoEmitenteEndereco extends DFBase {
      * Informar os zeros não significativos
      */
     public void setCep(final String cep) {
-        DFStringValidador.exatamente8N(cep, "CEP no " + MDFInfoEmitenteEndereco.INFO);
+        StringValidador.exatamente8N(cep, "CEP no " + MDFInfoEmitenteEndereco.INFO);
         this.cep = cep;
     }
 
@@ -139,7 +140,7 @@ public class MDFInfoEmitenteEndereco extends DFBase {
      * Informar EX para operações com o exterior.
      */
     public void setSiglaUF(final String siglaUF) {
-        DFStringValidador.exatamente2(siglaUF, "Sigla da UF no " + MDFInfoEmitenteEndereco.INFO);
+        StringValidador.exatamente2(siglaUF, "Sigla da UF no " + MDFInfoEmitenteEndereco.INFO);
         this.siglaUF = siglaUF;
     }
 
@@ -151,7 +152,7 @@ public class MDFInfoEmitenteEndereco extends DFBase {
      * Telefone
      */
     public void setTelefone(final String telefone) {
-        this.telefone = DFStringValidador.telefone(telefone, MDFInfoEmitenteEndereco.INFO);
+        this.telefone = StringValidador.telefone(telefone, MDFInfoEmitenteEndereco.INFO);
     }
 
     public String getEmail() {
@@ -159,6 +160,6 @@ public class MDFInfoEmitenteEndereco extends DFBase {
     }
 
     public void setEmail(final String email) {
-        this.email = DFStringValidador.email(email, MDFInfoEmitenteEndereco.INFO);
+        this.email = StringValidador.email(email, MDFInfoEmitenteEndereco.INFO);
     }
 }

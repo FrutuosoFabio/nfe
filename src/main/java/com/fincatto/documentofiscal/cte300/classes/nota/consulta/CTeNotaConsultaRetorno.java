@@ -1,5 +1,9 @@
 package com.fincatto.documentofiscal.cte300.classes.nota.consulta;
 
+import java.util.List;
+
+import org.simpleframework.xml.*;
+
 import com.fincatto.documentofiscal.DFAmbiente;
 import com.fincatto.documentofiscal.DFBase;
 import com.fincatto.documentofiscal.DFUnidadeFederativa;
@@ -7,31 +11,27 @@ import com.fincatto.documentofiscal.cte300.classes.enviolote.consulta.CTeProtoco
 import com.fincatto.documentofiscal.cte300.classes.evento.cancelamento.CTeProtocoloEventoCancelamento;
 import com.fincatto.documentofiscal.cte300.classes.evento.cancelamento.CTeRetornoCancelamento;
 
-import org.simpleframework.xml.*;
-
-import java.util.List;
-
 @Root(name = "retConsSitCTe", strict = false)
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaConsultaRetorno extends DFBase {
     private static final long serialVersionUID = 3229234247371007557L;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
-    
-    @Element(name = "verAplic")
+
+    @Element(name = "verAplic", required = true)
     private String versaoAplicacao;
-    
-    @Element(name = "cStat")
+
+    @Element(name = "cStat", required = true)
     private String status;
-    
-    @Element(name = "xMotivo")
+
+    @Element(name = "xMotivo", required = true)
     private String motivo;
-    
-    @Element(name = "cUF")
+
+    @Element(name = "cUF", required = true)
     private DFUnidadeFederativa uf;
 
     @Element(name = "protCTe", required = false)

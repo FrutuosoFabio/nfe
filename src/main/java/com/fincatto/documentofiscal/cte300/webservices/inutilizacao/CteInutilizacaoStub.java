@@ -5,9 +5,6 @@ import org.apache.axis2.client.Stub;
 
 import javax.xml.namespace.QName;
 
-import com.fincatto.documentofiscal.DFConfig;
-import com.fincatto.documentofiscal.utils.MessageContextFactory;
-
 /*
  * CteInutilizacaoStub java implementation
  */
@@ -28,7 +25,7 @@ public class CteInutilizacaoStub extends org.apache.axis2.client.Stub {
             CteInutilizacaoStub.counter = 0;
         }
         CteInutilizacaoStub.counter = CteInutilizacaoStub.counter + 1;
-        return System.currentTimeMillis() + "_" + CteInutilizacaoStub.counter;
+        return java.lang.Long.toString(java.lang.System.currentTimeMillis()) + "_" + CteInutilizacaoStub.counter;
     }
 
     private void populateAxisService() {
@@ -52,14 +49,14 @@ public class CteInutilizacaoStub extends org.apache.axis2.client.Stub {
      * Constructor that takes in a configContext
      */
 
-    public CteInutilizacaoStub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, DFConfig config) throws org.apache.axis2.AxisFault {
-        this(configurationContext, targetEndpoint, false, config);
+    public CteInutilizacaoStub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
+        this(configurationContext, targetEndpoint, false);
     }
 
     /**
      * Constructor that takes in a configContext and useseperate listner
      */
-    public CteInutilizacaoStub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, final boolean useSeparateListener, DFConfig config) throws org.apache.axis2.AxisFault {
+    public CteInutilizacaoStub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, final boolean useSeparateListener) throws org.apache.axis2.AxisFault {
         // To populate AxisService
         this.populateAxisService();
         this.populateFaults();
@@ -68,14 +65,27 @@ public class CteInutilizacaoStub extends org.apache.axis2.client.Stub {
         this._serviceClient.getOptions().setUseSeparateListener(useSeparateListener);
         // Set the soap version
         this._serviceClient.getOptions().setSoapVersionURI(org.apache.axiom.soap.SOAP12Constants.SOAP_ENVELOPE_NAMESPACE_URI);
-        this.config = config;
+    }
+
+    /**
+     * Default Constructor
+     */
+    public CteInutilizacaoStub(final org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
+        this(configurationContext, "https://cte.fazenda.mg.gov.br/cte/services/CteInutilizacao");
+    }
+
+    /**
+     * Default Constructor
+     */
+    public CteInutilizacaoStub() throws org.apache.axis2.AxisFault {
+        this("https://cte.fazenda.mg.gov.br/cte/services/CteInutilizacao");
     }
 
     /**
      * Constructor taking the target endpoint
      */
-    public CteInutilizacaoStub(final java.lang.String targetEndpoint, DFConfig config) throws org.apache.axis2.AxisFault {
-        this(null, targetEndpoint, config);
+    public CteInutilizacaoStub(final java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
+        this(null, targetEndpoint);
     }
 
     /**
@@ -93,7 +103,7 @@ public class CteInutilizacaoStub extends org.apache.axis2.client.Stub {
             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
             this.addPropertyToOperationClient(_operationClient, org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR, "&");
             // create a message context
-            _messageContext = MessageContextFactory.INSTANCE.create(config);
+            _messageContext = new org.apache.axis2.context.MessageContext();
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env;
             env = this.toEnvelope(Stub.getFactory(_operationClient.getOptions().getSoapVersionURI()), cteDadosMsg0, this.optimizeContent(new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/cte/wsdl/CteInutilizacao", "cteInutilizacaoCT")), new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/cte/wsdl/CteInutilizacao", "cteInutilizacaoCT"));
@@ -162,7 +172,7 @@ public class CteInutilizacaoStub extends org.apache.axis2.client.Stub {
         this.addPropertyToOperationClient(_operationClient, org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR, "&");
         // create SOAP envelope with that payload
         org.apache.axiom.soap.SOAPEnvelope env;
-        final org.apache.axis2.context.MessageContext _messageContext = MessageContextFactory.INSTANCE.create(config);
+        final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
         // Style is Doc.
         env = this.toEnvelope(Stub.getFactory(_operationClient.getOptions().getSoapVersionURI()), cteDadosMsg0, this.optimizeContent(new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/cte/wsdl/CteInutilizacao", "cteInutilizacaoCT")), new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/cte/wsdl/CteInutilizacao", "cteInutilizacaoCT"));
         // add the soap_headers only if they are not null
@@ -261,7 +271,6 @@ public class CteInutilizacaoStub extends org.apache.axis2.client.Stub {
     }
 
     private final javax.xml.namespace.QName[] opNameArray = null;
-    private final DFConfig config;
 
     private boolean optimizeContent(final javax.xml.namespace.QName opName) {
         if (this.opNameArray == null) {
@@ -1648,6 +1657,9 @@ public class CteInutilizacaoStub extends org.apache.axis2.client.Stub {
             }
             if (com.fincatto.documentofiscal.cte300.webservices.inutilizacao.CteInutilizacaoStub.CteInutilizacaoCTResult.class.equals(type)) {
                 return com.fincatto.documentofiscal.cte300.webservices.inutilizacao.CteInutilizacaoStub.CteInutilizacaoCTResult.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+            }
+            if (com.fincatto.documentofiscal.cte300.webservices.inutilizacao.CteInutilizacaoStub.CteCabecMsgE.class.equals(type)) {
+                return com.fincatto.documentofiscal.cte300.webservices.inutilizacao.CteInutilizacaoStub.CteCabecMsgE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
             }
             if (com.fincatto.documentofiscal.cte300.webservices.inutilizacao.CteInutilizacaoStub.CteCabecMsgE.class.equals(type)) {
                 return com.fincatto.documentofiscal.cte300.webservices.inutilizacao.CteInutilizacaoStub.CteCabecMsgE.Factory.parse(param.getXMLStreamReaderWithoutCaching());

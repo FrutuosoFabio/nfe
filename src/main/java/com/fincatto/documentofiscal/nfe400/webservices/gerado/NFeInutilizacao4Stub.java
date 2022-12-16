@@ -5,9 +5,6 @@ import org.apache.axis2.client.Stub;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamReader;
 
-import com.fincatto.documentofiscal.DFConfig;
-import com.fincatto.documentofiscal.utils.MessageContextFactory;
-
 public class NFeInutilizacao4Stub extends org.apache.axis2.client.Stub {
     private static int counter = 0;
     protected org.apache.axis2.description.AxisOperation[] _operations;
@@ -20,19 +17,18 @@ public class NFeInutilizacao4Stub extends org.apache.axis2.client.Stub {
     @SuppressWarnings("rawtypes")
     private final java.util.HashMap faultMessageMap = new java.util.HashMap();
     private final javax.xml.namespace.QName[] opNameArray = null;
-    private final DFConfig config;
 
     /**
      * Constructor that takes in a configContext
      */
-    public NFeInutilizacao4Stub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, DFConfig config) throws org.apache.axis2.AxisFault {
-        this(configurationContext, targetEndpoint, false, config);
+    public NFeInutilizacao4Stub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
+        this(configurationContext, targetEndpoint, false);
     }
 
     /**
      * Constructor that takes in a configContext and useseperate listner
      */
-    public NFeInutilizacao4Stub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, final boolean useSeparateListener, DFConfig config) throws org.apache.axis2.AxisFault {
+    public NFeInutilizacao4Stub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, final boolean useSeparateListener) throws org.apache.axis2.AxisFault {
         // To populate AxisService
         this.populateAxisService();
         this.populateFaults();
@@ -41,14 +37,13 @@ public class NFeInutilizacao4Stub extends org.apache.axis2.client.Stub {
         this._serviceClient.getOptions().setUseSeparateListener(useSeparateListener);
         // Set the soap version
         this._serviceClient.getOptions().setSoapVersionURI(org.apache.axiom.soap.SOAP12Constants.SOAP_ENVELOPE_NAMESPACE_URI);
-        this.config = config;
     }
 
     /**
      * Constructor taking the target endpoint
      */
-    public NFeInutilizacao4Stub(final java.lang.String targetEndpoint, DFConfig config) throws org.apache.axis2.AxisFault {
-        this(null, targetEndpoint, config);
+    public NFeInutilizacao4Stub(final java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
+        this(null, targetEndpoint);
     }
 
     private static synchronized java.lang.String getUniqueSuffix() {
@@ -57,7 +52,7 @@ public class NFeInutilizacao4Stub extends org.apache.axis2.client.Stub {
             NFeInutilizacao4Stub.counter = 0;
         }
         NFeInutilizacao4Stub.counter = NFeInutilizacao4Stub.counter + 1;
-        return System.currentTimeMillis() + "_" + NFeInutilizacao4Stub.counter;
+        return java.lang.Long.toString(java.lang.System.currentTimeMillis()) + "_" + NFeInutilizacao4Stub.counter;
     }
 
     private void populateAxisService() {
@@ -91,14 +86,10 @@ public class NFeInutilizacao4Stub extends org.apache.axis2.client.Stub {
             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
             this.addPropertyToOperationClient(_operationClient, org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR, "&");
             // create a message context
-            _messageContext = MessageContextFactory.INSTANCE.create(config);
+            _messageContext = new org.apache.axis2.context.MessageContext();
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env;
             env = this.toEnvelope(Stub.getFactory(_operationClient.getOptions().getSoapVersionURI()), nfeDadosMsg0, this.optimizeContent(new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/NFeInutilizacao4", "nfeInutilizacaoNF")), new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/NFeInutilizacao4", "nfeDadosMsg"));
-            
-            //Alteracao para correcao da inutilizacao da faixa de valores para o estado do Ceara
-            env.declareNamespace("http://www.portalfiscal.inf.br/nfe/wsdl/NFeInutilizacao4", "ns1");
-                
             // adding SOAP soap_headers
             this._serviceClient.addHeadersToEnvelope(env);
             // set the message context with that soap envelope

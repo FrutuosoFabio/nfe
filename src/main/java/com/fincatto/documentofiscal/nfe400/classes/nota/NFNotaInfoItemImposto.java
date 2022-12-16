@@ -1,13 +1,11 @@
 package com.fincatto.documentofiscal.nfe400.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.DFLog;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Element;
 
-import java.lang.reflect.InvocationTargetException;
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
 
 public class NFNotaInfoItemImposto extends DFBase {
     private static final long serialVersionUID = 8579628067567740408L;
@@ -45,15 +43,6 @@ public class NFNotaInfoItemImposto extends DFBase {
     public void setIcms(final NFNotaInfoItemImpostoICMS icms) {
         if (this.issqn != null) {
             throw new IllegalStateException("ICMS, IPI e II sao mutuamente exclusivo com ISSQN");
-        }
-        try {
-            DFStringValidador.validaPreenchimentoDeMargemValorAgregado(icms);
-        }catch (IllegalAccessException e) {
-            DFLog.getLogger(NFNotaInfoItemImposto.class)
-                    .error("Erro ao validar preenchimento de Margem de Valor agregado", e);
-        } catch (InvocationTargetException e) {
-            DFLog.getLogger(NFNotaInfoItemImposto.class)
-                    .error("Erro ao validar preenchimento de Margem de Valor agregado", e);
         }
         this.icms = icms;
     }
@@ -96,7 +85,7 @@ public class NFNotaInfoItemImposto extends DFBase {
     }
 
     public void setValorTotalTributos(final BigDecimal valorTotalTributos) {
-        this.valorTotalTributos = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorTotalTributos, "Valor Total Tributos");
+        this.valorTotalTributos = BigDecimalParser.tamanho15Com2CasasDecimais(valorTotalTributos, "Valor Total Tributos");
     }
 
     public String getValorTotalTributos() {
@@ -142,5 +131,4 @@ public class NFNotaInfoItemImposto extends DFBase {
     public void setIcmsUfDestino(final NFNotaInfoItemImpostoICMSUFDestino icmsUfDestino) {
         this.icmsUfDestino = icmsUfDestino;
     }
-
 }

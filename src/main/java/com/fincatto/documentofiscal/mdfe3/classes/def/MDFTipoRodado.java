@@ -18,9 +18,9 @@ public enum MDFTipoRodado {
 
     TRUCK("01", "Truck"),
     TOCO("02", "Toco"),
-    CAVALO_MECANICO("03", "Cavalo Mec\u00e2nico"),
+    CAVALO_MECANICO("03", "Cavalo Mecânico"),
     VAN("04", "VAN"),
-    UTILITARIO("05", "Utilit\u00e1rio"),
+    UTILITARIO("05", "Utilitário"),
     OUTROS("06", "Outros");
 
     private final String codigo;

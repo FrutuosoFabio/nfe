@@ -1,30 +1,31 @@
 package com.fincatto.documentofiscal.nfe400.classes.evento.cancelamento;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFListValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
-import org.simpleframework.xml.*;
-
 import java.math.BigDecimal;
 import java.util.List;
+
+import org.simpleframework.xml.*;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.ListValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 @Root(name = "envEvento")
 @Namespace(reference = "http://www.portalfiscal.inf.br/nfe")
 public class NFEnviaEventoCancelamento extends DFBase {
     private static final long serialVersionUID = 2370103749912669480L;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
-    
-    @Element(name = "idLote")
+
+    @Element(name = "idLote", required = true)
     private String idLote;
-    
-    @ElementList(entry = "evento", inline = true)
+
+    @ElementList(entry = "evento", inline = true, required = true)
     private List<NFEventoCancelamento> evento;
 
     public void setVersao(final BigDecimal versao) {
-        this.versao = DFBigDecimalValidador.tamanho5Com2CasasDecimais(versao, "Versao");
+        this.versao = BigDecimalParser.tamanho5Com2CasasDecimais(versao, "Versao");
     }
 
     public String getVersao() {
@@ -36,7 +37,7 @@ public class NFEnviaEventoCancelamento extends DFBase {
     }
 
     public void setIdLote(final String idLote) {
-        DFStringValidador.tamanho15N(idLote, "ID do Lote");
+        StringValidador.tamanho15N(idLote, "ID do Lote");
         this.idLote = idLote;
     }
 
@@ -45,7 +46,7 @@ public class NFEnviaEventoCancelamento extends DFBase {
     }
 
     public void setEvento(final List<NFEventoCancelamento> evento) {
-        DFListValidador.tamanho20(evento, "Evento de Cancelamento");
+        ListValidador.tamanho20(evento, "Evento de Cancelamento");
         this.evento = evento;
     }
 }

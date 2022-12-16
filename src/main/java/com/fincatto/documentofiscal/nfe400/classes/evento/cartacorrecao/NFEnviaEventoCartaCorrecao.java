@@ -1,31 +1,32 @@
 package com.fincatto.documentofiscal.nfe400.classes.evento.cartacorrecao;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.nfe400.classes.evento.NFEvento;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFListValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
-import org.simpleframework.xml.*;
-
 import java.math.BigDecimal;
 import java.util.List;
+
+import org.simpleframework.xml.*;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.nfe400.classes.evento.NFEvento;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.ListValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 @Root(name = "envEvento")
 @Namespace(reference = "http://www.portalfiscal.inf.br/nfe")
 public class NFEnviaEventoCartaCorrecao extends DFBase {
     private static final long serialVersionUID = -5454462961659029815L;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
-    
-    @Element(name = "idLote")
+
+    @Element(name = "idLote", required = true)
     private String idLote;
-    
-    @ElementList(entry = "evento", inline = true)
+
+    @ElementList(entry = "evento", inline = true, required = true)
     private List<NFEvento> evento;
 
     public void setVersao(final BigDecimal versao) {
-        this.versao = DFBigDecimalValidador.tamanho5Com2CasasDecimais(versao, "Versao");
+        this.versao = BigDecimalParser.tamanho5Com2CasasDecimais(versao, "Versao");
     }
 
     public String getVersao() {
@@ -37,7 +38,7 @@ public class NFEnviaEventoCartaCorrecao extends DFBase {
     }
 
     public void setIdLote(final String idLote) {
-        DFStringValidador.tamanho15N(idLote, "ID do Lote");
+        StringValidador.tamanho15N(idLote, "ID do Lote");
         this.idLote = idLote;
     }
 
@@ -46,7 +47,7 @@ public class NFEnviaEventoCartaCorrecao extends DFBase {
     }
 
     public void setEvento(final List<NFEvento> evento) {
-        DFListValidador.tamanho20(evento, "Eventos");
+        ListValidador.tamanho20(evento, "Eventos");
         this.evento = evento;
     }
 }

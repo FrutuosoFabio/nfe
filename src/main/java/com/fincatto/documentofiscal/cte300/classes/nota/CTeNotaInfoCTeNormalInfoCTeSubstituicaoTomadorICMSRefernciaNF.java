@@ -1,14 +1,15 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
+import java.time.LocalDate;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -25,23 +26,23 @@ public class CTeNotaInfoCTeNormalInfoCTeSubstituicaoTomadorICMSRefernciaNF exten
 
     @Element(name = "CPF", required = false)
     private String cpf;
-    
-    @Element(name = "mod")
+
+    @Element(name = "mod", required = true)
     private String modelo;
-    
-    @Element(name = "serie")
+
+    @Element(name = "serie", required = true)
     private String serie;
 
     @Element(name = "subserie", required = false)
     private String subserie;
-    
-    @Element(name = "nro")
+
+    @Element(name = "nro", required = true)
     private String numeroDocumento;
-    
-    @Element(name = "valor")
+
+    @Element(name = "valor", required = true)
     private String valor;
-    
-    @Element(name = "dEmi")
+
+    @Element(name = "dEmi", required = true)
     private LocalDate dataEmissao;
 
     public CTeNotaInfoCTeNormalInfoCTeSubstituicaoTomadorICMSRefernciaNF() {
@@ -64,7 +65,7 @@ public class CTeNotaInfoCTeNormalInfoCTeSubstituicaoTomadorICMSRefernciaNF exten
      * Informar o CNPJ do emitente do Documento Fiscal
      */
     public void setCnpj(final String cnpj) {
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
@@ -77,7 +78,7 @@ public class CTeNotaInfoCTeNormalInfoCTeSubstituicaoTomadorICMSRefernciaNF exten
      * Informar o CPF do emitente do documento fiscal
      */
     public void setCpf(final String cpf) {
-        DFStringValidador.cpf(cpf);
+        StringValidador.cpf(cpf);
         this.cpf = cpf;
     }
 
@@ -89,7 +90,7 @@ public class CTeNotaInfoCTeNormalInfoCTeSubstituicaoTomadorICMSRefernciaNF exten
      * Modelo do Documento Fiscal
      */
     public void setModelo(final String modelo) {
-        DFStringValidador.exatamente2(modelo, "Modelo do Documento Fiscal");
+        StringValidador.exatamente2(modelo, "Modelo do Documento Fiscal");
         this.modelo = modelo;
     }
 
@@ -101,7 +102,7 @@ public class CTeNotaInfoCTeNormalInfoCTeSubstituicaoTomadorICMSRefernciaNF exten
      * Serie do documento fiscal
      */
     public void setSerie(final String serie) {
-        DFStringValidador.tamanho3N(serie, "Serie do documento fiscal");
+        StringValidador.tamanho3N(serie, "Serie do documento fiscal");
         this.serie = serie;
     }
 
@@ -113,7 +114,7 @@ public class CTeNotaInfoCTeNormalInfoCTeSubstituicaoTomadorICMSRefernciaNF exten
      * Subserie do documento fiscal
      */
     public void setSubserie(final String subserie) {
-        DFStringValidador.tamanho3N(this.serie, "Subserie do documento fiscal");
+        StringValidador.tamanho3N(this.serie, "Subserie do documento fiscal");
         this.subserie = subserie;
     }
 
@@ -125,7 +126,7 @@ public class CTeNotaInfoCTeNormalInfoCTeSubstituicaoTomadorICMSRefernciaNF exten
      * Número do documento fiscal
      */
     public void setNumeroDocumento(final String numeroDocumento) {
-        DFStringValidador.tamanho6N(numeroDocumento, "Número do documento fiscal");
+        StringValidador.tamanho6N(numeroDocumento, "Número do documento fiscal");
         this.numeroDocumento = numeroDocumento;
     }
 
@@ -137,7 +138,7 @@ public class CTeNotaInfoCTeNormalInfoCTeSubstituicaoTomadorICMSRefernciaNF exten
      * Valor do documento fiscal.
      */
     public void setValor(final BigDecimal valor) {
-        this.valor = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valor, "Valor do documento fiscal");
+        this.valor = BigDecimalParser.tamanho15Com2CasasDecimais(valor, "Valor do documento fiscal");
     }
 
     public LocalDate getDataEmissao() {

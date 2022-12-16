@@ -5,10 +5,14 @@ import com.fincatto.documentofiscal.DFBase;
 import com.fincatto.documentofiscal.DFModelo;
 import com.fincatto.documentofiscal.DFUnidadeFederativa;
 import com.fincatto.documentofiscal.nfe.NFTipoEmissao;
-import com.fincatto.documentofiscal.nfe310.classes.*;
-import com.fincatto.documentofiscal.validadores.DFIntegerValidador;
-import com.fincatto.documentofiscal.validadores.DFListValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import com.fincatto.documentofiscal.nfe310.classes.NFFinalidade;
+import com.fincatto.documentofiscal.nfe310.classes.NFFormaPagamentoPrazo;
+import com.fincatto.documentofiscal.nfe310.classes.NFProcessoEmissor;
+import com.fincatto.documentofiscal.nfe310.classes.NFTipo;
+import com.fincatto.documentofiscal.nfe310.classes.NFTipoImpressao;
+import com.fincatto.documentofiscal.validadores.IntegerValidador;
+import com.fincatto.documentofiscal.validadores.ListValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
@@ -17,68 +21,68 @@ import java.util.List;
 
 public class NFNotaInfoIdentificacao extends DFBase {
     private static final long serialVersionUID = -2568396066960865875L;
-    
-    @Element(name = "cUF")
+
+    @Element(name = "cUF", required = true)
     private DFUnidadeFederativa uf;
-    
-    @Element(name = "cNF")
+
+    @Element(name = "cNF", required = true)
     private String codigoRandomico;
-    
-    @Element(name = "natOp")
+
+    @Element(name = "natOp", required = true)
     private String naturezaOperacao;
-    
-    @Element(name = "indPag")
+
+    @Element(name = "indPag", required = true)
     private NFFormaPagamentoPrazo formaPagamento;
-    
-    @Element(name = "mod")
+
+    @Element(name = "mod", required = true)
     private DFModelo modelo;
-    
-    @Element(name = "serie")
+
+    @Element(name = "serie", required = true)
     private String serie;
-    
-    @Element(name = "nNF")
+
+    @Element(name = "nNF", required = true)
     private String numeroNota;
-    
-    @Element(name = "dhEmi")
+
+    @Element(name = "dhEmi", required = true)
     private ZonedDateTime dataHoraEmissao;
 
     @Element(name = "dhSaiEnt", required = false)
     private ZonedDateTime dataHoraSaidaOuEntrada;
-    
-    @Element(name = "tpNF")
+
+    @Element(name = "tpNF", required = true)
     private NFTipo tipo;
-    
-    @Element(name = "idDest")
+
+    @Element(name = "idDest", required = true)
     private NFIdentificadorLocalDestinoOperacao identificadorLocalDestinoOperacao;
-    
-    @Element(name = "cMunFG")
+
+    @Element(name = "cMunFG", required = true)
     private String codigoMunicipio;
-    
-    @Element(name = "tpImp")
+
+    @Element(name = "tpImp", required = true)
     private NFTipoImpressao tipoImpressao;
-    
-    @Element(name = "tpEmis")
+
+    @Element(name = "tpEmis", required = true)
     private NFTipoEmissao tipoEmissao;
-    
-    @Element(name = "cDV")
+
+    @Element(name = "cDV", required = true)
     private Integer digitoVerificador;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
-    
-    @Element(name = "finNFe")
+
+    @Element(name = "finNFe", required = true)
     private NFFinalidade finalidade;
-    
-    @Element(name = "indFinal")
+
+    @Element(name = "indFinal", required = true)
     private NFOperacaoConsumidorFinal operacaoConsumidorFinal;
-    
-    @Element(name = "indPres")
+
+    @Element(name = "indPres", required = true)
     private NFIndicadorPresencaComprador indicadorPresencaComprador;
-    
-    @Element(name = "procEmi")
+
+    @Element(name = "procEmi", required = true)
     private NFProcessoEmissor programaEmissor;
-    
-    @Element(name = "verProc")
+
+    @Element(name = "verProc", required = true)
     private String versaoEmissor;
 
     @Element(name = "dhCont", required = false)
@@ -95,12 +99,12 @@ public class NFNotaInfoIdentificacao extends DFBase {
     }
 
     public void setCodigoRandomico(final String codigoRandomico) {
-        DFStringValidador.exatamente8(codigoRandomico, "Codigo Randomico");
+        StringValidador.exatamente8(codigoRandomico, "Codigo Randomico");
         this.codigoRandomico = codigoRandomico;
     }
 
     public void setNaturezaOperacao(final String naturezaOperacao) {
-        DFStringValidador.tamanho60(naturezaOperacao, "Natureza da Operacao");
+        StringValidador.tamanho60(naturezaOperacao, "Natureza da Operacao");
         this.naturezaOperacao = naturezaOperacao;
     }
 
@@ -113,12 +117,12 @@ public class NFNotaInfoIdentificacao extends DFBase {
     }
 
     public void setSerie(final String serie) {
-        DFStringValidador.tamanho3(serie, "Serie");
+        StringValidador.tamanho3(serie, "Serie");
         this.serie = serie;
     }
 
     public void setNumeroNota(final String numeroNota) {
-        DFStringValidador.tamanho9(numeroNota, "Numero da Nota");
+        StringValidador.tamanho9(numeroNota, "Numero da Nota");
         this.numeroNota = numeroNota;
     }
 
@@ -135,12 +139,12 @@ public class NFNotaInfoIdentificacao extends DFBase {
     }
 
     public void setCodigoMunicipio(final String codigoMunicipio) {
-        DFStringValidador.exatamente7N(codigoMunicipio, "Codigo Municipio");
+        StringValidador.exatamente7N(codigoMunicipio, "Codigo Municipio");
         this.codigoMunicipio = codigoMunicipio;
     }
 
     public void setReferenciadas(final List<NFInfoReferenciada> referenciadas) {
-        DFListValidador.tamanho500(referenciadas, "Referenciadas");
+        ListValidador.tamanho500(referenciadas, "Referenciadas");
         this.referenciadas = referenciadas;
     }
 
@@ -153,7 +157,7 @@ public class NFNotaInfoIdentificacao extends DFBase {
     }
 
     public void setDigitoVerificador(final Integer digitoVerificador) {
-        DFIntegerValidador.exatamente1(digitoVerificador, "DV");
+        IntegerValidador.exatamente1(digitoVerificador, "DV");
         this.digitoVerificador = digitoVerificador;
     }
 
@@ -170,7 +174,7 @@ public class NFNotaInfoIdentificacao extends DFBase {
     }
 
     public void setVersaoEmissor(final String versaoEmissor) {
-        DFStringValidador.tamanho20(versaoEmissor, "Versao Emissor");
+        StringValidador.tamanho20(versaoEmissor, "Versao Emissor");
         this.versaoEmissor = versaoEmissor;
     }
 
@@ -179,7 +183,7 @@ public class NFNotaInfoIdentificacao extends DFBase {
     }
 
     public void setJustificativaEntradaContingencia(final String justificativaEntradaContingencia) {
-        DFStringValidador.tamanho15a256(justificativaEntradaContingencia, "Justificativa Entrada Contingencia");
+        StringValidador.tamanho15a256(justificativaEntradaContingencia, "Justificativa Entrada Contingencia");
         this.justificativaEntradaContingencia = justificativaEntradaContingencia;
     }
 

@@ -1,43 +1,43 @@
 package com.fincatto.documentofiscal.nfe400.classes.statusservico.consulta;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.DFUnidadeFederativa;
+import java.time.LocalDateTime;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.time.ZonedDateTime;
+import com.fincatto.documentofiscal.DFAmbiente;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.DFUnidadeFederativa;
 
 @Root(name = "retConsStatServ")
 @Namespace(reference = "http://www.portalfiscal.inf.br/nfe")
 public class NFStatusServicoConsultaRetorno extends DFBase {
     private static final long serialVersionUID = -5022679215397514727L;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
-    
-    @Element(name = "verAplic")
+
+    @Element(name = "verAplic", required = true)
     private String versaoAplicacao;
-    
-    @Element(name = "cStat")
+
+    @Element(name = "cStat", required = true)
     private String status;
-    
-    @Element(name = "xMotivo")
+
+    @Element(name = "xMotivo", required = true)
     private String motivo;
-    
-    @Element(name = "cUF")
+
+    @Element(name = "cUF", required = true)
     private DFUnidadeFederativa uf;
-    
-    @Element(name = "dhRecbto")
-    private ZonedDateTime dataRecebimento;
+
+    @Element(name = "dhRecbto", required = true)
+    private LocalDateTime dataRecebimento;
 
     @Element(name = "dhRetorno", required = false)
-    private ZonedDateTime dataRetorno;
+    private LocalDateTime dataRetorno;
 
     @Element(name = "xObs", required = false)
     private String observacao;
@@ -105,20 +105,20 @@ public class NFStatusServicoConsultaRetorno extends DFBase {
     public void setUf(final DFUnidadeFederativa uf) {
         this.uf = uf;
     }
-    
-    public ZonedDateTime getDataRecebimento() {
+
+    public LocalDateTime getDataRecebimento() {
         return this.dataRecebimento;
     }
-    
-    public void setDataRecebimento(final ZonedDateTime dataRecebimento) {
+
+    public void setDataRecebimento(final LocalDateTime dataRecebimento) {
         this.dataRecebimento = dataRecebimento;
     }
-    
-    public ZonedDateTime getDataRetorno() {
+
+    public LocalDateTime getDataRetorno() {
         return this.dataRetorno;
     }
-    
-    public void setDataRetorno(final ZonedDateTime dataRetorno) {
+
+    public void setDataRetorno(final LocalDateTime dataRetorno) {
         this.dataRetorno = dataRetorno;
     }
 

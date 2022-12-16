@@ -1,19 +1,20 @@
 package com.fincatto.documentofiscal.nfe400.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
 
 public class NFNotaInfoCanaFornecimentoDiario extends DFBase {
     private static final long serialVersionUID = 4997480383513451707L;
-    
-    @Attribute(name = "dia")
+
+    @Attribute(name = "dia", required = true)
     private int dia;
-    
-    @Element(name = "qtde")
+
+    @Element(name = "qtde", required = true)
     private String quantidade;
 
     public void setDia(final int dia) {
@@ -24,7 +25,7 @@ public class NFNotaInfoCanaFornecimentoDiario extends DFBase {
     }
 
     public void setQuantidade(final BigDecimal quantidade) {
-        this.quantidade = DFBigDecimalValidador.tamanho21ComAte10CasasDecimais(quantidade, "Quantidade");
+        this.quantidade = BigDecimalParser.tamanho21ComAte10CasasDecimais(quantidade, "Quantidade");
     }
 
     public int getDia() {

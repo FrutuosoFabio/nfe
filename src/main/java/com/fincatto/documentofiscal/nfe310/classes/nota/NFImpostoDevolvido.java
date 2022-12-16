@@ -1,18 +1,19 @@
 package com.fincatto.documentofiscal.nfe310.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Element;
 
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
 
 public class NFImpostoDevolvido extends DFBase {
     private static final long serialVersionUID = 3300133386344205418L;
-    
-    @Element(name = "pDevol")
+
+    @Element(name = "pDevol", required = true)
     private String percentualDevolucao;
-    
-    @Element(name = "IPI")
+
+    @Element(name = "IPI", required = true)
     private NFInformacaoImpostoDevolvido informacaoIPIDevolvido;
 
     public String getPercentualDevolucao() {
@@ -20,7 +21,7 @@ public class NFImpostoDevolvido extends DFBase {
     }
 
     public void setPercentualDevolucao(final BigDecimal percentualDevolucao) {
-        this.percentualDevolucao = DFBigDecimalValidador.tamanho5Com2CasasDecimais(percentualDevolucao, "Percentual Devolucao");
+        this.percentualDevolucao = BigDecimalParser.tamanho5Com2CasasDecimais(percentualDevolucao, "Percentual Devolucao");
     }
 
     public NFInformacaoImpostoDevolvido getInformacaoIPIDevolvido() {

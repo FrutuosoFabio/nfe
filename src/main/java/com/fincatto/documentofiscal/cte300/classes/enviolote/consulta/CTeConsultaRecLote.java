@@ -1,11 +1,12 @@
 package com.fincatto.documentofiscal.cte300.classes.enviolote.consulta;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFBase;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
+
+import com.fincatto.documentofiscal.DFAmbiente;
+import com.fincatto.documentofiscal.DFBase;
 
 /**
  * @author Caio
@@ -16,14 +17,14 @@ import org.simpleframework.xml.Root;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeConsultaRecLote extends DFBase {
     private static final long serialVersionUID = -1071906898535302580L;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
-    
-    @Element(name = "nRec")
+
+    @Element(name = "nRec", required = true)
     private String numeroRecebimento;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
 
     public CTeConsultaRecLote() {

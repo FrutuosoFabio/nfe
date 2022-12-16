@@ -1,38 +1,39 @@
 package com.fincatto.documentofiscal.nfe310.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFBigIntegerValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
-import org.simpleframework.xml.Element;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.simpleframework.xml.Element;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.BigIntegerValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
+
 public class NFNotaInfoItemExportacaoIndireta extends DFBase {
     private static final long serialVersionUID = 2911935204123851926L;
-    
-    @Element(name = "nRE")
+
+    @Element(name = "nRE", required = true)
     private BigInteger numeroRegistroExportacao;
-    
-    @Element(name = "chNFe")
+
+    @Element(name = "chNFe", required = true)
     private String chaveAcessoNFe;
-    
-    @Element(name = "qExport")
+
+    @Element(name = "qExport", required = true)
     private String quantidadeItemEfetivamenteExportado;
 
     public void setChaveAcessoNFe(final String chaveAcessoNFe) {
-        DFStringValidador.exatamente44N(chaveAcessoNFe, "Chave de Acesso NFe");
+        StringValidador.exatamente44N(chaveAcessoNFe, "Chave de Acesso NFe");
         this.chaveAcessoNFe = chaveAcessoNFe;
     }
 
     public void setNumeroRegistroExportacao(final BigInteger numeroRegistroExportacao) {
-        DFBigIntegerValidador.tamanho12(numeroRegistroExportacao, "Numero Registro Exportacao");
+        BigIntegerValidador.tamanho12(numeroRegistroExportacao, "Numero Registro Exportacao");
         this.numeroRegistroExportacao = numeroRegistroExportacao;
     }
 
     public void setQuantidadeItemEfetivamenteExportado(final BigDecimal quantidadeItemEfetivamenteExportado) {
-        this.quantidadeItemEfetivamenteExportado = DFBigDecimalValidador.tamanho15comAte4CasasDecimais(quantidadeItemEfetivamenteExportado, "Quantidade Item Evetivamente Exportado");
+        this.quantidadeItemEfetivamenteExportado = BigDecimalParser.tamanho15comAte4CasasDecimais(quantidadeItemEfetivamenteExportado, "Quantidade Item Evetivamente Exportado");
     }
 
     public String getChaveAcessoNFe() {

@@ -1,32 +1,33 @@
 package com.fincatto.documentofiscal.nfe310.classes.evento.downloadnf;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFBase;
+import java.util.List;
+
 import org.simpleframework.xml.*;
 
-import java.util.List;
+import com.fincatto.documentofiscal.DFAmbiente;
+import com.fincatto.documentofiscal.DFBase;
 
 @Root(name = "retDownloadNFe")
 @Namespace(reference = "http://www.portalfiscal.inf.br/nfe")
 public class NFDownloadNFeRetorno extends DFBase {
     private static final long serialVersionUID = 6195353603223024941L;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
-    
-    @Element(name = "verAplic")
+
+    @Element(name = "verAplic", required = true)
     private String versaoAplicacao;
-    
-    @Element(name = "cStat")
+
+    @Element(name = "cStat", required = true)
     private String status;
-    
-    @Element(name = "xMotivo")
+
+    @Element(name = "xMotivo", required = true)
     private String motivo;
-    
-    @Element(name = "dhResp")
+
+    @Element(name = "dhResp", required = true)
     private String dataRetorno;
 
     @ElementList(name = "retNFe", inline = true, required = false)

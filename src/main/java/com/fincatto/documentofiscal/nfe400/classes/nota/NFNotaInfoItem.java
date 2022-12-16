@@ -1,24 +1,22 @@
 package com.fincatto.documentofiscal.nfe400.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFIntegerValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
 
-import java.util.List;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.IntegerValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFNotaInfoItem extends DFBase {
     private static final long serialVersionUID = 362646693945373643L;
-    
-    @Attribute(name = "nItem")
+
+    @Attribute(name = "nItem", required = true)
     private Integer numeroItem;
-    
-    @Element(name = "prod")
+
+    @Element(name = "prod", required = true)
     private NFNotaInfoItemProduto produto;
-    
-    @Element(name = "imposto")
+
+    @Element(name = "imposto", required = true)
     private NFNotaInfoItemImposto imposto;
 
     @Element(name = "impostoDevol", required = false)
@@ -27,19 +25,13 @@ public class NFNotaInfoItem extends DFBase {
     @Element(name = "infAdProd", required = false)
     private String informacoesAdicionais;
 
-    @ElementList(entry = "obsCont", inline = true, required = false)
-    private List<NFNotaInfoObservacao> observacoesContribuinte;
-
-    @ElementList(entry = "obsFisco", inline = true, required = false)
-    private List<NFNotaInfoObservacao> observacoesFisco;
-
     public void setNumeroItem(final Integer numeroItem) {
-        DFIntegerValidador.tamanho3maximo990(numeroItem, "Numero do Item");
+        IntegerValidador.tamanho3maximo990(numeroItem, "Numero do Item");
         this.numeroItem = numeroItem;
     }
 
     public void setInformacoesAdicionais(final String informacoesAdicionais) {
-        DFStringValidador.tamanho500(informacoesAdicionais, "Informacoes Adicionais do Item");
+        StringValidador.tamanho500(informacoesAdicionais, "Informacoes Adicionais do Item");
         this.informacoesAdicionais = informacoesAdicionais;
     }
 
@@ -49,14 +41,6 @@ public class NFNotaInfoItem extends DFBase {
 
     public void setImposto(final NFNotaInfoItemImposto imposto) {
         this.imposto = imposto;
-    }
-
-    public void setObservacoesContribuinte(List<NFNotaInfoObservacao> observacoesContribuinte) {
-        this.observacoesContribuinte = observacoesContribuinte;
-    }
-
-    public void setObservacoesFisco(List<NFNotaInfoObservacao> observacoesFisco) {
-        this.observacoesFisco = observacoesFisco;
     }
 
     public Integer getNumeroItem() {
@@ -77,14 +61,6 @@ public class NFNotaInfoItem extends DFBase {
 
     public NFImpostoDevolvido getImpostoDevolvido() {
         return this.impostoDevolvido;
-    }
-
-    public List<NFNotaInfoObservacao> getObservacoesContribuinte() {
-        return observacoesContribuinte;
-    }
-
-    public List<NFNotaInfoObservacao> getObservacoesFisco() {
-        return observacoesFisco;
     }
 
     public void setImpostoDevolvido(final NFImpostoDevolvido impostoDevolvido) {

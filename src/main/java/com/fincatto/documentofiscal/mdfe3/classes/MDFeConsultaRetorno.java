@@ -1,16 +1,17 @@
 package com.fincatto.documentofiscal.mdfe3.classes;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.DFUnidadeFederativa;
-import com.fincatto.documentofiscal.nfe310.classes.NFProtocoloInfo;
-import com.fincatto.documentofiscal.nfe310.classes.lote.envio.NFLoteEnvioRetornoRecebimentoInfo;
+import java.time.LocalDateTime;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.time.ZonedDateTime;
+import com.fincatto.documentofiscal.DFAmbiente;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.DFUnidadeFederativa;
+import com.fincatto.documentofiscal.nfe310.classes.NFProtocoloInfo;
+import com.fincatto.documentofiscal.nfe310.classes.lote.envio.NFLoteEnvioRetornoRecebimentoInfo;
 
 /**
  * @Author Eldevan Nery Junior on 26/05/17.
@@ -19,30 +20,30 @@ import java.time.ZonedDateTime;
 @Namespace(reference = "http://www.portalfiscal.inf.br/mdfe")
 public class MDFeConsultaRetorno extends DFBase {
     private static final long serialVersionUID = -7216488190676193958L;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
-    
-    @Element(name = "verAplic")
+
+    @Element(name = "verAplic", required = true)
     private String versaoAplicacao;
-    
-    @Element(name = "cStat")
+
+    @Element(name = "cStat", required = true)
     private String status;
-    
-    @Element(name = "xMotivo")
+
+    @Element(name = "xMotivo", required = true)
     private String motivo;
-    
-    @Element(name = "nRec")
+
+    @Element(name = "nRec", required = true)
     private String reciboConsultado;
-    
-    @Element(name = "cUF")
+
+    @Element(name = "cUF", required = true)
     private DFUnidadeFederativa uf;
-    
-    @Element(name = "dhRecbto")
-    private ZonedDateTime dataRecebimento;
+
+    @Element(name = "dhRecbto", required = true)
+    private LocalDateTime dataRecebimento;
 
     @Element(name = "infRec", required = false)
     private NFLoteEnvioRetornoRecebimentoInfo infoRecebimento;
@@ -77,7 +78,7 @@ public class MDFeConsultaRetorno extends DFBase {
         this.uf = uf;
     }
 
-    public void setDataRecebimento(final ZonedDateTime dataRecebimento) {
+    public void setDataRecebimento(final LocalDateTime dataRecebimento) {
         this.dataRecebimento = dataRecebimento;
     }
 
@@ -113,7 +114,7 @@ public class MDFeConsultaRetorno extends DFBase {
         return this.uf;
     }
 
-    public ZonedDateTime getDataRecebimento() {
+    public LocalDateTime getDataRecebimento() {
         return this.dataRecebimento;
     }
 

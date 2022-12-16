@@ -1,16 +1,17 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.cte300.classes.CTModeloNF;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+import java.util.List;
+
+import java.time.LocalDate;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.cte300.classes.CTModeloNF;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -28,38 +29,38 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNF extends DFBase {
 
     @Element(name = "nPed", required = false)
     private String numeroPedidoNF;
-    
-    @Element(name = "mod")
+
+    @Element(name = "mod", required = true)
     private CTModeloNF modeloNF;
-    
-    @Element(name = "serie")
+
+    @Element(name = "serie", required = true)
     private String serie;
-    
-    @Element(name = "nDoc")
+
+    @Element(name = "nDoc", required = true)
     private String numeroDocumento;
-    
-    @Element(name = "dEmi")
+
+    @Element(name = "dEmi", required = true)
     private LocalDate dataEmissao;
-    
-    @Element(name = "vBC")
+
+    @Element(name = "vBC", required = true)
     private String valorBcICMS;
-    
-    @Element(name = "vICMS")
+
+    @Element(name = "vICMS", required = true)
     private String valorICMS;
-    
-    @Element(name = "vBCST")
+
+    @Element(name = "vBCST", required = true)
     private String valorBcICMSST;
-    
-    @Element(name = "vST")
+
+    @Element(name = "vST", required = true)
     private String valorICMSST;
-    
-    @Element(name = "vProd")
+
+    @Element(name = "vProd", required = true)
     private String valorTotalProdutos;
-    
-    @Element(name = "vNF")
+
+    @Element(name = "vNF", required = true)
     private String valorTotalNF;
-    
-    @Element(name = "nCFOP")
+
+    @Element(name = "nCFOP", required = true)
     private String CFOP;
 
     @Element(name = "nPeso", required = false)
@@ -106,7 +107,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNF extends DFBase {
      * Número do Romaneio da NF
      */
     public void setNumeroRomaneio(final String numeroRomaneio) {
-        DFStringValidador.tamanho20(numeroRomaneio, "Número do Romaneio da NF");
+        StringValidador.tamanho20(numeroRomaneio, "Número do Romaneio da NF");
         this.numeroRomaneio = numeroRomaneio;
     }
 
@@ -118,7 +119,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNF extends DFBase {
      * Número do Pedido da NF
      */
     public void setNumeroPedidoNF(final String numeroPedidoNF) {
-        DFStringValidador.tamanho20(numeroPedidoNF, "Número do Pedido da NF");
+        StringValidador.tamanho20(numeroPedidoNF, "Número do Pedido da NF");
         this.numeroPedidoNF = numeroPedidoNF;
     }
 
@@ -144,7 +145,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNF extends DFBase {
      * Série
      */
     public void setSerie(final String serie) {
-        DFStringValidador.tamanho3(serie, "Série");
+        StringValidador.tamanho3(serie, "Série");
         this.serie = serie;
     }
 
@@ -156,7 +157,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNF extends DFBase {
      * Número
      */
     public void setNumeroDocumento(final String numeroDocumento) {
-        DFStringValidador.tamanho20(numeroDocumento, "Número");
+        StringValidador.tamanho20(numeroDocumento, "Número");
         this.numeroDocumento = numeroDocumento;
     }
 
@@ -180,7 +181,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNF extends DFBase {
      * Valor da Base de Cálculo do ICMS
      */
     public void setValorBcICMS(final BigDecimal valorBcICMS) {
-        this.valorBcICMS = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorBcICMS, "Valor da Base de Cálculo do ICMS");
+        this.valorBcICMS = BigDecimalParser.tamanho15Com2CasasDecimais(valorBcICMS, "Valor da Base de Cálculo do ICMS");
     }
 
     public String getValorICMS() {
@@ -191,7 +192,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNF extends DFBase {
      * Valor Total do ICMS
      */
     public void setValorICMS(final BigDecimal valorICMS) {
-        this.valorICMS = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorICMS, "Valor Total do ICMS");
+        this.valorICMS = BigDecimalParser.tamanho15Com2CasasDecimais(valorICMS, "Valor Total do ICMS");
     }
 
     public String getValorBcICMSST() {
@@ -202,7 +203,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNF extends DFBase {
      * Valor da Base de Cálculo do ICMS ST
      */
     public void setValorBcICMSST(final BigDecimal valorBcICMSST) {
-        this.valorBcICMSST = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorBcICMSST, "Valor da Base de Cálculo do ICMS ST");
+        this.valorBcICMSST = BigDecimalParser.tamanho15Com2CasasDecimais(valorBcICMSST, "Valor da Base de Cálculo do ICMS ST");
     }
 
     public String getValorICMSST() {
@@ -213,7 +214,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNF extends DFBase {
      * Valor Total do ICMS ST
      */
     public void setValorICMSST(final BigDecimal valorICMSST) {
-        this.valorICMSST = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorICMSST, "Valor Total do ICMS ST");
+        this.valorICMSST = BigDecimalParser.tamanho15Com2CasasDecimais(valorICMSST, "Valor Total do ICMS ST");
     }
 
     public String getValorTotalProdutos() {
@@ -224,7 +225,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNF extends DFBase {
      * Valor Total dos Produtos
      */
     public void setValorTotalProdutos(final BigDecimal valorTotalProdutos) {
-        this.valorTotalProdutos = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorTotalProdutos, "Valor Total dos Produtos");
+        this.valorTotalProdutos = BigDecimalParser.tamanho15Com2CasasDecimais(valorTotalProdutos, "Valor Total dos Produtos");
     }
 
     public String getValorTotalNF() {
@@ -235,7 +236,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNF extends DFBase {
      * Valor Total da NF
      */
     public void setValorTotalNF(final BigDecimal valorTotalNF) {
-        this.valorTotalNF = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorTotalNF, "Valor Total da NF");
+        this.valorTotalNF = BigDecimalParser.tamanho15Com2CasasDecimais(valorTotalNF, "Valor Total da NF");
     }
 
     public String getCFOP() {
@@ -247,7 +248,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNF extends DFBase {
      * CFOP da NF ou, na existência de mais de um, predominância pelo critério de valor econômico.
      */
     public void setCFOP(final String cFOP) {
-        DFStringValidador.exatamente4N(cFOP, "CFOP");
+        StringValidador.exatamente4N(cFOP, "CFOP");
         this.CFOP = cFOP;
     }
 
@@ -259,7 +260,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNF extends DFBase {
      * Peso total em Kg
      */
     public void setValorPesoTotal(final BigDecimal valorPesoTotal) {
-        this.valorPesoTotal = DFBigDecimalValidador.tamanho15Com3CasasDecimais(valorPesoTotal, "Peso total em Kg");
+        this.valorPesoTotal = BigDecimalParser.tamanho15Com3CasasDecimais(valorPesoTotal, "Peso total em Kg");
     }
 
     public String getPinSUFRAMA() {
@@ -271,7 +272,7 @@ public class CTeNotaInfoCTeNormalInfoDocumentosInfoNF extends DFBase {
      * PIN atribuído pela SUFRAMA para a operação.
      */
     public void setPinSUFRAMA(final String pinSUFRAMA) {
-        DFStringValidador.tamanho2a9N(pinSUFRAMA, "PIN SUFRAMA");
+        StringValidador.tamanho2a9N(pinSUFRAMA, "PIN SUFRAMA");
         this.pinSUFRAMA = pinSUFRAMA;
     }
 

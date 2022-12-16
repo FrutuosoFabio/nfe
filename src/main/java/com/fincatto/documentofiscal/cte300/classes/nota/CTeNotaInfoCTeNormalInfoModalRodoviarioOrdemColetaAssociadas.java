@@ -1,12 +1,12 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.time.LocalDate;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.time.LocalDate;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -20,14 +20,14 @@ public class CTeNotaInfoCTeNormalInfoModalRodoviarioOrdemColetaAssociadas extend
 
     @Element(name = "serie", required = false)
     private String serie;
-    
-    @Element(name = "nOcc")
+
+    @Element(name = "nOcc", required = true)
     private String numeroOrdemColeta;
-    
-    @Element(name = "dEmi")
+
+    @Element(name = "dEmi", required = true)
     private LocalDate dataEmissao;
-    
-    @Element(name = "emiOcc")
+
+    @Element(name = "emiOcc", required = true)
     private CTeNotaInfoCTeNormalInfoModalRodoviarioOrdemColetaAssociadasEmi ordemColetaAssociadasEmi;
 
     public CTeNotaInfoCTeNormalInfoModalRodoviarioOrdemColetaAssociadas() {
@@ -45,7 +45,7 @@ public class CTeNotaInfoCTeNormalInfoModalRodoviarioOrdemColetaAssociadas extend
      * Série da OCC
      */
     public void setSerie(final String serie) {
-        DFStringValidador.tamanho3(serie, "Série da OCC");
+        StringValidador.tamanho3(serie, "Série da OCC");
         this.serie = serie;
     }
 
@@ -57,7 +57,7 @@ public class CTeNotaInfoCTeNormalInfoModalRodoviarioOrdemColetaAssociadas extend
      * Número da Ordem de coleta
      */
     public void setNumeroOrdemColeta(final String numeroOrdemColeta) {
-        DFStringValidador.tamanho6N(numeroOrdemColeta, "Número da Ordem de coleta");
+        StringValidador.tamanho6N(numeroOrdemColeta, "Número da Ordem de coleta");
         this.numeroOrdemColeta = numeroOrdemColeta;
     }
 

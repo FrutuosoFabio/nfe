@@ -1,10 +1,11 @@
 package com.fincatto.documentofiscal.nfe400.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Element;
 
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
 
 public class NFNotaInfoItemImpostoPISST extends DFBase {
     private static final long serialVersionUID = 3395149664389917725L;
@@ -20,12 +21,9 @@ public class NFNotaInfoItemImpostoPISST extends DFBase {
 
     @Element(name = "vAliqProd", required = false)
     private String valorAliquota;
-    
-    @Element(name = "vPIS")
-    private String valorTributo;
 
-    @Element(name = "indSomaPISST", required = false)
-    private NFIndicadorSomaPISST indicadorSomaPISST;
+    @Element(name = "vPIS", required = true)
+    private String valorTributo;
 
     public NFNotaInfoItemImpostoPISST() {
         this.valorBaseCalculo = null;
@@ -39,36 +37,32 @@ public class NFNotaInfoItemImpostoPISST extends DFBase {
         if (this.valorAliquota != null || this.quantidadeVendida != null) {
             throw new IllegalStateException("Nao pode setar percentual aliquota caso valor aliquota ou quantidade vendida esteja setado");
         }
-        this.valorBaseCalculo = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorBaseCalculo, "Valor BC PIS ST Item");
+        this.valorBaseCalculo = BigDecimalParser.tamanho15Com2CasasDecimais(valorBaseCalculo, "Valor BC PIS ST Item");
     }
 
     public void setPercentualAliquota(final BigDecimal aliquota) {
         if (this.valorAliquota != null || this.quantidadeVendida != null) {
             throw new IllegalStateException("Nao pode setar percentual aliquota caso valor aliquota ou quantidade vendida esteja setado");
         }
-        this.percentualAliquota = DFBigDecimalValidador.tamanho7ComAte4CasasDecimais(aliquota, "Aliquota PIS ST Item");
+        this.percentualAliquota = BigDecimalParser.tamanho7ComAte4CasasDecimais(aliquota, "Aliquota PIS ST Item");
     }
 
     public void setQuantidadeVendida(final BigDecimal quantidadeVendida) {
         if (this.percentualAliquota != null || this.valorBaseCalculo != null) {
             throw new IllegalStateException("Nao pode setar valor aliquota caso percentual aliquota ou valor base calculo esteja setado");
         }
-        this.quantidadeVendida = DFBigDecimalValidador.tamanho16ComAte4CasasDecimais(quantidadeVendida, "Quantidade Vendida PIS ST Item");
+        this.quantidadeVendida = BigDecimalParser.tamanho16ComAte4CasasDecimais(quantidadeVendida, "Quantidade Vendida PIS ST Item");
     }
 
     public void setValorAliquota(final BigDecimal valorAliquota) {
         if (this.percentualAliquota != null || this.valorBaseCalculo != null) {
             throw new IllegalStateException("Nao pode setar valor aliquota caso percentual aliquota ou valor base calculo esteja setado");
         }
-        this.valorAliquota = DFBigDecimalValidador.tamanho15Com4CasasDecimais(valorAliquota, "Valor Aliquota PIS ST Item");
+        this.valorAliquota = BigDecimalParser.tamanho15Com4CasasDecimais(valorAliquota, "Valor Aliquota PIS ST Item");
     }
 
     public void setValorTributo(final BigDecimal valorTributo) {
-        this.valorTributo = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorTributo, "Valor Tributo PIS ST Item");
-    }
-
-    public void setIndicadorSomaPISST(NFIndicadorSomaPISST indicadorSomaPISST) {
-        this.indicadorSomaPISST = indicadorSomaPISST;
+        this.valorTributo = BigDecimalParser.tamanho15Com2CasasDecimais(valorTributo, "Valor Tributo PIS ST Item");
     }
 
     public String getValorBaseCalculo() {
@@ -89,9 +83,5 @@ public class NFNotaInfoItemImpostoPISST extends DFBase {
 
     public String getValorTributo() {
         return this.valorTributo;
-    }
-
-    public NFIndicadorSomaPISST getIndicadorSomaPISST() {
-        return indicadorSomaPISST;
     }
 }

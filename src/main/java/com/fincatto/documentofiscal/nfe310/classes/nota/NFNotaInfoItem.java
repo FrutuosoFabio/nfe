@@ -1,21 +1,22 @@
 package com.fincatto.documentofiscal.nfe310.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFIntegerValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.IntegerValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
+
 public class NFNotaInfoItem extends DFBase {
     private static final long serialVersionUID = 362646693945373643L;
-    
-    @Attribute(name = "nItem")
+
+    @Attribute(name = "nItem", required = true)
     private Integer numeroItem;
-    
-    @Element(name = "prod")
+
+    @Element(name = "prod", required = true)
     private NFNotaInfoItemProduto produto;
-    
-    @Element(name = "imposto")
+
+    @Element(name = "imposto", required = true)
     private NFNotaInfoItemImposto imposto;
 
     @Element(name = "impostoDevol", required = false)
@@ -25,12 +26,12 @@ public class NFNotaInfoItem extends DFBase {
     private String informacoesAdicionais;
 
     public void setNumeroItem(final Integer numeroItem) {
-        DFIntegerValidador.tamanho3maximo990(numeroItem, "Numero do Item");
+        IntegerValidador.tamanho3maximo990(numeroItem, "Numero do Item");
         this.numeroItem = numeroItem;
     }
 
     public void setInformacoesAdicionais(final String informacoesAdicionais) {
-        DFStringValidador.tamanho500(informacoesAdicionais, "Informacoes Adicionais do Item");
+        StringValidador.tamanho500(informacoesAdicionais, "Informacoes Adicionais do Item");
         this.informacoesAdicionais = informacoesAdicionais;
     }
 

@@ -1,18 +1,19 @@
 package com.fincatto.documentofiscal.nfe400.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.nfe400.classes.NFModalidadeFrete;
-import com.fincatto.documentofiscal.validadores.DFListValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.util.List;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
-import java.util.List;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.nfe400.classes.NFModalidadeFrete;
+import com.fincatto.documentofiscal.validadores.ListValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFNotaInfoTransporte extends DFBase {
     private static final long serialVersionUID = 1172316192774549031L;
-    
-    @Element(name = "modFrete")
+
+    @Element(name = "modFrete", required = true)
     private NFModalidadeFrete modalidadeFrete;
 
     @Element(name = "transporta", required = false)
@@ -53,22 +54,22 @@ public class NFNotaInfoTransporte extends DFBase {
     }
 
     public void setReboques(final List<NFNotaInfoReboque> reboques) {
-        DFListValidador.tamanho5(reboques, "Reboques");
+        ListValidador.tamanho5(reboques, "Reboques");
         this.reboques = reboques;
     }
 
     public void setVolumes(final List<NFNotaInfoVolume> volumes) {
-        DFListValidador.tamanho5000(volumes, "Volumes");
+        ListValidador.tamanho5000(volumes, "Volumes");
         this.volumes = volumes;
     }
 
     public void setVagao(final String vagao) {
-        DFStringValidador.tamanho20(vagao, "Vagao");
+        StringValidador.tamanho20(vagao, "Vagao");
         this.vagao = vagao;
     }
 
     public void setBalsa(final String balsa) {
-        DFStringValidador.tamanho20(balsa, "Balsa");
+        StringValidador.tamanho20(balsa, "Balsa");
         this.balsa = balsa;
     }
 

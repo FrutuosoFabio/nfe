@@ -3,16 +3,11 @@
  */
 package com.fincatto.documentofiscal.nfe400.webservices.consultacadastro;
 
-import org.apache.axis2.AxisFault;
-import org.apache.axis2.client.Stub;
-
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import java.lang.reflect.InvocationTargetException;
 
-import com.fincatto.documentofiscal.DFConfig;
-import com.fincatto.documentofiscal.utils.MessageContextFactory;
+import org.apache.axis2.client.Stub;
 
 public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
     private static int counter = 0;
@@ -26,19 +21,18 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
     @SuppressWarnings("rawtypes")
     private final java.util.HashMap faultMessageMap = new java.util.HashMap();
     private final javax.xml.namespace.QName[] opNameArray = null;
-    private final DFConfig config;
 
     /**
      * Constructor that takes in a configContext
      */
-    public CadConsultaCadastro4Stub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, DFConfig config) throws org.apache.axis2.AxisFault {
-        this(configurationContext, targetEndpoint, false, config);
+    public CadConsultaCadastro4Stub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
+        this(configurationContext, targetEndpoint, false);
     }
 
     /**
      * Constructor that takes in a configContext and useseperate listner
      */
-    public CadConsultaCadastro4Stub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, final boolean useSeparateListener, DFConfig config) throws org.apache.axis2.AxisFault {
+    public CadConsultaCadastro4Stub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, final boolean useSeparateListener) throws org.apache.axis2.AxisFault {
         // To populate AxisService
         this.populateAxisService();
         this.populateFaults();
@@ -50,14 +44,13 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
 
         // Set the soap version
         this._serviceClient.getOptions().setSoapVersionURI(org.apache.axiom.soap.SOAP12Constants.SOAP_ENVELOPE_NAMESPACE_URI);
-        this.config = config;
     }
 
     /**
      * Constructor taking the target endpoint
      */
-    public CadConsultaCadastro4Stub(final java.lang.String targetEndpoint, DFConfig config) throws org.apache.axis2.AxisFault {
-        this(null, targetEndpoint, config);
+    public CadConsultaCadastro4Stub(final java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
+        this(null, targetEndpoint);
     }
 
     private static synchronized java.lang.String getUniqueSuffix() {
@@ -67,8 +60,8 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
         }
 
         CadConsultaCadastro4Stub.counter = CadConsultaCadastro4Stub.counter + 1;
-    
-        return System.currentTimeMillis() + "_" + CadConsultaCadastro4Stub.counter;
+
+        return java.lang.Long.toString(java.lang.System.currentTimeMillis()) + "_" + CadConsultaCadastro4Stub.counter;
     }
 
     private void populateAxisService() throws org.apache.axis2.AxisFault {
@@ -110,7 +103,7 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
             this.addPropertyToOperationClient(_operationClient, org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR, "&");
 
             // create a message context
-            _messageContext = MessageContextFactory.INSTANCE.create(config);
+            _messageContext = new org.apache.axis2.context.MessageContext();
 
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
@@ -150,11 +143,26 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
                         final java.lang.String messageClassName = (java.lang.String) this.faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(), "consultaCadastro"));
                         final java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         final java.lang.Object messageObject = this.fromOM(faultElt, messageClass);
-                        final java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage", messageClass);
-                        m.invoke(ex, messageObject);
+                        final java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage", new java.lang.Class[] { messageClass });
+                        m.invoke(ex, new java.lang.Object[] { messageObject });
 
                         throw new java.rmi.RemoteException(ex.getMessage(), ex);
-                    } catch (final ClassCastException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
+                    } catch (final java.lang.ClassCastException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (final java.lang.ClassNotFoundException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (final java.lang.NoSuchMethodException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (final java.lang.reflect.InvocationTargetException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (final java.lang.IllegalAccessException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (final java.lang.InstantiationException e) {
                         // we cannot intantiate the class - throw the original Axis fault
                         throw f;
                     }
@@ -173,6 +181,8 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
 
     /**
      * Auto generated method signature for Asynchronous Invocations Serviço destinado à consulta no Cadastro.
+     * @see CadConsultaCadastro4#startconsultaCadastro
+     * @param nfeDadosMsg0
      */
     public void startconsultaCadastro(final CadConsultaCadastro4Stub.NfeDadosMsg nfeDadosMsg0, final CadConsultaCadastro4CallbackHandler callback) throws java.rmi.RemoteException {
         final org.apache.axis2.client.OperationClient _operationClient = this._serviceClient.createClient(this._operations[0].getName());
@@ -183,7 +193,7 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
 
         // create SOAP envelope with that payload
         org.apache.axiom.soap.SOAPEnvelope env = null;
-        final org.apache.axis2.context.MessageContext _messageContext = MessageContextFactory.INSTANCE.create(config);
+        final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
 
         // Style is Doc.
         env = this.toEnvelope(Stub.getFactory(_operationClient.getOptions().getSoapVersionURI()), nfeDadosMsg0, this.optimizeContent(new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4", "consultaCadastro")), new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4", "nfeDadosMsg"));
@@ -229,11 +239,29 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
                                 final java.lang.String messageClassName = (java.lang.String) CadConsultaCadastro4Stub.this.faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(), "consultaCadastro"));
                                 final java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                 final java.lang.Object messageObject = CadConsultaCadastro4Stub.this.fromOM(faultElt, messageClass);
-                                final java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage", messageClass);
-                                m.invoke(ex, messageObject);
+                                final java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage", new java.lang.Class[] { messageClass });
+                                m.invoke(ex, new java.lang.Object[] { messageObject });
 
                                 callback.receiveErrorconsultaCadastro(new java.rmi.RemoteException(ex.getMessage(), ex));
-                            } catch (final ClassCastException | AxisFault | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
+                            } catch (final java.lang.ClassCastException e) {
+                                // we cannot intantiate the class - throw the original Axis fault
+                                callback.receiveErrorconsultaCadastro(f);
+                            } catch (final java.lang.ClassNotFoundException e) {
+                                // we cannot intantiate the class - throw the original Axis fault
+                                callback.receiveErrorconsultaCadastro(f);
+                            } catch (final java.lang.NoSuchMethodException e) {
+                                // we cannot intantiate the class - throw the original Axis fault
+                                callback.receiveErrorconsultaCadastro(f);
+                            } catch (final java.lang.reflect.InvocationTargetException e) {
+                                // we cannot intantiate the class - throw the original Axis fault
+                                callback.receiveErrorconsultaCadastro(f);
+                            } catch (final java.lang.IllegalAccessException e) {
+                                // we cannot intantiate the class - throw the original Axis fault
+                                callback.receiveErrorconsultaCadastro(f);
+                            } catch (final java.lang.InstantiationException e) {
+                                // we cannot intantiate the class - throw the original Axis fault
+                                callback.receiveErrorconsultaCadastro(f);
+                            } catch (final org.apache.axis2.AxisFault e) {
                                 // we cannot intantiate the class - throw the original Axis fault
                                 callback.receiveErrorconsultaCadastro(f);
                             }
@@ -325,7 +353,7 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
 
     @SuppressWarnings("serial")
     public static class NfeResultMsg implements org.apache.axis2.databinding.ADBBean {
-        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4", "nfeResultMsg", "");
+        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4", "nfeResultMsg", "ns1");
 
         /**
          * field for ExtraElement
@@ -359,12 +387,12 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
         }
 
         @Override
-        public void serialize(final javax.xml.namespace.QName parentQName, final javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
+        public void serialize(final javax.xml.namespace.QName parentQName, final javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException {
             this.serialize(parentQName, xmlWriter, false);
         }
 
         @Override
-        public void serialize(final javax.xml.namespace.QName parentQName, final javax.xml.stream.XMLStreamWriter xmlWriter, final boolean serializeType) throws javax.xml.stream.XMLStreamException {
+        public void serialize(final javax.xml.namespace.QName parentQName, final javax.xml.stream.XMLStreamWriter xmlWriter, final boolean serializeType) throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException {
             java.lang.String prefix = null;
             java.lang.String namespace = null;
 
@@ -393,7 +421,7 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
 
         private static java.lang.String generatePrefix(final java.lang.String namespace) {
             if (namespace.equals("http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4")) {
-                return "";
+                return "ns1";
             }
 
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
@@ -492,8 +520,8 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
 
                         if (fullTypeName != null) {
                             java.lang.String nsPrefix = null;
-    
-                            if (fullTypeName.contains(":")) {
+
+                            if (fullTypeName.indexOf(":") > -1) {
                                 nsPrefix = fullTypeName.substring(0, fullTypeName.indexOf(":"));
                             }
 
@@ -561,7 +589,7 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
 
     @SuppressWarnings("serial")
     public static class NfeDadosMsg implements org.apache.axis2.databinding.ADBBean {
-        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4", "nfeDadosMsg", "");
+        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4", "nfeDadosMsg", "ns1");
 
         /**
          * field for ExtraElement
@@ -595,12 +623,12 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
         }
 
         @Override
-        public void serialize(final javax.xml.namespace.QName parentQName, final javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
+        public void serialize(final javax.xml.namespace.QName parentQName, final javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException {
             this.serialize(parentQName, xmlWriter, false);
         }
 
         @Override
-        public void serialize(final javax.xml.namespace.QName parentQName, final javax.xml.stream.XMLStreamWriter xmlWriter, final boolean serializeType) throws javax.xml.stream.XMLStreamException {
+        public void serialize(final javax.xml.namespace.QName parentQName, final javax.xml.stream.XMLStreamWriter xmlWriter, final boolean serializeType) throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException {
             java.lang.String prefix = null;
             java.lang.String namespace = null;
 
@@ -629,7 +657,7 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
 
         private static java.lang.String generatePrefix(final java.lang.String namespace) {
             if (namespace.equals("http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4")) {
-                return "";
+                return "ns1";
             }
 
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
@@ -728,8 +756,8 @@ public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
 
                         if (fullTypeName != null) {
                             java.lang.String nsPrefix = null;
-    
-                            if (fullTypeName.contains(":")) {
+
+                            if (fullTypeName.indexOf(":") > -1) {
                                 nsPrefix = fullTypeName.substring(0, fullTypeName.indexOf(":"));
                             }
 

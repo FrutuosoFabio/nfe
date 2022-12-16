@@ -1,25 +1,26 @@
 package com.fincatto.documentofiscal.nfe310.classes.evento.cancelamento;
 
-import com.fincatto.documentofiscal.nfe310.classes.evento.NFTipoEvento;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
 import org.simpleframework.xml.Element;
+
+import com.fincatto.documentofiscal.nfe310.classes.evento.NFTipoEvento;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFInfoCancelamento extends NFTipoEvento {
     private static final long serialVersionUID = 7427073073940993756L;
-    
-    @Element(name = "nProt")
+
+    @Element(name = "nProt", required = true)
     private String protocoloAutorizacao;
-    
-    @Element(name = "xJust")
+
+    @Element(name = "xJust", required = true)
     private String justificativa;
 
     public void setJustificativa(final String justificativa) {
-        DFStringValidador.tamanho15a256(justificativa, "Justificativa");
+        StringValidador.tamanho15a256(justificativa, "Justificativa");
         this.justificativa = justificativa;
     }
 
     public void setProtocoloAutorizacao(final String protocoloAutorizacao) {
-        DFStringValidador.exatamente15N(protocoloAutorizacao, "Protocolo de Autorizacao");
+        StringValidador.exatamente15N(protocoloAutorizacao, "Protocolo de Autorizacao");
         this.protocoloAutorizacao = protocoloAutorizacao;
     }
 

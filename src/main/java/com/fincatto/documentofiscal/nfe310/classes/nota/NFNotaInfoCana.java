@@ -1,43 +1,44 @@
 package com.fincatto.documentofiscal.nfe310.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFListValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
+
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.ListValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
+
 public class NFNotaInfoCana extends DFBase {
     private static final long serialVersionUID = 5219843108064204554L;
-    
-    @Element(name = "safra")
+
+    @Element(name = "safra", required = true)
     private String safra;
-    
-    @Element(name = "ref")
+
+    @Element(name = "ref", required = true)
     private String referencia;
-    
-    @ElementList(entry = "forDia", inline = true)
+
+    @ElementList(entry = "forDia", inline = true, required = true)
     private List<NFNotaInfoCanaFornecimentoDiario> fornecimentosDiario;
 
     @ElementList(entry = "deduc", inline = true, required = false)
     private List<NFNotaInfoCanaDeducao> deducoes;
-    
-    @Element(name = "qTotMes")
+
+    @Element(name = "qTotMes", required = true)
     private String quantidadeTotalMes;
-    @Element(name = "qTotAnt")
+    @Element(name = "qTotAnt", required = true)
     private String quantidadeTotalAnterior;
-    @Element(name = "qTotGer")
+    @Element(name = "qTotGer", required = true)
     private String quantidadeTotalGeral;
-    @Element(name = "vFor")
+    @Element(name = "vFor", required = true)
     private String valorFornecimento;
-    @Element(name = "vTotDed")
+    @Element(name = "vTotDed", required = true)
     private String valorTotalDeducao;
-    @Element(name = "vLiqFor")
+    @Element(name = "vLiqFor", required = true)
     private String valorLiquidoFornecimento;
 
     public void setSafra(final String safra) {
@@ -55,42 +56,42 @@ public class NFNotaInfoCana extends DFBase {
     }
 
     public void setReferencia(final String referencia) {
-        DFStringValidador.mmaaaa(referencia);
+        StringValidador.mmaaaa(referencia);
         this.referencia = referencia;
     }
 
     public void setFornecimentosDiario(final List<NFNotaInfoCanaFornecimentoDiario> fornecimentosDiario) {
-        DFListValidador.tamanho31Obrigatorio(fornecimentosDiario, "Fornecimento Diario");
+        ListValidador.tamanho31Obrigatorio(fornecimentosDiario, "Fornecimento Diario");
         this.fornecimentosDiario = fornecimentosDiario;
     }
 
     public void setDeducoes(final List<NFNotaInfoCanaDeducao> deducoes) {
-        DFListValidador.tamanho10(deducoes, "Deducoes");
+        ListValidador.tamanho10(deducoes, "Deducoes");
         this.deducoes = deducoes;
     }
 
     public void setQuantidadeTotalMes(final BigDecimal quantidadeTotalMes) {
-        this.quantidadeTotalMes = DFBigDecimalValidador.tamanho21ComAte10CasasDecimais(quantidadeTotalMes, "Quantidade Total Mes");
+        this.quantidadeTotalMes = BigDecimalParser.tamanho21ComAte10CasasDecimais(quantidadeTotalMes, "Quantidade Total Mes");
     }
 
     public void setQuantidadeTotalAnterior(final BigDecimal quantidadeTotalAnterior) {
-        this.quantidadeTotalAnterior = DFBigDecimalValidador.tamanho21ComAte10CasasDecimais(quantidadeTotalAnterior, "Quantidade Total Anterior");
+        this.quantidadeTotalAnterior = BigDecimalParser.tamanho21ComAte10CasasDecimais(quantidadeTotalAnterior, "Quantidade Total Anterior");
     }
 
     public void setQuantidadeTotalGeral(final BigDecimal quantidadeTotalGeral) {
-        this.quantidadeTotalGeral = DFBigDecimalValidador.tamanho21ComAte10CasasDecimais(quantidadeTotalGeral, "Quantidade Total Geral");
+        this.quantidadeTotalGeral = BigDecimalParser.tamanho21ComAte10CasasDecimais(quantidadeTotalGeral, "Quantidade Total Geral");
     }
 
     public void setValorFornecimento(final BigDecimal valorFornecimento) {
-        this.valorFornecimento = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorFornecimento, "Valor Fornecimento");
+        this.valorFornecimento = BigDecimalParser.tamanho15Com2CasasDecimais(valorFornecimento, "Valor Fornecimento");
     }
 
     public void setValorTotalDeducao(final BigDecimal valorTotalDeducao) {
-        this.valorTotalDeducao = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorTotalDeducao, "Valor Total Deducao");
+        this.valorTotalDeducao = BigDecimalParser.tamanho15Com2CasasDecimais(valorTotalDeducao, "Valor Total Deducao");
     }
 
     public void setValorLiquidoFornecimento(final BigDecimal valorLiquidoFornecimento) {
-        this.valorLiquidoFornecimento = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorLiquidoFornecimento, "Valor Liquido Fornecimento");
+        this.valorLiquidoFornecimento = BigDecimalParser.tamanho15Com2CasasDecimais(valorLiquidoFornecimento, "Valor Liquido Fornecimento");
     }
 
     public String getSafra() {

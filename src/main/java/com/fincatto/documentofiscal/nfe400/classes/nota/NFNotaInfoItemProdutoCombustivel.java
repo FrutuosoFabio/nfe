@@ -2,8 +2,8 @@ package com.fincatto.documentofiscal.nfe400.classes.nota;
 
 import com.fincatto.documentofiscal.DFBase;
 import com.fincatto.documentofiscal.DFUnidadeFederativa;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 import org.simpleframework.xml.Element;
 
 import java.math.BigDecimal;
@@ -59,38 +59,38 @@ public class NFNotaInfoItemProdutoCombustivel extends DFBase {
     }
 
     public void setCodigoProdutoANP(final String codigoProdutoANP) {
-        DFStringValidador.exatamente9(codigoProdutoANP, "Codigo Produto ANP Combustivel");
+        StringValidador.exatamente9(codigoProdutoANP, "Codigo Produto ANP Combustivel");
         this.codigoProdutoANP = codigoProdutoANP;
     }
 
     public void setDescricaoProdutoANP(final String descricaoProdutoANP) {
-        DFStringValidador.tamanho2a95(descricaoProdutoANP, "Descricao Produto ANP Combustivel");
+        StringValidador.tamanho2a95(descricaoProdutoANP, "Descricao Produto ANP Combustivel");
         this.descricaoProdutoANP = descricaoProdutoANP;
     }
 
     public void setPercentualGLPDerivadoPetroleo(final BigDecimal percentualGLPDerivadoPetroleo) {
-        this.percentualGLPDerivadoPetroleo = DFBigDecimalValidador.tamanho7ComAte4CasasDecimais(percentualGLPDerivadoPetroleo, "Percentual GLP derivado petr\u00f3leo");
+        this.percentualGLPDerivadoPetroleo = BigDecimalParser.tamanho7ComAte4CasasDecimais(percentualGLPDerivadoPetroleo, "Percentual GLP derivado petr\u00f3leo");
     }
 
     public void setPercentualGasNaturalImportado(final BigDecimal percentualGasNaturalImportado) {
-        this.percentualGasNaturalImportado = DFBigDecimalValidador.tamanho7ComAte4CasasDecimais(percentualGasNaturalImportado, "Percentual gas natural importado");
+        this.percentualGasNaturalImportado = BigDecimalParser.tamanho7ComAte4CasasDecimais(percentualGasNaturalImportado, "Percentual gas natural importado");
     }
 
     public void setPercentualGasNaturalNacional(final BigDecimal percentualGasNaturalNacional) {
-        this.percentualGasNaturalNacional = DFBigDecimalValidador.tamanho7ComAte4CasasDecimais(percentualGasNaturalNacional, "Percentual gas natural nacional");
+        this.percentualGasNaturalNacional = BigDecimalParser.tamanho7ComAte4CasasDecimais(percentualGasNaturalNacional, "Percentual gas natural nacional");
     }
 
     public void setValorPartida(final BigDecimal valorPartida) {
-        this.valorPartida = DFBigDecimalValidador.tamanho13Com2CasasDecimais(valorPartida, "Valor de partida");
+        this.valorPartida = BigDecimalParser.tamanho13Com2CasasDecimais(valorPartida, "Valor de partida");
     }
 
     public void setCodigoAutorizacaoCODIF(final String codigoAutorizacaoCODIF) {
-        DFStringValidador.tamanho21(codigoAutorizacaoCODIF, "Codigo Autorizacao CODIF Combustivel");
+        StringValidador.tamanho21(codigoAutorizacaoCODIF, "Codigo Autorizacao CODIF Combustivel");
         this.codigoAutorizacaoCOFIF = codigoAutorizacaoCODIF;
     }
 
     public void setQuantidade(final BigDecimal quantidade) {
-        this.quantidade = DFBigDecimalValidador.tamanho16Com4CasasDecimais(quantidade, "Quantidade Combustivel");
+        this.quantidade = BigDecimalParser.tamanho16Com4CasasDecimais(quantidade, "Quantidade Combustivel");
     }
 
     public void setUf(final DFUnidadeFederativa uf) {

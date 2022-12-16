@@ -1,15 +1,16 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.math.BigDecimal;
-import java.util.List;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -20,17 +21,17 @@ import java.util.List;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalInfoCarga extends DFBase {
     private static final long serialVersionUID = -2031819416191957758L;
-    
-    @Element(name = "vCarga")
+
+    @Element(name = "vCarga", required = true)
     private String valorTotalCarga;
-    
-    @Element(name = "proPred")
+
+    @Element(name = "proPred", required = true)
     private String descricaoProdutoPredominante;
 
     @Element(name = "xOutCat", required = false)
     private String descricaoOutrasCaracteristicas;
-    
-    @ElementList(name = "infQ", inline = true)
+
+    @ElementList(name = "infQ", inline = true, required = true)
     private List<CTeNotaInfoCTeNormalInfoCargaInformacoesQuantidadeCarga> informacoesQuantidadeCarga;
 
     @Element(name = "vCargaAverb", required = false)
@@ -53,7 +54,7 @@ public class CTeNotaInfoCTeNormalInfoCarga extends DFBase {
      * Dever ser informado para todos os modais, com exceção para o Dutoviário.
      */
     public void setValorTotalCarga(final BigDecimal valorTotalCarga) {
-        this.valorTotalCarga = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorTotalCarga, "Valor total da carga");
+        this.valorTotalCarga = BigDecimalParser.tamanho15Com2CasasDecimais(valorTotalCarga, "Valor total da carga");
     }
 
     public String getDescricaoProdutoPredominante() {
@@ -65,7 +66,7 @@ public class CTeNotaInfoCTeNormalInfoCarga extends DFBase {
      * Informar a descrição do produto predominante
      */
     public void setDescricaoProdutoPredominante(final String descricaoProdutoPredominante) {
-        DFStringValidador.tamanho60(descricaoProdutoPredominante, "Produto predominante");
+        StringValidador.tamanho60(descricaoProdutoPredominante, "Produto predominante");
         this.descricaoProdutoPredominante = descricaoProdutoPredominante;
     }
 
@@ -78,7 +79,7 @@ public class CTeNotaInfoCTeNormalInfoCarga extends DFBase {
      * "FRIA", "GRANEL", "REFRIGERADA", "Medidas: 12X12X12"
      */
     public void setDescricaoOutrasCaracteristicas(final String descricaoOutrasCaracteristicas) {
-        DFStringValidador.tamanho30(descricaoOutrasCaracteristicas, "Outras características da carga");
+        StringValidador.tamanho30(descricaoOutrasCaracteristicas, "Outras características da carga");
         this.descricaoOutrasCaracteristicas = descricaoOutrasCaracteristicas;
     }
 
@@ -107,6 +108,6 @@ public class CTeNotaInfoCTeNormalInfoCarga extends DFBase {
      * Normalmente igual ao valor declarado da mercadoria, diferente por exemplo, quando a mercadoria transportada é isenta de tributos nacionais para exportação, onde é preciso averbar um valor maior, pois no caso de indenização, o valor a ser pago será maior
      */
     public void setValorAverbacao(final BigDecimal valorAverbacao) {
-        this.valorAverbacao = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorAverbacao, "Valor da Carga para efeito de averbação");
+        this.valorAverbacao = BigDecimalParser.tamanho15Com2CasasDecimais(valorAverbacao, "Valor da Carga para efeito de averbação");
     }
 }

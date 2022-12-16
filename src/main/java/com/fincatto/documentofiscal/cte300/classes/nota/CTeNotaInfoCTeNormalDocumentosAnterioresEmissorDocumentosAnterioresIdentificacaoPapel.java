@@ -1,13 +1,13 @@
 package com.fincatto.documentofiscal.cte300.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.cte300.classes.CTTipoDocumentoTransporteAnterior;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.time.LocalDate;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-import java.time.LocalDate;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.cte300.classes.CTTipoDocumentoTransporteAnterior;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -18,20 +18,20 @@ import java.time.LocalDate;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeNotaInfoCTeNormalDocumentosAnterioresEmissorDocumentosAnterioresIdentificacaoPapel extends DFBase {
     private static final long serialVersionUID = 85388615678199370L;
-    
-    @Element(name = "tpDoc")
+
+    @Element(name = "tpDoc", required = true)
     private CTTipoDocumentoTransporteAnterior tipoDocumentoAnterior;
-    
-    @Element(name = "serie")
+
+    @Element(name = "serie", required = true)
     private String serie;
 
     @Element(name = "subser", required = false)
     private String subSerie;
-    
-    @Element(name = "nDoc")
+
+    @Element(name = "nDoc", required = true)
     private String numeroDocumento;
-    
-    @Element(name = "dEmi")
+
+    @Element(name = "dEmi", required = true)
     private LocalDate dataEmissao;
 
     public CTeNotaInfoCTeNormalDocumentosAnterioresEmissorDocumentosAnterioresIdentificacaoPapel() {
@@ -68,7 +68,7 @@ public class CTeNotaInfoCTeNormalDocumentosAnterioresEmissorDocumentosAnteriores
      * Série do Documento Fiscal
      */
     public void setSerie(final String serie) {
-        DFStringValidador.tamanho3N(serie, "Série do Documento Fiscal");
+        StringValidador.tamanho3N(serie, "Série do Documento Fiscal");
         this.serie = serie;
     }
 
@@ -80,7 +80,7 @@ public class CTeNotaInfoCTeNormalDocumentosAnterioresEmissorDocumentosAnteriores
      * Série do Documento Fiscal
      */
     public void setSubSerie(final String subSerie) {
-        DFStringValidador.tamanho2N(subSerie, "Série do Documento Fiscal");
+        StringValidador.tamanho2N(subSerie, "Série do Documento Fiscal");
         this.subSerie = subSerie;
     }
 
@@ -92,7 +92,7 @@ public class CTeNotaInfoCTeNormalDocumentosAnterioresEmissorDocumentosAnteriores
      * Número do Documento Fiscal
      */
     public void setNumeroDocumento(final String numeroDocumento) {
-        DFStringValidador.tamanho30(numeroDocumento, "Número do Documento Fiscal");
+        StringValidador.tamanho30(numeroDocumento, "Número do Documento Fiscal");
         this.numeroDocumento = numeroDocumento;
     }
 

@@ -1,11 +1,12 @@
 package com.fincatto.documentofiscal.mdfe3.classes.nota.evento;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
 
 /**
  * Created by Eldevan Nery Junior on 17/11/17.
@@ -20,7 +21,7 @@ public class MDFeDetalhamentoEventoRegistroPassagem extends DFBase {
     private MDFeEnviaEventoRegistroPassagem eventoRegistroPassagem;
 
     public void setVersaoEvento(final BigDecimal versaoEvento) {
-        this.versaoEvento = DFBigDecimalValidador.tamanho5Com2CasasDecimais(versaoEvento, "Versao do Evento");
+        this.versaoEvento = BigDecimalParser.tamanho5Com2CasasDecimais(versaoEvento, "Versao do Evento");
     }
 
     public String getVersaoEvento() {

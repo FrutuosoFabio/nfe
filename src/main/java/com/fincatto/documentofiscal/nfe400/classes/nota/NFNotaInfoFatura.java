@@ -1,11 +1,12 @@
 package com.fincatto.documentofiscal.nfe400.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
 import org.simpleframework.xml.Element;
 
-import java.math.BigDecimal;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFNotaInfoFatura extends DFBase {
     private static final long serialVersionUID = 3308281411924779862L;
@@ -23,22 +24,22 @@ public class NFNotaInfoFatura extends DFBase {
     private String valorLiquidoFatura;
 
     public void setNumeroFatura(final String numeroFatura) {
-        DFStringValidador.tamanho60(numeroFatura, "Numero Fatura");
+        StringValidador.tamanho60(numeroFatura, "Numero Fatura");
         this.numeroFatura = numeroFatura;
     }
 
     public void setValorOriginalFatura(final BigDecimal valorOriginalFatura) {
-        this.valorOriginalFatura = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorOriginalFatura, "Valor Original Fatura");
+        this.valorOriginalFatura = BigDecimalParser.tamanho15Com2CasasDecimais(valorOriginalFatura, "Valor Original Fatura");
     }
 
     public void setValorDesconto(final BigDecimal valorDesconto) {
         //this.valorDesconto = BigDecimalParser.tamanho15Com2CasasDecimais(valorDesconto, "Valor Desconto Fatura");
-        this.valorDesconto = DFBigDecimalValidador.tamanho13Com2CasasDecimais(valorDesconto, "Valor Desconto Fatura");
+    	this.valorDesconto = BigDecimalParser.tamanho13Com2CasasDecimais(valorDesconto, "Valor Desconto Fatura");
     }
     
     
     public void setValorLiquidoFatura(final BigDecimal valorLiquidoFatura) {
-        this.valorLiquidoFatura = DFBigDecimalValidador.tamanho15Com2CasasDecimais(valorLiquidoFatura, "Valor Liquido Fatura");
+        this.valorLiquidoFatura = BigDecimalParser.tamanho15Com2CasasDecimais(valorLiquidoFatura, "Valor Liquido Fatura");
     }
 
     public String getValorOriginalFatura() {

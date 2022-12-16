@@ -1,18 +1,20 @@
 package com.fincatto.documentofiscal.cte300.transformes;
 
+import com.fincatto.documentofiscal.cte300.classes.CTIndicadorTomador;
 import org.simpleframework.xml.transform.Transform;
 
-import com.fincatto.documentofiscal.cte300.classes.CTIndicadorTomador;
-
 public class CTIndicadorTomadorTransformer implements Transform<CTIndicadorTomador> {
-    
-    @Override
+
+	@Override
     public CTIndicadorTomador read(String arg0) {
-        return CTIndicadorTomador.valueOfCodigo(arg0);
-    }
-    
-    @Override
+		// TODO Auto-generated method stub
+		return CTIndicadorTomador.valueOfCodigo(arg0);
+	}
+
+	@Override
     public String write(CTIndicadorTomador arg0) {
-        return arg0.getCodigo();
-    }
+		// TODO Auto-generated method stub
+		return arg0.getCodigo();
+	}
+
 }

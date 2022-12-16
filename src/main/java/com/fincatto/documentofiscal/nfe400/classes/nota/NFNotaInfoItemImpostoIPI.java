@@ -1,11 +1,12 @@
 package com.fincatto.documentofiscal.nfe400.classes.nota;
 
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFBigIntegerValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigInteger;
+
 import org.simpleframework.xml.Element;
 
-import java.math.BigInteger;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.validadores.BigIntegerValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFNotaInfoItemImpostoIPI extends DFBase {
     private static final long serialVersionUID = 3354365738012803301L;
@@ -18,8 +19,8 @@ public class NFNotaInfoItemImpostoIPI extends DFBase {
 
     @Element(name = "qSelo", required = false)
     private BigInteger quantidadeSelo;
-    
-    @Element(name = "cEnq")
+
+    @Element(name = "cEnq", required = true)
     private String codigoEnquadramento;
 
     @Element(name = "IPITrib", required = false)
@@ -38,22 +39,22 @@ public class NFNotaInfoItemImpostoIPI extends DFBase {
     }
 
     public void setCnpjProdutor(final String cnpjProdutor) {
-        DFStringValidador.cnpj(cnpjProdutor);
+        StringValidador.cnpj(cnpjProdutor);
         this.cnpjProdutor = cnpjProdutor;
     }
 
     public void setCodigoSelo(final String codigoSelo) {
-        DFStringValidador.tamanho60(codigoSelo, "Codigo Selo IPI Item");
+        StringValidador.tamanho60(codigoSelo, "Codigo Selo IPI Item");
         this.codigoSelo = codigoSelo;
     }
 
     public void setQuantidadeSelo(final BigInteger quantidadeSelo) {
-        DFBigIntegerValidador.tamanho12(quantidadeSelo, "Quantidade Selo IPI Item");
+        BigIntegerValidador.tamanho12(quantidadeSelo, "Quantidade Selo IPI Item");
         this.quantidadeSelo = quantidadeSelo;
     }
 
     public void setCodigoEnquadramento(final String codigoEnquadramento) {
-        DFStringValidador.exatamente3(codigoEnquadramento, "Codigo Enquadramento IPI Item");
+        StringValidador.exatamente3(codigoEnquadramento, "Codigo Enquadramento IPI Item");
         this.codigoEnquadramento = codigoEnquadramento;
     }
 

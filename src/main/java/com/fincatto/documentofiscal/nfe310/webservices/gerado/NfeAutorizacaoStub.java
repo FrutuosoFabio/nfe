@@ -9,9 +9,6 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
-import com.fincatto.documentofiscal.DFConfig;
-import com.fincatto.documentofiscal.utils.MessageContextFactory;
-
 /*
  * NfeAutorizacaoStub java implementation
  */
@@ -35,7 +32,7 @@ public class NfeAutorizacaoStub extends org.apache.axis2.client.Stub {
             NfeAutorizacaoStub.counter = 0;
         }
         NfeAutorizacaoStub.counter = NfeAutorizacaoStub.counter + 1;
-        return System.currentTimeMillis() + "_" + NfeAutorizacaoStub.counter;
+        return java.lang.Long.toString(java.lang.System.currentTimeMillis()) + "_" + NfeAutorizacaoStub.counter;
     }
 
     private void populateAxisService() {
@@ -59,11 +56,11 @@ public class NfeAutorizacaoStub extends org.apache.axis2.client.Stub {
     private void populateFaults() {
     }
 
-    public NfeAutorizacaoStub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, DFConfig config) throws org.apache.axis2.AxisFault {
-        this(configurationContext, targetEndpoint, false, config);
+    public NfeAutorizacaoStub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
+        this(configurationContext, targetEndpoint, false);
     }
 
-    public NfeAutorizacaoStub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, final boolean useSeparateListener, DFConfig config) throws org.apache.axis2.AxisFault {
+    public NfeAutorizacaoStub(final org.apache.axis2.context.ConfigurationContext configurationContext, final java.lang.String targetEndpoint, final boolean useSeparateListener) throws org.apache.axis2.AxisFault {
         // To populate AxisService
         this.populateAxisService();
         this.populateFaults();
@@ -72,11 +69,18 @@ public class NfeAutorizacaoStub extends org.apache.axis2.client.Stub {
         this._serviceClient.getOptions().setUseSeparateListener(useSeparateListener);
         // Set the soap version
         this._serviceClient.getOptions().setSoapVersionURI(org.apache.axiom.soap.SOAP12Constants.SOAP_ENVELOPE_NAMESPACE_URI);
-        this.config = config;
     }
 
-    public NfeAutorizacaoStub(final java.lang.String targetEndpoint, DFConfig config) throws org.apache.axis2.AxisFault {
-        this(null, targetEndpoint, config);
+    public NfeAutorizacaoStub(final org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
+        this(configurationContext, "https://nfe.sefaz.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx");
+    }
+
+    public NfeAutorizacaoStub() throws org.apache.axis2.AxisFault {
+        this("https://nfe.sefaz.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx");
+    }
+
+    public NfeAutorizacaoStub(final java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
+        this(null, targetEndpoint);
     }
 
     public NfeAutorizacaoStub.NfeAutorizacaoLoteZipResult nfeAutorizacaoLoteZip(final NfeAutorizacaoStub.NfeDadosMsgZip nfeDadosMsgZip, final NfeAutorizacaoStub.NfeCabecMsgE nfeCabecMsg) throws java.rmi.RemoteException {
@@ -87,7 +91,7 @@ public class NfeAutorizacaoStub extends org.apache.axis2.client.Stub {
             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
             this.addPropertyToOperationClient(_operationClient, org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR, "&");
             // create a message context
-            _messageContext = MessageContextFactory.INSTANCE.create(config);
+            _messageContext = new org.apache.axis2.context.MessageContext();
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env;
             env = this.toEnvelope(Stub.getFactory(_operationClient.getOptions().getSoapVersionURI()), nfeDadosMsgZip, this.optimizeContent(new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/NfeAutorizacao", "nfeAutorizacaoLoteZip")), new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/NfeAutorizacao", "nfeAutorizacaoLoteZip"));
@@ -151,7 +155,7 @@ public class NfeAutorizacaoStub extends org.apache.axis2.client.Stub {
             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
             this.addPropertyToOperationClient(_operationClient, org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR, "&");
             // create a message context
-            _messageContext = MessageContextFactory.INSTANCE.create(config);
+            _messageContext = new org.apache.axis2.context.MessageContext();
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env;
             env = this.toEnvelope(Stub.getFactory(_operationClient.getOptions().getSoapVersionURI()), nfeDadosMsg, this.optimizeContent(new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/NfeAutorizacao", "nfeAutorizacaoLote")), new javax.xml.namespace.QName("http://www.portalfiscal.inf.br/nfe/wsdl/NfeAutorizacao", "nfeAutorizacaoLote"));
@@ -218,7 +222,6 @@ public class NfeAutorizacaoStub extends org.apache.axis2.client.Stub {
     }
 
     private final javax.xml.namespace.QName[] opNameArray = null;
-    private final DFConfig config;
 
     private boolean optimizeContent(final javax.xml.namespace.QName opName) {
         if (this.opNameArray == null) {
@@ -1298,11 +1301,17 @@ public class NfeAutorizacaoStub extends org.apache.axis2.client.Stub {
             if (NfeAutorizacaoStub.NfeCabecMsgE.class.equals(type)) {
                 return NfeAutorizacaoStub.NfeCabecMsgE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
             }
+            if (NfeAutorizacaoStub.NfeCabecMsgE.class.equals(type)) {
+                return NfeAutorizacaoStub.NfeCabecMsgE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+            }
             if (NfeAutorizacaoStub.NfeDadosMsg.class.equals(type)) {
                 return NfeAutorizacaoStub.NfeDadosMsg.Factory.parse(param.getXMLStreamReaderWithoutCaching());
             }
             if (NfeAutorizacaoStub.NfeAutorizacaoLoteResult.class.equals(type)) {
                 return NfeAutorizacaoStub.NfeAutorizacaoLoteResult.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+            }
+            if (NfeAutorizacaoStub.NfeCabecMsgE.class.equals(type)) {
+                return NfeAutorizacaoStub.NfeCabecMsgE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
             }
             if (NfeAutorizacaoStub.NfeCabecMsgE.class.equals(type)) {
                 return NfeAutorizacaoStub.NfeCabecMsgE.Factory.parse(param.getXMLStreamReaderWithoutCaching());

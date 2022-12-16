@@ -1,27 +1,28 @@
 package com.fincatto.documentofiscal.nfe310.classes.evento;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.DFUnidadeFederativa;
-import com.fincatto.documentofiscal.validadores.DFBigDecimalValidador;
-import com.fincatto.documentofiscal.validadores.DFIntegerValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import java.math.BigDecimal;
+
+import java.time.ZonedDateTime;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 
-import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import com.fincatto.documentofiscal.DFAmbiente;
+import com.fincatto.documentofiscal.DFBase;
+import com.fincatto.documentofiscal.DFUnidadeFederativa;
+import com.fincatto.documentofiscal.validadores.BigDecimalParser;
+import com.fincatto.documentofiscal.validadores.IntegerValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 public class NFInfoEvento extends DFBase {
     private static final long serialVersionUID = 8878652860997939767L;
-    
-    @Attribute(name = "Id")
+
+    @Attribute(name = "Id", required = true)
     private String id;
-    
-    @Element(name = "cOrgao")
+
+    @Element(name = "cOrgao", required = true)
     private DFUnidadeFederativa orgao;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
 
     @Element(name = "CNPJ", required = false)
@@ -29,23 +30,23 @@ public class NFInfoEvento extends DFBase {
 
     @Element(name = "CPF", required = false)
     private String cpf;
-    
-    @Element(name = "chNFe")
+
+    @Element(name = "chNFe", required = true)
     private String chave;
-    
-    @Element(name = "dhEvento")
+
+    @Element(name = "dhEvento", required = true)
     private ZonedDateTime dataHoraEvento;
-    
-    @Element(name = "tpEvento")
+
+    @Element(name = "tpEvento", required = true)
     private String codigoEvento;
-    
-    @Element(name = "nSeqEvento")
+
+    @Element(name = "nSeqEvento", required = true)
     private Integer numeroSequencialEvento;
-    
-    @Element(name = "verEvento")
+
+    @Element(name = "verEvento", required = true)
     private String versaoEvento;
-    
-    @Element(name = "detEvento")
+
+    @Element(name = "detEvento", required = true)
     private NFTipoEvento dadosEvento;
 
     public void setOrgao(final DFUnidadeFederativa orgao) {
@@ -53,7 +54,7 @@ public class NFInfoEvento extends DFBase {
     }
 
     public void setVersaoEvento(final BigDecimal versaoEvento) {
-        this.versaoEvento = DFBigDecimalValidador.tamanho5Com2CasasDecimais(versaoEvento, "Info Evento Versao");
+        this.versaoEvento = BigDecimalParser.tamanho5Com2CasasDecimais(versaoEvento, "Info Evento Versao");
     }
 
     public String getId() {
@@ -61,7 +62,7 @@ public class NFInfoEvento extends DFBase {
     }
 
     public void setId(final String id) {
-        DFStringValidador.exatamente54(id, "Info Evento ID");
+        StringValidador.exatamente54(id, "Info Evento ID");
         this.id = id;
     }
 
@@ -81,7 +82,7 @@ public class NFInfoEvento extends DFBase {
         if (this.cpf != null) {
             throw new IllegalStateException("CPF ja foi setado");
         }
-        DFStringValidador.cnpj(cnpj);
+        StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
@@ -93,7 +94,7 @@ public class NFInfoEvento extends DFBase {
         if (this.cnpj != null) {
             throw new IllegalStateException("CNPJ ja foi setado");
         }
-        DFStringValidador.cpf(cpf);
+        StringValidador.cpf(cpf);
         this.cpf = cpf;
     }
 
@@ -102,7 +103,7 @@ public class NFInfoEvento extends DFBase {
     }
 
     public void setChave(final String chave) {
-        DFStringValidador.exatamente44N(chave, "Info Evento Chave");
+        StringValidador.exatamente44N(chave, "Info Evento Chave");
         this.chave = chave;
     }
 
@@ -119,7 +120,7 @@ public class NFInfoEvento extends DFBase {
     }
 
     public void setTipoEvento(final String tipoEvento) {
-        DFStringValidador.exatamente6N(tipoEvento, "Tipo Evento");
+        StringValidador.exatamente6N(tipoEvento, "Tipo Evento");
         this.codigoEvento = tipoEvento;
     }
 
@@ -128,7 +129,7 @@ public class NFInfoEvento extends DFBase {
     }
 
     public void setNumeroSequencialEvento(final int numeroSequencialEvento) {
-        DFIntegerValidador.tamanho1a2(numeroSequencialEvento, "Numero Sequencial Evento");
+        IntegerValidador.tamanho1a2(numeroSequencialEvento, "Numero Sequencial Evento");
         this.numeroSequencialEvento = numeroSequencialEvento;
     }
 

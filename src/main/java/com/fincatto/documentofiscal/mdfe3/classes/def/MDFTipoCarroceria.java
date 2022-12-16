@@ -16,9 +16,9 @@ package com.fincatto.documentofiscal.mdfe3.classes.def;
  */
 public enum MDFTipoCarroceria {
 
-    NAO_APLICAVEL("00", "Não aplic\u00e1vel"),
+    NAO_APLICAVEL("00", "Não aplicável"),
     ABERTA("01", "Aberta"),
-    FECHADA_BAU("02", "Fechada/Ba\u00fa"),
+    FECHADA_BAU("02", "Fechada/Baú"),
     GRANELERA("03", "Granelera"),
     PORTA_CONTAINER("04", "Porta Container"),
     SIDER("05", "Sider");

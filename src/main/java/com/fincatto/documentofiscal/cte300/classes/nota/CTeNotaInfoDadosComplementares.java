@@ -8,8 +8,8 @@ import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
 import com.fincatto.documentofiscal.DFBase;
-import com.fincatto.documentofiscal.validadores.DFListValidador;
-import com.fincatto.documentofiscal.validadores.DFStringValidador;
+import com.fincatto.documentofiscal.validadores.ListValidador;
+import com.fincatto.documentofiscal.validadores.StringValidador;
 
 /**
  * @author Caio
@@ -73,7 +73,7 @@ public class CTeNotaInfoDadosComplementares extends DFBase {
      * Texto livre: REENTREGA; DEVOLUÇÃO; REFATURAMENTO; etc
      */
     public void setCaracteristicasTransporte(final String caracteristicasTransporte) {
-        DFStringValidador.tamanho15(caracteristicasTransporte, "Característica adicional do transporte");
+        StringValidador.tamanho15(caracteristicasTransporte, "Característica adicional do transporte");
         this.caracteristicasTransporte = caracteristicasTransporte;
     }
 
@@ -86,7 +86,7 @@ public class CTeNotaInfoDadosComplementares extends DFBase {
      * Texto livre: ENTREGA EXPRESSA; LOGÍSTICA REVERSA; CONVENCIONAL; EMERGENCIAL; etc
      */
     public void setCaracteristicasServico(final String caracteristicasServico) {
-        DFStringValidador.tamanho30(caracteristicasServico, "Característica adicional do serviço");
+        StringValidador.tamanho30(caracteristicasServico, "Característica adicional do serviço");
         this.caracteristicasServico = caracteristicasServico;
     }
 
@@ -98,7 +98,7 @@ public class CTeNotaInfoDadosComplementares extends DFBase {
      * Funcionário emissor do CTe
      */
     public void setFuncionarioEmissor(final String funcionarioEmissor) {
-        DFStringValidador.tamanho20(funcionarioEmissor, "Funcionário emissor do CTe");
+        StringValidador.tamanho20(funcionarioEmissor, "Funcionário emissor do CTe");
         this.funcionarioEmissor = funcionarioEmissor;
     }
 
@@ -133,7 +133,7 @@ public class CTeNotaInfoDadosComplementares extends DFBase {
      * Município de origem para efeito de cálculo do frete
      */
     public void setMunicipioOrigem(final String municipioOrigem) {
-        DFStringValidador.tamanho2ate40(municipioOrigem, "Município de origem para efeito de cálculo do frete");
+        StringValidador.tamanho2ate40(municipioOrigem, "Município de origem para efeito de cálculo do frete");
         this.municipioOrigem = municipioOrigem;
     }
 
@@ -145,7 +145,7 @@ public class CTeNotaInfoDadosComplementares extends DFBase {
      * Município de destino para efeito de cálculo do frete
      */
     public void setMunicipioDestino(final String municipioDestino) {
-        DFStringValidador.tamanho2ate40(municipioDestino, "Município de destino para efeito de cálculo do frete");
+        StringValidador.tamanho2ate40(municipioDestino, "Município de destino para efeito de cálculo do frete");
         this.municipioDestino = municipioDestino;
     }
 
@@ -157,7 +157,7 @@ public class CTeNotaInfoDadosComplementares extends DFBase {
      * Observações Gerais
      */
     public void setObservacaoGeral(final String observacaoGeral) {
-        DFStringValidador.tamanho2000(observacaoGeral, "Observações Gerais");
+        StringValidador.tamanho2000(observacaoGeral, "Observações Gerais");
         this.observacaoGeral = observacaoGeral;
     }
 
@@ -169,7 +169,7 @@ public class CTeNotaInfoDadosComplementares extends DFBase {
      * Campo de uso livre do contribuinte
      */
     public void setObservacaoContribuinte(final List<CTeNotaInfoDadosComplementaresObservacaoContribuinte> observacaoContribuinte) {
-        DFListValidador.tamanho10(observacaoContribuinte, "Observação de interesse do contribuinte");
+        ListValidador.tamanho10(observacaoContribuinte, "Observação de interesse do contribuinte");
         this.observacaoContribuinte = observacaoContribuinte;
     }
 
@@ -181,7 +181,7 @@ public class CTeNotaInfoDadosComplementares extends DFBase {
      * Campo de uso livre do contribuinte
      */
     public void setObservacaoFisco(final List<CTeNotaInfoDadosComplementaresObservacaoFisco> observacaoFisco) {
-        DFListValidador.tamanho10(observacaoFisco, "Observação de interesse do fisco");
+        ListValidador.tamanho10(observacaoFisco, "Observação de interesse do fisco");
         this.observacaoFisco = observacaoFisco;
     }
 

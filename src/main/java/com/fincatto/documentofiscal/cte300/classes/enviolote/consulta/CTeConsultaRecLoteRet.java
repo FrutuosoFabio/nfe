@@ -1,10 +1,11 @@
 package com.fincatto.documentofiscal.cte300.classes.enviolote.consulta;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFBase;
+import java.util.List;
+
 import org.simpleframework.xml.*;
 
-import java.util.List;
+import com.fincatto.documentofiscal.DFAmbiente;
+import com.fincatto.documentofiscal.DFBase;
 
 /**
  * @author Caio
@@ -15,29 +16,29 @@ import java.util.List;
 @Namespace(reference = "http://www.portalfiscal.inf.br/cte")
 public class CTeConsultaRecLoteRet extends DFBase {
     private static final long serialVersionUID = 1224302136932120984L;
-    
-    @Element(name = "tpAmb")
+
+    @Element(name = "tpAmb", required = true)
     private DFAmbiente ambiente;
-    
-    @Element(name = "verAplic")
+
+    @Element(name = "verAplic", required = true)
     private String versaoAplicacao;
-    
-    @Element(name = "nRec")
+
+    @Element(name = "nRec", required = true)
     private String numeroRecebimento;
-    
-    @Element(name = "cStat")
+
+    @Element(name = "cStat", required = true)
     private String status;
-    
-    @Element(name = "xMotivo")
+
+    @Element(name = "xMotivo", required = true)
     private String motivo;
-    
-    @Element(name = "cUF")
+
+    @Element(name = "cUF", required = true)
     private String siglaUF;
 
     @ElementList(name = "protCTe", inline = true, required = false)
     private List<CTeProtocolo> protocolo;
-    
-    @Attribute(name = "versao")
+
+    @Attribute(name = "versao", required = true)
     private String versao;
 
     public CTeConsultaRecLoteRet() {
